@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 
 import { LoginPage } from '../pages/login/login';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,13 +18,18 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+              public platform: Platform, 
+              public statusBar: StatusBar,
+              public splashScreen: SplashScreen,
+              public storageService:StorageService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Lista de Pacientes', component: 'ListPacientesPage' }
+      { title: 'Lista de Pacientes', component: 'ListPacientesPage' },
+      {title:'Sair',component:'sair'}
       
     ];
 
@@ -33,6 +39,9 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      if(this.storageService.getUser()){
+        this.rootPage = HomePage
+      }
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
@@ -41,6 +50,11 @@ export class MyApp {
   }
 
   openPage(page) {
+    if(page.component === 'sair'){
+      this.storageService.limparStorage()
+      this.nav.setRoot(LoginPage)
+      return
+    }
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);

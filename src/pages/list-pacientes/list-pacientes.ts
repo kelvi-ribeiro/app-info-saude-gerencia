@@ -20,7 +20,7 @@ export class ListPacientesPage {
   pacientes = [];
   pages;
   pageAtual = 0;
-  totalPages;
+  totalPages;  
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -48,17 +48,19 @@ export class ListPacientesPage {
     
     this.findPacientes(this.pacienteNome,null,this.pageAtual)
   }
+  openActions(paciente){
+    paciente.actionOpened =  paciente.actionOpened ? false : true
+  }
 
   findPacientes(pessoaNome?:string,linhaCuidadoId?:number,page?:number){
     this.pacienteService.findByPessoaNomePage(pessoaNome,linhaCuidadoId,page)
     .then(res=>{
-      this.pacientes = res.content;   
+      this.pacientes = res.content;             
       this.totalPages = res.totalPages   
       this.pages =  Array(res.totalPages).fill(res.totalPages).map((x,i)=>  i) /* Array(res.totalPages).fill(res.totalPages).map((x,i)=>i); // [0,1,2,3,4] */
       this.pages = this.pages.filter(res => res<=this.pageAtual+5 && res>=this.pageAtual-5)
     }).catch(()=>{
       this.notificacoesService.presentAlertErro();
     })
-  }
-
+  }  
 }

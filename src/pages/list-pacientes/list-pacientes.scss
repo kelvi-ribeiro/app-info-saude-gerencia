@@ -528,7 +528,13 @@ page-list-pacientes {
       background-color: transparent;
       border-color: #34a853;
       color: #34a853;
-    }   
+    } 
+    .label-outline-danger {
+      background-color: transparent;
+      border-color: #e53935;
+      color: #e53935;
+    }
+      
     html, body {
       width: 100%;
       height: 100%;
@@ -553,6 +559,8 @@ page-list-pacientes {
       margin-bottom: 0 !important;
       margin-top: 0 !important;
         }    
-      
-    }
+.open > .dropdown-menu {
+  display: block; 
+  }      
+}
     

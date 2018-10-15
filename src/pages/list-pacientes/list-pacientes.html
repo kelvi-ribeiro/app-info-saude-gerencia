@@ -58,17 +58,18 @@
                   <span class="label label-outline-success">Active</span>
                 </td>
                 <td>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Action
+                  <div  [class]="paciente.actionOpened ? 'btn-group open': 'btn-group'">
+                    <button (click)="openActions(paciente)" type="button" class="btn btn-default btn-sm dropdown-toggle"
+                     data-toggle="dropdown" 
+                     aria-haspopup="true" 
+                     aria-expanded="false">
+                      Ações
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
+                      <li><a href="#">Visualizar Paciente</a></li>
+                      <li><a href="#">Enviar Mensagem</a></li>
+                      <li><a href="#">Editar dados</a></li>
                     </ul>
                   </div>
                 </td>

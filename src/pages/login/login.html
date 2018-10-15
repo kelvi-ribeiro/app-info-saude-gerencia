@@ -1,0 +1,36 @@
+<div  style="position: absolute;height: 100%;width: 100%;background: #0258f5;
+opacity: .3;"></div>
+  
+
+
+  <div class="list-form">
+
+    <!-- <img id="capa" src="assets/imgs/newLogo.png" alt="Capa"> -->
+
+    <form #loginForm="ngForm" (ngSubmit)="login()" class="form-login">
+
+      <ion-item class="input-login">
+        <ion-label>
+          <ion-icon name="person" class="icone-form"></ion-icon>
+        </ion-label>
+        <ion-input placeholder="CPF" (input)="creds.cpf = format(creds.cpf)" round block name="cpf" type="text"
+          required [(ngModel)]="creds.cpf"></ion-input>
+      </ion-item>
+      <ion-item class="input-login password">
+        <ion-label>
+          <ion-icon name="key" class="icone-form"></ion-icon>
+
+        </ion-label>
+        <ion-input round block name="senha" [type]="typeSenha" placeholder="Senha"
+          required [(ngModel)]="creds.senha"></ion-input>
+      </ion-item>    
+      
+      <ion-row class="row-btn">
+        <ion-grid>
+          <ion-col offset-1 col-10>
+            <button color="primary" ion-button full [disabled]="!loginForm.form.valid" type="submit">Entrar</button>
+          </ion-col>
+        </ion-grid>
+      </ion-row>
+    </form>  
+</div>

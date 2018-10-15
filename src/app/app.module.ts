@@ -17,6 +17,7 @@ import { LoginPage } from '../pages/login/login';
 import { NotificacoesService } from '../services/domain/notificacoes.service';
 import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
+import { PacienteService } from '../services/domain/paciente.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { UsuarioService } from '../services/domain/usuario.service';
     NotificacoesService,
     StorageService,
     UsuarioService,
+    PacienteService,
   ]
 })
 export class AppModule {}

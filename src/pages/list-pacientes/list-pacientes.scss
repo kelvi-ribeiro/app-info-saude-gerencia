@@ -1,4 +1,331 @@
 page-list-pacientes {
+    /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+    html {
+      font-family: sans-serif;
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+    }
+    nav {
+      display: block;
+    }
+    a {
+      background-color: transparent;
+    }
+    a:active,
+    a:hover {
+      outline: 0;
+    }
+    img {
+      border: 0;
+    }
+    button {
+      color: inherit;
+      font: inherit;
+      margin: 0;
+    }
+    button {
+      overflow: visible;
+    }
+    button {
+      text-transform: none;
+    }
+    button {
+      -webkit-appearance: button;
+      cursor: pointer;
+    }
+    button::-moz-focus-inner {
+      border: 0;
+      padding: 0;
+    }
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+    td,
+    th {
+      padding: 0;
+    }
+    /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
+    @media print {
+      *,
+      *:before,
+      *:after {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+      a,
+      a:visited {
+        text-decoration: underline;
+      }
+      a[href]:after {
+        content: " (" attr(href) ")";
+      }
+      a[href^="#"]:after {
+        content: "";
+      }
+      thead {
+        display: table-header-group;
+      }
+      tr,
+      img {
+        page-break-inside: avoid;
+      }
+      img {
+        max-width: 100% !important;
+      }
+      .btn > .caret {
+        border-top-color: #000 !important;
+      }
+      .label {
+        border: 1px solid #000;
+      }
+      .table {
+        border-collapse: collapse !important;
+      }
+      .table td,
+      .table th {
+        background-color: #fff !important;
+      }
+    }
+    @font-face {
+      font-family: 'Glyphicons Halflings';
+      src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
+      src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+    }
+    * {
+      box-sizing: border-box;
+    }
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+    html {
+      font-size: 10px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: "Roboto", sans-serif;
+      font-size: 13px;
+      line-height: 1.538462;
+      color: #333333;
+      background-color: #eee;
+    }
+    button {
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+    a {
+      color: #1d87e4;
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      color: #135fa1;
+      text-decoration: underline;
+    }
+    img {
+      vertical-align: middle;
+    }
+    .img-circle {
+      border-radius: 50%;
+    }
+    ul {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    table {
+      background-color: #fff;
+    }
+    th {
+      text-align: left;
+    }
+    .table {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+    .table > thead > tr > th,
+    .table > tbody > tr > td {
+      padding: 8px;
+      line-height: 1.538462;
+      vertical-align: top;
+      border-top: 1px solid #ddd;
+    }
+    .table > thead > tr > th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #ddd;
+    }
+    .table > thead:first-child > tr:first-child > th {
+      border-top: 0;
+    }
+    .table-hover > tbody > tr:hover {
+      background-color: #f5f5f5;
+    }
+    .table-responsive {
+      overflow-x: auto;
+      min-height: 0.01%;
+    }
+    @media screen and (max-width: 767px) {
+      .table-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #ddd;
+      }
+      .table-responsive > .table {
+        margin-bottom: 0;
+      }
+      .table-responsive > .table > thead > tr > th,
+      .table-responsive > .table > tbody > tr > td {
+        white-space: nowrap;
+      }
+    }
+    .btn {
+      display: inline-block;
+      margin-bottom: 0;
+      font-weight: normal;
+      text-align: center;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+          touch-action: manipulation;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      padding: 6px 12px;
+      font-size: 13px;
+      line-height: 1.538462;
+      border-radius: 2px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .btn:hover, .btn:focus {
+      color: #333;
+      text-decoration: none;
+    }
+    .btn:active {
+      outline: 0;
+      background-image: none;
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    }
+    .btn-default {
+      background-color: #fff;
+      border-color: #ccc;
+      color: #333;
+    }
+    .btn-default:focus {
+      background-color: #fff;
+      border-color: #ccc;
+      color: #333;
+    }
+    .btn-default:hover {
+      background-color: #e6e6e6;
+      border-color: #b3b3b3;
+      color: #333;
+    }
+    .btn-default:active {
+      background-color: #e6e6e6;
+      border-color: #b3b3b3;
+      color: #333;
+    }
+    .btn-default:active:hover, .btn-default:active:focus {
+      background-color: #d9d9d9;
+      border-color: #a6a6a6;
+      color: #333;
+    }
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 11px;
+      line-height: 1.5;
+      border-radius: 1px;
+    }
+    .caret {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 2px;
+      vertical-align: middle;
+      border-top: 4px dashed;
+      border-top: 4px solid \9;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+    }
+    .dropdown-toggle:focus {
+      outline: 0;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      float: left;
+      min-width: 160px;
+      padding: 5px 0;
+      margin: 2px 0 0;
+      list-style: none;
+      font-size: 13px;
+      text-align: left;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border: 1px solid #ddd;
+      border-radius: 2px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+      background-clip: padding-box;
+    }
+    .dropdown-menu .divider {
+      height: 1px;
+      margin: 9px 0;
+      overflow: hidden;
+      background-color: #e5e5e5;
+    }
+    .dropdown-menu > li > a {
+      display: block;
+      padding: 3px 20px;
+      clear: both;
+      font-weight: normal;
+      line-height: 1.538462;
+      color: #333333;
+      white-space: nowrap;
+    }
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+      text-decoration: none;
+      color: #262626;
+      background-color: #f5f5f5;
+    }
+    .dropdown-menu-right {
+      left: auto;
+      right: 0;
+    }
+    .btn-group {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .btn-group > .btn {
+      position: relative;
+      float: left;
+    }
+    .btn-group > .btn:hover, .btn-group > .btn:focus, .btn-group > .btn:active {
+      z-index: 2;
+    }
+    .btn-group > .btn:first-child {
+      margin-left: 0;
+    }
+    .btn-group .dropdown-toggle:active {
+      outline: 0;
+    }
+    .btn .caret {
+      margin-left: 0;
+    }
     .pagination {
         display: inline-block;
         padding-left: 0;
@@ -92,4 +419,140 @@ page-list-pacientes {
         border-bottom-right-radius: 1px;
         border-top-right-radius: 1px;
       }
-}
+
+    
+    .label {
+      display: inline;
+      padding: .2em .6em .3em;
+      font-size: 75%;
+      font-weight: bold;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: .25em;
+    }
+    .panel {
+      margin-bottom: 20px;
+      background-color: #fff;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+    .panel-body {
+      padding: 20px;
+    }
+    .panel-body:before, .panel-body:after {
+      content: " ";
+      display: table;
+    }
+    .panel-body:after {
+      clear: both;
+    }
+    .panel > .table-responsive > .table {
+      margin-bottom: 0;
+    }
+    .panel > .table-responsive:first-child > .table:first-child {
+      border-top-right-radius: 1px;
+      border-top-left-radius: 1px;
+    }
+    .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child {
+      border-top-left-radius: 1px;
+      border-top-right-radius: 1px;
+    }
+    .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child {
+      border-top-left-radius: 1px;
+    }
+    .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child {
+      border-top-right-radius: 1px;
+    }
+    .panel > .table-responsive:last-child > .table:last-child {
+      border-bottom-right-radius: 1px;
+      border-bottom-left-radius: 1px;
+    }
+    .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child {
+      border-bottom-left-radius: 1px;
+      border-bottom-right-radius: 1px;
+    }
+    .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:first-child {
+      border-bottom-left-radius: 1px;
+    }
+    .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:last-child {
+      border-bottom-right-radius: 1px;
+    }
+    .panel > .table-responsive {
+      border: 0;
+      margin-bottom: 0;
+    }
+    .panel-default {
+      border-color: #e5e5e5;
+    }
+    
+    .btn {
+      box-shadow: none;
+      position: relative;
+      -webkit-transition: 0.3s;
+      transition: 0.3s;
+    }
+    .btn:hover, .btn:focus {
+      box-shadow: none;
+    }
+    .dropdown-menu {
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .dropdown-menu > li > a {
+      padding: 5px 15px;
+    }
+    /*!
+     *  Material Design Iconic Font by Sergey Kupletsky (@zavoloklom) - http://zavoloklom.github.io/material-design-iconic-font/
+     *  License - http://zavoloklom.github.io/material-design-iconic-font/license (Font: SIL OFL 1.1, CSS: MIT License)
+     */
+    @font-face {
+      font-family: 'Material-Design-Iconic-Font';
+      src: url("../fonts/material-design/Material-Design-Iconic-Font.woff2?v=2.2.0") format("woff2"), url("../fonts/material-design/Material-Design-Iconic-Font.woff?v=2.2.0") format("woff"), url("../fonts/material-design/Material-Design-Iconic-Font.ttf?v=2.2.0") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+    /* Material Design Iconic Font uses the Unicode Private Use Area (PUA) to ensure screen
+       readers do not read off random characters that represent icons */
+    .label {
+      border: 1px solid transparent;
+      border-radius: 2px;
+      display: inline-block;
+      font-size: 85%;
+      font-weight: 500;
+      padding: 0.2em 0.6em;
+    }
+    .label-outline-success {
+      background-color: transparent;
+      border-color: #34a853;
+      color: #34a853;
+    }   
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+    * {
+      outline: none !important;
+    }
+    
+    a,
+    button {
+      -ms-touch-action: manipulation;
+          touch-action: manipulation;
+    }
+    .table > thead {
+      background-color: #f5f5f5;
+    }
+    .table > thead > tr > th,
+    .table > tbody > tr > td {
+      vertical-align: middle;
+    }
+    .m-y-0 {
+      margin-bottom: 0 !important;
+      margin-top: 0 !important;
+        }    
+      
+    }
+    

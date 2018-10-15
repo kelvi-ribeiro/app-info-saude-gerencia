@@ -16,16 +16,69 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-item >
-        <ion-label floating>Tipo De Medicamento</ion-label>
-        <ion-select >
-          <ion-option *ngFor="let tipoMedicamento of tiposMedicamentos;first as f;" [selected]="f"  [value]="tipoMedicamento.id">{{tipoMedicamento.nome}}</ion-option>
-        </ion-select>
-      </ion-item>
+<ion-content padding>   
     <ion-searchbar  [(ngModel)]="pacienteNome" placeholder="nome do paciente"
     (ionInput)="findPacientes(pacienteNome)"></ion-searchbar>
-    <h2 *ngFor="let paciente of pacientes">{{paciente?.pessoa?.nome}}</h2>
+
+    <div class="panel panel-default panel-table">       
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width: 32px"></th>                
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Tipo Sanguíneo</th>
+                <th>Cidade</th>
+                <th style="width: 15%">Data de Nascimento</th>
+                <th>Status</th>
+                <th style="width: 5%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let paciente of pacientes;">
+                
+                <td>
+                  <img class="img-circle" src="img/avatars/1.jpg" alt="" width="32" height="32">
+                </td>
+                <td>{{paciente?.pessoa.nome}}</td>
+                <td>
+                    {{paciente?.pessoa.email}}
+                </td>
+                <td>
+                  <span class="flag-icon flag-icon-us">
+                      {{paciente?.tipoSanguineo?.tipoSanguineo}}
+                  </span>
+                </td>
+                <td>{{paciente?.pessoa?.endereco?.cidade?.nome}}</td>
+                <td>
+                  {{paciente?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
+                </td>
+                <td>
+                  <span class="label label-outline-success">Active</span>
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Action
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    
     <!-- <div *ngFor="let page of pages">{{page + 1}}</div> -->
     <div class="panel-body">            
         <nav>

@@ -66,40 +66,8 @@ findProfissionalSaudeByPessoaCpf() {
       );
     })
   }
+ 
 
-  findAll() {
-    let headers = new Headers();
-    return this.storage.getUserCredentials()
-    .then(userCredentials=>{
-      if(!userCredentials){
-        return;
-      }
-      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
-      return this.handlerResponseService.handlerResponse(
-        "get",
-        `${API_CONFIG.baseUrl}/usuarios`,
-        null,
-        headers
-      );
-    });
-  }
-
-  findByEmail(email: string) {
-    let headers = new Headers();
-    return this.storage.getUserCredentials()
-    .then(userCredentials=>{
-      if(!userCredentials){
-        return;
-      }
-      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
-      return this.handlerResponseService.handlerResponse(
-        "get",
-        `${API_CONFIG.baseUrl}/usuarios/email?value=${email}`,
-        null,
-        headers
-      );
-    });
-  }
   getImageFromBucket(urlFoto = this.storageService.getUser().pessoa.urlFoto ) {
       let headers = new HttpHeaders();
       headers = headers

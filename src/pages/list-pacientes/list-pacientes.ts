@@ -90,14 +90,15 @@ export class ListPacientesPage {
     })
   }  
   returnPathImageByLinhaCuidadoId(){
-    if(this.linhasCuidado.length <= this.slidesLinhasCuidado.getActiveIndex()){
-      return this.linhasCuidado[this.linhasCuidado.length -1].caminhoImagem
-    }
-    const linhaCuidadoAtiva = this.linhasCuidado[this.slidesLinhasCuidado.getActiveIndex()]    
-    if(linhaCuidadoAtiva !== undefined){
-      return linhaCuidadoAtiva.caminhoImagem
-    }    
-  }
+    if(this.linhasCuidado.length === 0){return false}    
+      if(this.linhasCuidado.length <= this.slidesLinhasCuidado.getActiveIndex()){
+        return this.linhasCuidado[this.linhasCuidado.length -1].caminhoImagem
+      }
+      const linhaCuidadoAtiva = this.linhasCuidado[this.slidesLinhasCuidado.getActiveIndex()]    
+      if(linhaCuidadoAtiva !== undefined){
+        return linhaCuidadoAtiva.caminhoImagem
+      }    
+    }  
   zerarPagination(){
     this.pageAtual = 0;
   }

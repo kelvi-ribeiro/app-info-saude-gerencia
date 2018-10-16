@@ -48,7 +48,7 @@ export class LoginPage {
     public storageService:StorageService,         
     public notificacoesService:NotificacoesService) {
 
-      this.creds.cpf = this.format('16342027757')
+      this.creds.cpf = this.format('95159191003')
       //this.creds.cpf = this.format(storageService.getCpf());
   }
 

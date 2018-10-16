@@ -74,7 +74,10 @@
                   {{paciente?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
                 </td>
                 <td>
-                  <span class="label label-outline-success">Active</span>
+                  <span *ngIf="paciente.pessoa.perfis[0];else inativo" class="label label-outline-success">Ativo</span>
+                  <ng-template #inativo>
+                    <span  class="label label-outline-danger">Inativo</span>
+                  </ng-template>
                 </td>
                 <td>
                   <div  [class]="paciente.actionOpened ? 'btn-group open': 'btn-group'">

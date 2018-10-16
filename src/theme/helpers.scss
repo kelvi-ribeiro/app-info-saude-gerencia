@@ -1,0 +1,17 @@
+@mixin align-vertical-center(){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+@mixin align-horizontal-center(){
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.text-white{
+  color: color($colors, light);
+}
+.text-bold{
+  font-weight: bold;
+}

@@ -34,7 +34,12 @@ export class ListPacientesPage {
     this.findPacientes()  
     this.findLinhasCuidado()  
   }
+  searchPaciente(){
+    this.zerarPagination();
+    this.findPacientes()
+  }
   slideChanged(){
+    this.zerarPagination()
     if(this.slidesLinhasCuidado.getActiveIndex() === 0){
       this.linhaCuidadoId = ''
     }
@@ -43,7 +48,7 @@ export class ListPacientesPage {
       return
     }
     this.linhaCuidadoId = this.slidesLinhasCuidado.getActiveIndex() 
-    this.findPacientes(this.campoPesquisa,this.linhaCuidadoId,this.pageAtual) 
+    this.findPacientes() 
   }
   findLinhasCuidado(){
     this.linhaCuidadoService.findAll()
@@ -55,26 +60,26 @@ export class ListPacientesPage {
   changePage(clickedPage){
   if(this.pageAtual === clickedPage) return 
   this.pageAtual = clickedPage
-  this.findPacientes(this.campoPesquisa,this.linhaCuidadoId,this.pageAtual)
+  this.findPacientes()
   }
 
   nextPage(){
     if(this.pageAtual === this.totalPages) return
     this.pageAtual++;
-    this.findPacientes(this.campoPesquisa,this.linhaCuidadoId,this.pageAtual)
+    this.findPacientes()
   }
   previousPage(){
     if(this.pageAtual === 0) return
     this.pageAtual--;
     
-    this.findPacientes(this.campoPesquisa,this.linhaCuidadoId,this.pageAtual)
+    this.findPacientes()
   }
   openActions(paciente){
     paciente.actionOpened =  paciente.actionOpened ? false : true
   }
 
-  findPacientes(campoPesquisa?:string,linhaCuidadoId?:number,page?:number){
-    this.pacienteService.findPessoaByAnyField(campoPesquisa,linhaCuidadoId,page)
+  findPacientes(){
+    this.pacienteService.findPessoaByAnyField(this.campoPesquisa,this.linhaCuidadoId,this.pageAtual)
     .then(res=>{
       this.pacientes = res.content;             
       this.totalPages = res.totalPages   
@@ -91,10 +96,9 @@ export class ListPacientesPage {
     const linhaCuidadoAtiva = this.linhasCuidado[this.slidesLinhasCuidado.getActiveIndex()]    
     if(linhaCuidadoAtiva !== undefined){
       return linhaCuidadoAtiva.caminhoImagem
-    }
-      
-    
-    
-    //return this.linhasCuidado[this.slidesLinhasCuidado.getActiveIndex()].caminhoImagem
+    }    
+  }
+  zerarPagination(){
+    this.pageAtual = 0;
   }
 }

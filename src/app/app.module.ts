@@ -18,7 +18,8 @@ import { NotificacoesService } from '../services/domain/notificacoes.service';
 import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { PacienteService } from '../services/domain/paciente.service';
-import { LinhaCuidadoService } from '../services/domain/linha.cuidado';
+import { LinhaCuidadoService } from '../services/domain/linha.cuidado.service';
+import { ValidadoresService } from '../services/utils/validadores.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { LinhaCuidadoService } from '../services/domain/linha.cuidado';
     UsuarioService,
     PacienteService,
     LinhaCuidadoService,
+    ValidadoresService
   ]
 })
 export class AppModule {}

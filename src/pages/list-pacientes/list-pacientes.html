@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ListPacientesPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -11,25 +5,40 @@
           <ion-icon name="menu"></ion-icon>
         </button>
     <ion-title>Lista de pacientes</ion-title>        
+    <ion-buttons end>
+        <button  ion-button icon-only >
+          Enviar Mensagem 
+          &nbsp;
+          <img style="width: 70%;height: 70%;"
+           [src]="returnPathImageByLinhaCuidadoId()"> &nbsp;
+          <ion-icon color="sun" name="mail"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding> 
     <ion-grid>
-      <ion-row>
+      <ion-row >
         <ion-slides #slidesLinhasCuidado (ionSlideDidChange)="slideChanged()" style="
-        height: 50px;">      
+        height: 100px;">      
             <ion-slide  *ngFor="let linhaCuidado of linhasCuidado" >
-              {{linhaCuidado.nome}}
+              <ion-row class="align-horizontal">
+                <img [src]="linhaCuidado.caminhoImagem">
+              </ion-row>
+              <ion-row class="align-horizontal">
+                {{linhaCuidado.nome}}
+              </ion-row>
+            
             </ion-slide>        
           </ion-slides> 
 
       </ion-row>
     </ion-grid>
-    <ion-searchbar  [(ngModel)]="pacienteNome" placeholder="Busca por nome do paciente"
-    (ionInput)="findPacientes(pacienteNome,linhaCuidadoId,pageAtual)"></ion-searchbar>
+    <ion-searchbar  [(ngModel)]="campoPesquisa" 
+    placeholder="Busca por nome,cpf ou email do paciente"
+    (ionInput)="findPacientes(campoPesquisa,linhaCuidadoId,pageAtual)"></ion-searchbar>
     <div class="panel panel-default panel-table">       
         <div class="table-responsive">
           <table class="table table-hover">
@@ -38,7 +47,7 @@
                 <th style="width: 32px"></th>                
                 <th>Nome</th>
                 <th>Email</th>
-                <th>Tipo Sanguíneo</th>
+                <th>CPF</th>
                 <th>Cidade</th>
                 <th style="width: 15%">Data de Nascimento</th>
                 <th>Status</th>
@@ -49,7 +58,7 @@
               <tr *ngFor="let paciente of pacientes;">
                 
                 <td>
-                  <img class="img-circle" src="img/avatars/1.jpg" alt="" width="32" height="32">
+                  <img class="img-circle" src="assets/imgs/avatars/1.jpg" alt="" width="32" height="32">
                 </td>
                 <td>{{paciente?.pessoa.nome}}</td>
                 <td>
@@ -57,7 +66,7 @@
                 </td>
                 <td>
                   <span class="flag-icon flag-icon-us">
-                      {{paciente?.tipoSanguineo?.tipoSanguineo}}
+                      {{validadoresService.formatCpf(paciente?.pessoa?.cpf)}}
                   </span>
                 </td>
                 <td>{{paciente?.pessoa?.endereco?.cidade?.nome}}</td>

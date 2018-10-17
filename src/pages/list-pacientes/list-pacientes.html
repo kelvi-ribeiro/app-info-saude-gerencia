@@ -27,7 +27,7 @@
               <ion-grid>
                 <ion-row>
                   <ion-col offset-4 col-1>
-                    <img  (click)="slidesLinhasCuidado.slidePrev()"
+                    <img class="arrow-slide" (click)="slidesLinhasCuidado.slidePrev()"
                      [hidden]="slidesLinhasCuidado.isBeginning()"
                       src="/assets/imgs/arrow-left.png" >
                   </ion-col>
@@ -36,6 +36,7 @@
                   </ion-col>
                   <ion-col  col-1>
                       <img 
+                      class="arrow-slide"
                       (click)="slidesLinhasCuidado.slideNext()"
                        [hidden]="slidesLinhasCuidado.isEnd()"
                        src="/assets/imgs/arrow-right.png" >

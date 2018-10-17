@@ -11,6 +11,7 @@ export class ModalPerfilPacientePage {
 
   paciente = this.navParams.get('paciente');
   bucketBaseUrl = API_CONFIG.bucketBaseUrl;
+  activeSegment = 'pessoais'
   constructor(public viewCtrl: ViewController, 
               public navParams: NavParams) {
   }

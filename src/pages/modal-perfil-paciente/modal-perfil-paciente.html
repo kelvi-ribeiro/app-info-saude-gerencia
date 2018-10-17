@@ -1,4 +1,5 @@
 <ion-content no-bounce>
+  <!-- 
     <div class="header">
       <ion-grid>
         <ion-row>
@@ -15,10 +16,100 @@
       
     </div>
     <img class="align-horizontal img-paciente"
-     [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'"
-    
-       
-   >
-  
-  </ion-content>
-  
+     [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'"> -->
+  <ion-segment [(ngModel)]="activeSegment" color="secondary">
+    <ion-segment-button value="pessoais">
+      <span>
+        Dados Pessoais
+      </span>
+      <ion-icon name="person"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="medicos">
+      <span>
+        Dados Médicos
+      </span>
+      <ion-icon name="medkit"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="endereco">
+      <span>
+        Endereço
+      </span>
+      <ion-icon name="pin"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="contato">
+      <span>
+        Contatos
+      </span>
+      <ion-icon name="call"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-grid>
+    <ion-col offset-3 col-6>
+      <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">
+    </ion-col>
+  </ion-grid>
+  <div class="div-content" *ngIf="activeSegment === 'pessoais'">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <span class="label-informations">
+            Nome
+          </span>
+        </ion-col>
+        <ion-col offset-1  col-6>
+          <p class="content-informations">
+            {{paciente.pessoa.nome}}
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <span class="label-informations">
+              Nascimento
+            </span>
+          </ion-col>
+          <ion-col offset-1  col-6>
+            <p class="content-informations">
+                {{paciente?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <span class="label-informations">
+                Sexo
+              </span>
+            </ion-col>
+            <ion-col offset-1  col-6>
+              <p class="content-informations">
+                {{paciente.pessoa.sexo}}
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid>
+            <ion-row>
+              <ion-col col-4>
+                <span class="label-informations">
+                  CPF
+                </span>
+              </ion-col>
+              <ion-col offset-1  col-6>
+                <p class="content-informations">
+                  {{paciente.pessoa.cpf  | formatCpf}}
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+  </div>
+</ion-content>

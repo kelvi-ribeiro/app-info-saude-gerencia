@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ModalPerfilPacientePage } from './modal-perfil-paciente';
+import { PipeModule } from '../../pipes/pipe.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { ModalPerfilPacientePage } from './modal-perfil-paciente';
   ],
   imports: [
     IonicPageModule.forChild(ModalPerfilPacientePage),
+    PipeModule
   ],
 })
 export class ModalPerfilPacientePageModule {}

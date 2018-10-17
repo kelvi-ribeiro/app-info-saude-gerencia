@@ -18,8 +18,32 @@ page-modal-perfil-paciente {
         cursor: pointer;
         } 
     .img-paciente{
-        height: 345px;
-        width: 100%;
+        border-radius: 50%;        
         margin-top: 20px;
+        height: 160px;
     }  
+    ion-segment-button > span{
+        padding: 10px;
+    }
+    .segment-md-secondary .segment-button {
+        color: white;
+    }
+    ion-segment{
+        background: black;
+    }
+    .div-content{
+        background:black;
+         height: 100%;
+         padding-left:25px;              
+    }
+    .label-informations{
+        color:white;
+        font-size: 20px;
+        font-weight: bolder;
+    }
+    .content-informations{
+        color:white;
+        font-size: 20px;
+        display: inline;
+    }
 }

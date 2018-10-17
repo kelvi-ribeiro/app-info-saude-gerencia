@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, Slides, ModalController } from 'io
 import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
-
 import { API_CONFIG } from '../../config/api.config';
 
 

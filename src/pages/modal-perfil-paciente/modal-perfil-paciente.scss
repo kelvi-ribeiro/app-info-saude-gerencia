@@ -1,0 +1,25 @@
+page-modal-perfil-paciente {
+    .scroll-content{
+        overflow: hidden;
+    }
+    .header{
+        background: black;
+        height: 50px;
+        width: 100%;
+        text-align: center;    
+       }
+    .title-header{    
+        color: white;
+        font-weight: bolder;
+        font-size: 23px;   
+        }
+    .close-icon{
+        font-size: 24px;
+        cursor: pointer;
+        } 
+    .img-paciente{
+        height: 345px;
+        width: 100%;
+        margin-top: 20px;
+    }  
+}

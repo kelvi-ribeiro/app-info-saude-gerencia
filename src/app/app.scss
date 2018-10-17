@@ -8,3 +8,20 @@
 .align-vertical {
     @include align-vertical-center()
 }
+//DADOS DO PERFIL PACIENTE
+.label-informations{
+    color:white;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.content-informations{
+    color:white;
+    font-size: 20px;
+    display: inline;
+}
+.llustration-img{
+    left: 5px;
+    position: relative;
+    top: 2px;    
+}
+//DADOS DO  PERFIL PACIENTE END

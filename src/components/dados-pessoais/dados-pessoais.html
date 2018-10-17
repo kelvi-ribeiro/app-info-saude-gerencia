@@ -1,11 +1,11 @@
     <ion-grid>
       <ion-row>
-        <ion-col col-4>
+        <ion-col col-5>
           <span class="label-informations">
             Nome
           </span>
         </ion-col>
-        <ion-col offset-1  col-6>
+        <ion-col   col-6>
           <p class="content-informations">
             {{paciente.pessoa.nome}}
           </p>
@@ -15,12 +15,12 @@
 
     <ion-grid>
         <ion-row>
-          <ion-col col-4>
+          <ion-col col-5>
             <span class="label-informations">
-              Nascimento
+              Data de Nascimento
             </span>
           </ion-col>
-          <ion-col offset-1  col-6>
+          <ion-col   col-6>
             <p class="content-informations">
                 {{paciente?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
             </p>
@@ -69,7 +69,8 @@
                   <p class="content-informations">
                     {{paciente.pessoa.naturalidade.naturalidade}}
                   </p>
-                  <img *ngIf="paciente.pessoa.naturalidade.naturalidade === 'Brasileira'" class="img-naturalidade" src="assets/imgs/brazilian.png">
+                  <img *ngIf="paciente.pessoa.naturalidade.naturalidade === 'Brasileira'" 
+                  class="llustration-img" src="assets/imgs/brazilian.png">
                 </ion-col>               
               </ion-row>          
             </ion-grid>

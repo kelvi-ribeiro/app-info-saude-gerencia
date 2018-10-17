@@ -9,7 +9,7 @@ import { PipeModule } from '../../pipes/pipe.module';
   ],
   imports: [
     IonicPageModule.forChild(ListPacientesPage),
-    PipeModule
+    PipeModule,
   ],
 })
 export class ListPacientesPageModule {}

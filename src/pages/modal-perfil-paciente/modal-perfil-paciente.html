@@ -51,65 +51,7 @@
       <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">
     </ion-col>
   </ion-grid>
-  <div class="div-content" *ngIf="activeSegment === 'pessoais'">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-4>
-          <span class="label-informations">
-            Nome
-          </span>
-        </ion-col>
-        <ion-col offset-1  col-6>
-          <p class="content-informations">
-            {{paciente.pessoa.nome}}
-          </p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <ion-grid>
-        <ion-row>
-          <ion-col col-4>
-            <span class="label-informations">
-              Nascimento
-            </span>
-          </ion-col>
-          <ion-col offset-1  col-6>
-            <p class="content-informations">
-                {{paciente?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-      <ion-grid>
-          <ion-row>
-            <ion-col col-4>
-              <span class="label-informations">
-                Sexo
-              </span>
-            </ion-col>
-            <ion-col offset-1  col-6>
-              <p class="content-informations">
-                {{paciente.pessoa.sexo}}
-              </p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-        <ion-grid>
-            <ion-row>
-              <ion-col col-4>
-                <span class="label-informations">
-                  CPF
-                </span>
-              </ion-col>
-              <ion-col offset-1  col-6>
-                <p class="content-informations">
-                  {{paciente.pessoa.cpf  | formatCpf}}
-                </p>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
+  <div class="content">
+    <dados-pessoais *ngIf="activeSegment === 'pessoais'" [paciente]="paciente" ></dados-pessoais>
   </div>
 </ion-content>

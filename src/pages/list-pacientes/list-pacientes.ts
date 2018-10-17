@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, ModalController } from 'ionic-angular';
 import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
 import { ValidadoresService } from '../../services/utils/validadores.service';
+import { API_CONFIG } from '../../config/api.config';
+
 
 @IonicPage()
 @Component({
@@ -18,6 +20,7 @@ export class ListPacientesPage {
   totalPages;  
   linhasCuidado = [];
   linhaCuidadoId;
+  bucketBaseUrl = API_CONFIG.bucketBaseUrl;
   
   @ViewChild('slidesLinhasCuidado') slidesLinhasCuidado: Slides;
   constructor(
@@ -26,7 +29,8 @@ export class ListPacientesPage {
     private pacienteService:PacienteService,
     private linhaCuidadoService:LinhaCuidadoService,
     private notificacoesService:NotificacoesService,
-    private validadoresService:ValidadoresService
+    private validadoresService:ValidadoresService,
+    private modalCtrl:ModalController
     ) {
   }
 
@@ -102,4 +106,12 @@ export class ListPacientesPage {
   zerarPagination(){
     this.pageAtual = 0;
   }
+  openModal(paciente){    
+    let profileModal = this.modalCtrl.create('ModalPerfilPacientePage',{paciente:paciente});
+   profileModal.onDidDismiss(data => {
+     
+   });
+   profileModal.present();
+ }
+  
 }

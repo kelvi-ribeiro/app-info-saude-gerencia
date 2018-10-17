@@ -54,7 +54,8 @@
   <div class="content">
     <dados-pessoais *ngIf="activeSegment === 'pessoais'" [paciente]="paciente" ></dados-pessoais>
     <dados-medicos *ngIf="activeSegment === 'medicos'" [paciente]="paciente" ></dados-medicos>
-
+    <dados-endereco *ngIf="activeSegment === 'endereco'" [paciente]="paciente" ></dados-endereco>
+    
        
   
   </div>

@@ -57,4 +57,36 @@
               </ion-col>
             </ion-row>
           </ion-grid>
+
+          <ion-grid>
+              <ion-row>
+                <ion-col col-4>
+                  <span class="label-informations">
+                    Naturalidade
+                  </span>
+                </ion-col>
+                <ion-col offset-1  col-5>
+                  <p class="content-informations">
+                    {{paciente.pessoa.naturalidade.naturalidade}}
+                  </p>
+                  <img *ngIf="paciente.pessoa.naturalidade.naturalidade === 'Brasileira'" class="img-naturalidade" src="assets/imgs/brazilian.png">
+                </ion-col>               
+              </ion-row>          
+            </ion-grid>
+
+            <ion-grid>
+                <ion-row>
+                  <ion-col col-4>
+                    <span class="label-informations">
+                      Raça
+                    </span>
+                  </ion-col>
+                  <ion-col offset-1  col-5>
+                    <p class="content-informations">
+                      {{paciente.pessoa.raca}}
+                    </p>                    
+                  </ion-col>                  
+                </ion-row>
+              </ion-grid>
+    
   

@@ -1,22 +1,20 @@
 import { Component, Input } from '@angular/core';
 
 /**
- * Generated class for the DadosPessoaisComponent component.
+ * Generated class for the DadosMedicosComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
-
 @Component({
-  selector: 'dados-pessoais',
-  templateUrl: 'dados-pessoais.html'
+  selector: 'dados-medicos',
+  templateUrl: 'dados-medicos.html'
 })
-export class DadosPessoaisComponent {
+export class DadosMedicosComponent {
 
   @Input() paciente;
 
   constructor() {
     
   }
-
 }

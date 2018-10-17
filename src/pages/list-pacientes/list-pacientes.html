@@ -22,11 +22,26 @@
     <ion-grid>
       <ion-row >
         <ion-slides #slidesLinhasCuidado (ionSlideDidChange)="slideChanged()" style="
-        height: 100px;">      
+        height: 112px;">      
             <ion-slide  *ngFor="let linhaCuidado of linhasCuidado" >
-              <ion-row class="align-horizontal">
-                <img [src]="linhaCuidado.caminhoImagem">
-              </ion-row>
+              <ion-grid>
+                <ion-row>
+                  <ion-col offset-4 col-1>
+                    <img  (click)="slidesLinhasCuidado.slidePrev()"
+                     [hidden]="slidesLinhasCuidado.isBeginning()"
+                      src="/assets/imgs/arrow-left.png" >
+                  </ion-col>
+                  <ion-col  col-2>
+                    <img [src]="linhaCuidado.caminhoImagem">
+                  </ion-col>
+                  <ion-col  col-1>
+                      <img 
+                      (click)="slidesLinhasCuidado.slideNext()"
+                       [hidden]="slidesLinhasCuidado.isEnd()"
+                       src="/assets/imgs/arrow-right.png" >
+                    </ion-col>
+                </ion-row>
+              </ion-grid>
               <ion-row class="align-horizontal">
                 {{linhaCuidado.nome}}
               </ion-row>
@@ -58,7 +73,7 @@
               <tr *ngFor="let paciente of pacientes;">
                 
                 <td>
-                  <img class="img-circle" src="assets/imgs/avatars/1.jpg" alt="" width="32" height="32">
+                  <img class="img-circle" src="assets/imgs/avatars/1.jpg"  width="32" height="32">
                 </td>
                 <td>{{paciente?.pessoa.nome}}</td>
                 <td>

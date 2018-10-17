@@ -83,7 +83,7 @@
                 </td>
                 <td>
                   <span class="flag-icon flag-icon-us">
-                      {{validadoresService.formatCpf(paciente?.pessoa?.cpf)}}
+                      {{paciente?.pessoa?.cpf  | formatCpf}}
                   </span>
                 </td>
                 <td>{{paciente?.pessoa?.endereco?.cidade?.nome}}</td>

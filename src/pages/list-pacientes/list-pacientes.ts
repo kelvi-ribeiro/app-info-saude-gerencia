@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, Slides, ModalController } from 'io
 import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
-import { ValidadoresService } from '../../services/utils/validadores.service';
+
 import { API_CONFIG } from '../../config/api.config';
 
 
@@ -28,8 +28,7 @@ export class ListPacientesPage {
     public navParams: NavParams,
     private pacienteService:PacienteService,
     private linhaCuidadoService:LinhaCuidadoService,
-    private notificacoesService:NotificacoesService,
-    private validadoresService:ValidadoresService,
+    private notificacoesService:NotificacoesService,    
     private modalCtrl:ModalController
     ) {
   }

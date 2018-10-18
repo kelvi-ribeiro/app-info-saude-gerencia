@@ -9,7 +9,7 @@ import { ToastController,NavController, LoadingController } from "ionic-angular"
 
 @Injectable()
 export class NotificacoesService {
-
+  toast;
   constructor(
     public http: HttpClient,
     public storage: StorageService,
@@ -21,15 +21,19 @@ export class NotificacoesService {
   }
 
   presentToast(message:string,css:string,duration:number,position:string) {
-    let toast = this.toastCtrl.create({
+    if(this.toast){
+      this.toast.dismiss()
+      
+    }
+    this.toast = this.toastCtrl.create({
       message: message,
       duration: duration,
       position: position,
       cssClass:css
     });
-    toast.present();
+    this.toast.present();
   }
-  presentAlertDefault(title,message,page?,navCtrl?:NavController){
+  presentAlertDefault(title,message,page?,navCtrl?:NavController){  
     let alert = this.alertCtrl.create({
       title:title,
       message:message,

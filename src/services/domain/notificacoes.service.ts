@@ -2,14 +2,14 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { StorageService } from "../storage.service";
-import { ToastController,NavController, LoadingController } from "ionic-angular";
+import { ToastController,NavController, LoadingController, Toast } from "ionic-angular";
 
 
 
 
 @Injectable()
 export class NotificacoesService {
-  toast;
+  toast:Toast;
   constructor(
     public http: HttpClient,
     public storage: StorageService,
@@ -21,9 +21,8 @@ export class NotificacoesService {
   }
 
   presentToast(message:string,css:string,duration:number,position:string) {
-    if(this.toast){
-      this.toast.dismiss()
-      
+    if(this.toast && this.toast.readReady.closed){
+      return            
     }
     this.toast = this.toastCtrl.create({
       message: message,

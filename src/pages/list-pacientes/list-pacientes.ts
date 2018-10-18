@@ -83,9 +83,13 @@ export class ListPacientesPage {
 
   findPacientes(){
     this.pacienteService.findPessoaByAnyField(this.campoPesquisa,this.linhaCuidadoId,this.pageAtual)
-    .then(res=>{
+    .then(res=>{      
       this.pacientes = res.content;             
       this.totalPages = res.totalPages   
+      if(res.content.length === 0){
+        this.notificacoesService.presentToast('Nenhum paciente encontrado','alert',2000,'top')
+        return        
+      }
       this.pages =  Array(res.totalPages).fill(res.totalPages).map((x,i)=>  i) /* Array(res.totalPages).fill(res.totalPages).map((x,i)=>i); // [0,1,2,3,4] */
       this.pages = this.pages.filter(res => res<=this.pageAtual+5 && res>=this.pageAtual-5)
     }).catch(()=>{

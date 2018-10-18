@@ -2,11 +2,14 @@
 @import "theme/variables";
 
 .align-horizontal {
-    @include align-horizontal-center()
+    @include align-horizontal-center();
 }
 
 .align-vertical {
-    @include align-vertical-center()
+    @include align-vertical-center();
+}
+.flip-image{
+    @include flip-image();
 }
 //DADOS DO PERFIL PACIENTE
 .label-informations{

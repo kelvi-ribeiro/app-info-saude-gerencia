@@ -26,9 +26,15 @@
               <ion-grid>
                 <ion-row>
                   <ion-col offset-4 col-1>
-                    <img class="arrow-slide" (click)="slidesLinhasCuidado.slidePrev()"
+                    <img style="-moz-transform: scaleX(-1);
+                    -o-transform: scaleX(-1);
+                    -webkit-transform: scaleX(-1);
+                    transform: scaleX(-1);
+                    filter: FlipH;"
+                    
+                     class="arrow-slide" (click)="slidesLinhasCuidado.slidePrev()"
                      [hidden]="slidesLinhasCuidado.isBeginning()"
-                      src="/assets/imgs/arrow-left.png" >
+                      src="/assets/imgs/arrow-slide.png" >
                   </ion-col>
                   <ion-col  col-2>
                     <img [src]="linhaCuidado.caminhoImagem">
@@ -38,7 +44,7 @@
                       class="arrow-slide"
                       (click)="slidesLinhasCuidado.slideNext()"
                        [hidden]="slidesLinhasCuidado.isEnd()"
-                       src="/assets/imgs/arrow-right.png" >
+                       src="/assets/imgs/arrow-slide.png" >
                     </ion-col>
 
                     <ion-col class="fix-position-col" col-4>

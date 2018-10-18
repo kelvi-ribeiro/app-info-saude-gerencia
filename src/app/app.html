@@ -5,7 +5,7 @@
           <ion-grid>
               <ion-row>
                   <ion-col col-4>
-                      <div (click)="openPage('MeuPerfilPage')"   menuClose class="user-avatar">
+                      <div   menuClose class="user-avatar">
                           <img  [src]="profileImage">
                       </div>
                   </ion-col>
@@ -19,7 +19,7 @@
 
               <ion-row no-padding class="other-data">
                   <ion-col no-padding class="column">
-                      <button color="light" (click)="openPage('MeuPerfilPage')" 
+                      <button color="light" (click)="openPage('ListPacientesPage')" 
                       ion-button icon-left small full color="light" menuClose >
                           <ion-icon name="contact"></ion-icon>
                           Meu Perfil

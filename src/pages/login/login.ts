@@ -7,17 +7,6 @@ import { UsuarioService } from '../../services/domain/usuario.service';
 import { StorageService } from '../../services/storage.service';
 
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
-import { HomePage } from '../home/home';
-
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -103,7 +92,7 @@ export class LoginPage {
           .then(()=>{                          
             this.auth.obterDadosPerfil()
             .then(()=>{              
-              this.navCtrl.setRoot(HomePage)
+              this.navCtrl.setRoot('ListPacientesPage')
             }).catch(()=>{              
               this.notificacoesService.presentAlertJustMessage('Sem permissão','Você não tem acesso esse sistema')
             })

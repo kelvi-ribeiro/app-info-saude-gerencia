@@ -1,30 +1,26 @@
+import { AuthService } from '../services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-
-
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { AuthService } from '../services/auth.service';
 import { HandlerResponseProvider } from '../services/handler-response/handler-response';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { ImageUtilService } from '../services/image-util.service';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { LinhaCuidadoService } from '../services/domain/linha.cuidado.service';
 import { LoginPage } from '../pages/login/login';
+import { MyApp } from './app.component';
 import { NotificacoesService } from '../services/domain/notificacoes.service';
+import { PacienteService } from '../services/domain/paciente.service';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
-import { PacienteService } from '../services/domain/paciente.service';
-import { LinhaCuidadoService } from '../services/domain/linha.cuidado.service';
 import { ValidadoresService } from '../services/utils/validadores.service';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,    
+    
     LoginPage
   ],
   imports: [
@@ -35,8 +31,7 @@ import { ValidadoresService } from '../services/utils/validadores.service';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage,    
+    MyApp,    
     LoginPage
   ],
   providers: [

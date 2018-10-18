@@ -25,3 +25,160 @@
     top: 2px;    
 }
 //DADOS DO  PERFIL PACIENTE END
+
+
+.content-md hr { 
+    height: 2px;
+    background-color: #ffffff;
+}
+
+
+
+ion-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 55px 1px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background:color($colors, primary);    
+}
+
+.list-md[no-lines] .item-block, .list-md[no-lines] ion-item-options, .list-md[no-lines] .item .item-inner
+, .list-ios[no-lines] .item-block, .list-md[no-lines] ion-item-options, .list-md[no-lines] .item .item-inner {
+    border-width: 0;
+    background: color($colors, primary);
+}
+.button-md-light
+,.button-ios-light {
+    color: white;
+    background-color: darken(color($colors, primary),20%);
+}
+
+.ion-md-menu,.ion-ios-menu,.toolbar-title-md,.toolbar-title-ios,
+.ion-md-arrow-back,.ion-ios-arrow-back,.ion-md-more,.ion-ios-more {
+    color:#ffffff;
+}
+.content-md,.content-ios {
+    background-color: lighten(color($colors,primary),35%);
+    
+}
+
+map {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.scroll {
+    height: 100%;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.back-button {
+    z-index: 10;
+}
+
+.loading {
+    margin: auto;
+    display: block;
+}
+
+.msg-erro {
+    padding: 10px;
+    font-size: large;
+    text-align: center;
+}
+
+.line {
+    display: block;
+    position: relative;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 1px;
+}
+
+.alert-checkbox-label {
+    white-space: normal !important;
+}
+
+
+
+// Menu user profile
+.scroll-content{
+    overflow-y:auto !important;
+}
+.user-profile {
+    .user-avatar {
+      width: 68px;
+      height: 68px;
+      display: inline-block;
+      border-radius: 50%;
+      box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.25), 0 0 4rem rgba(255,255,255,.45);
+      img {
+        border-radius: 50%;
+      }
+    }
+    .toolbar-background {
+      background-image: linear-gradient(135deg, lighten(color($colors, primary),20%), color($colors, primary));
+    }
+
+    .other-data {
+      .column {
+        &:first-child {
+          border-right: 1px solid rgba(36, 50, 157, .25);
+        }
+      }
+    }
+  }
+
+  .no-margin {
+    margin: 0;
+  }
+  .content-side-menu{
+    background: color($colors, primary);
+  }
+ //END MENU
+  
+
+  //TOASTS
+
+.toast-md .toast-wrapper,
+.toast-ios .toast-wrapper {
+  background-color: rgb(19, 172, 19);
+  font-weight: bold;
+  color:black;
+  text-align: center;
+}
+
+ion-toast.toast-ios.toast-error div,
+ion-toast.toast-md.toast-error div {
+  background-color: #f53d3d;
+
+  }
+
+  ion-toast.toast-ios.toast-attention div,
+  ion-toast.toast-md.toast-attention div {
+  background-color: #ff9900
+
+  }
+
+
+
+
+
+
+
+
+
+

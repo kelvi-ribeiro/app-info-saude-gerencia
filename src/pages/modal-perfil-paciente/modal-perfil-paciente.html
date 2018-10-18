@@ -61,12 +61,17 @@
       [color]="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'secondary':'primary'" name="radio-button-on"></ion-icon>
     </ion-col>
       <ion-grid class="grid-status-user">
-        <ion-col offset-3 col-8>
-          <p *ngIf="!usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso)" 
-          style="color: white;">
-              Visto pela última em 
-              {{paciente.pessoa.ultimoAcesso | date:'dd/MM/yyyy hh:mm:ss' }}
-          </p>
+        <ion-col *ngIf="!usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso)" 
+        offset-3 col-8>          
+            <p *ngIf="paciente.pessoa.ultimoAcesso"  
+            style="color: white;">
+                Visto pela última em 
+                {{paciente.pessoa.ultimoAcesso | date:'dd/MM/yyyy hh:mm:ss' }}
+            </p>
+            <p *ngIf="!paciente.pessoa.ultimoAcesso" style="color: white;">
+              Usuário ainda não entrou no aplicativo
+            </p>
+          
         </ion-col>
       </ion-grid>
     </ion-row>    

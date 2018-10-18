@@ -20,10 +20,6 @@ export class MyApp {
               public storageService:StorageService) {
     this.initializeApp();
 
-    
-  
-
-
   }
 
   initializeApp() {

@@ -3,6 +3,14 @@ page-list-pacientes {
   .arrow-slide{
     cursor: pointer;
   }
+  .btn-primary{
+    background:color($colors, primary);
+    color:white;
+  }
+  .fix-position-col{
+    top: 60px;
+    left: 100px;
+  }
   //END MY CSS
   //CSS cosmos framework
     html {

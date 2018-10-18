@@ -47,7 +47,7 @@
         offset-3 col-8>          
             <p *ngIf="paciente.pessoa.ultimoAcesso"  
             style="color: white;">
-                Visto pela última em 
+                Último acesso em 
                 {{paciente.pessoa.ultimoAcesso | date:'dd/MM/yyyy hh:mm:ss a' }}
             </p>
             <p *ngIf="!paciente.pessoa.ultimoAcesso" style="color: white;">

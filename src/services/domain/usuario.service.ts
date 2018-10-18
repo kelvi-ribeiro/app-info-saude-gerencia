@@ -134,8 +134,7 @@ findProfissionalSaudeByPessoaCpf() {
     if(!dataUltimoAcesso)return false
     const currentTime = new Date()
     currentTime.setSeconds(currentTime.getSeconds() - 80)
-    dataUltimoAcesso = new Date(dataUltimoAcesso)
-    console.log(dataUltimoAcesso.getTime() < currentTime.getTime() ? true : false)
+    dataUltimoAcesso = new Date(dataUltimoAcesso)    
     return dataUltimoAcesso.getTime() > currentTime.getTime() ? true : false
   }
 

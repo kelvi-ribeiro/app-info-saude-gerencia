@@ -36,5 +36,18 @@ page-modal-perfil-paciente {
          height: 100%;
          padding-left:25px;              
     }
+
+    .grid-header{
+        height: 100px;
+    }
+    .icon-status-user{
+        position: relative;
+        bottom: 34px;
+        right: 26px;
+    }
+    .grid-status-user{        
+      position: relative;
+      bottom: 47px;
+    }
     
 }

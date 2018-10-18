@@ -51,18 +51,25 @@
       <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">      
     </ion-col>
   </ion-grid>
-  <ion-grid>
+  <ion-grid class="grid-header">
     <ion-row>      
       <ion-col offset-5 col-8>
         <h1 class="title-status">
           {{usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'Online':'Offline'}}
         </h1>
-        <ion-icon style="position: relative;
-        bottom: 34px;
-        right: 26px;"
+        <ion-icon class="icon-status-user"
       [color]="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'secondary':'primary'" name="radio-button-on"></ion-icon>
-      </ion-col>
-    </ion-row>
+    </ion-col>
+      <ion-grid class="grid-status-user">
+        <ion-col offset-3 col-8>
+          <p *ngIf="!usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso)" 
+          style="color: white;">
+              Visto pela última em 
+              {{paciente.pessoa.ultimoAcesso | date:'dd/MM/yyyy hh:mm:ss' }}
+          </p>
+        </ion-col>
+      </ion-grid>
+    </ion-row>    
   </ion-grid>
   <div class="content">
     <dados-pessoais *ngIf="activeSegment === 'pessoais'" [paciente]="paciente" ></dados-pessoais>

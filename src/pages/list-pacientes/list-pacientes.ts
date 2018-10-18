@@ -34,8 +34,9 @@ export class ListPacientesPage {
 
   ionViewDidLoad() {    
     this.findPacientes()  
-    this.findLinhasCuidado()  
-  }
+    this.findLinhasCuidado()     
+  } 
+
   searchPaciente(){
     this.zerarPagination();
     this.findPacientes()
@@ -66,12 +67,12 @@ export class ListPacientesPage {
   }
 
   nextPage(){
-    if(this.pageAtual === this.totalPages) return
+    if(this.pageAtual === this.totalPages || this.totalPages === 1) return
     this.pageAtual++;
     this.findPacientes()
   }
   previousPage(){
-    if(this.pageAtual === 0) return
+    if(this.pageAtual === 0 || this.totalPages === 1) return
     this.pageAtual--;
     
     this.findPacientes()

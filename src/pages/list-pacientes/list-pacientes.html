@@ -122,7 +122,7 @@
     <div *ngIf="pacientes.length > 0" class="panel-body">            
         <nav>
           <ul class="pagination pagination-rounded m-y-0">
-            <li (click)="previousPage()">
+            <li  (click)="previousPage()">
               <a  aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
@@ -131,7 +131,7 @@
               <a   >{{page + 1}}</a>
             </li>
             
-            <li (click)="nextPage()">
+            <li  (click)="nextPage()">
               <a  aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>

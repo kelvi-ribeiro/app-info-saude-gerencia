@@ -1,22 +1,4 @@
-<ion-content no-bounce>
-  <!-- 
-    <div class="header">
-      <ion-grid>
-        <ion-row>
-          <ion-col offset-3 col-6>
-            <span class="title-header">
-                {{paciente.pessoa.nome}}
-            </span>
-          </ion-col>
-          <ion-col offset-2 col-1>
-              <ion-icon (click)="closeModal()" class="close-icon" color="light" name="close"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      
-    </div>
-    <img class="align-horizontal img-paciente"
-     [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'"> -->
+<ion-content>  
   <ion-segment [(ngModel)]="activeSegment" color="secondary">
     <ion-segment-button value="pessoais">
       <span>

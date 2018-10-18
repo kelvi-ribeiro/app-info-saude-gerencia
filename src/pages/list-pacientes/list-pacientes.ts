@@ -33,9 +33,21 @@ export class ListPacientesPage {
   }
 
   ionViewDidLoad() {    
+    this.slidesLinhasCuidado.lockSwipes(true)
     this.findPacientes()  
     this.findLinhasCuidado()     
   } 
+
+  nextSlide(){
+    this.slidesLinhasCuidado.lockSwipes(false)
+    this.slidesLinhasCuidado.slideNext()
+    this.slidesLinhasCuidado.lockSwipes(true)
+  }
+  prevSlide(){
+    this.slidesLinhasCuidado.lockSwipes(false)
+    this.slidesLinhasCuidado.slidePrev()
+    this.slidesLinhasCuidado.lockSwipes(true)
+  }
 
   searchPaciente(){
     this.zerarPagination();

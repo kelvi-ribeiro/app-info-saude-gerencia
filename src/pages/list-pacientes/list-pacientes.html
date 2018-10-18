@@ -22,7 +22,7 @@
       <ion-row >
         <ion-slides #slidesLinhasCuidado (ionSlideDidChange)="slideChanged()" style="
         height: 112px;">      
-            <ion-slide  *ngFor="let linhaCuidado of linhasCuidado" >
+            <ion-slide swipeBackEnabled="false"  *ngFor="let linhaCuidado of linhasCuidado" >
               <ion-grid>
                 <ion-row>
                   <ion-col offset-4 col-1>
@@ -32,7 +32,7 @@
                     transform: scaleX(-1);
                     filter: FlipH;"
                     
-                     class="arrow-slide" (click)="slidesLinhasCuidado.slidePrev()"
+                     class="arrow-slide" (click)="prevSlide()"
                      [hidden]="slidesLinhasCuidado.isBeginning()"
                       src="/assets/imgs/arrow-slide.png" >
                   </ion-col>
@@ -42,7 +42,7 @@
                   <ion-col  col-1>
                       <img 
                       class="arrow-slide"
-                      (click)="slidesLinhasCuidado.slideNext()"
+                      (click)="nextSlide()"
                        [hidden]="slidesLinhasCuidado.isEnd()"
                        src="/assets/imgs/arrow-slide.png" >
                     </ion-col>

@@ -47,9 +47,22 @@
     </ion-segment-button>
   </ion-segment>
   <ion-grid>
-    <ion-col offset-3 col-6>
-      <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">
+    <ion-col style="text-align: center;" offset-3 col-6>
+      <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">      
     </ion-col>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>      
+      <ion-col offset-5 col-8>
+        <h1 class="title-status">
+          {{usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'Online':'Offline'}}
+        </h1>
+        <ion-icon style="position: relative;
+        bottom: 34px;
+        right: 26px;"
+      [color]="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'secondary':'primary'" name="radio-button-on"></ion-icon>
+      </ion-col>
+    </ion-row>
   </ion-grid>
   <div class="content">
     <dados-pessoais *ngIf="activeSegment === 'pessoais'" [paciente]="paciente" ></dados-pessoais>

@@ -130,6 +130,15 @@ findProfissionalSaudeByPessoaCpf() {
       );
   }
 
+  checkUserIsOnline(dataUltimoAcesso){
+    if(!dataUltimoAcesso)return false
+    const currentTime = new Date()
+    currentTime.setSeconds(currentTime.getSeconds() - 80)
+    dataUltimoAcesso = new Date(dataUltimoAcesso)
+    console.log(dataUltimoAcesso.getTime() < currentTime.getTime() ? true : false)
+    return dataUltimoAcesso.getTime() > currentTime.getTime() ? true : false
+  }
+
 
   // getImageFromBucket(): Observable<any> {
   //   let url = `${API_CONFIG.bucketBaseUrl}/${this.storageService.getUserUrlFoto()}`

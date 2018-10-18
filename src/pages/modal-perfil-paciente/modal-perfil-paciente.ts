@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
+import { UsuarioService } from '../../services/domain/usuario.service';
 
 @IonicPage()
 @Component({
@@ -13,7 +14,8 @@ export class ModalPerfilPacientePage {
   bucketBaseUrl = API_CONFIG.bucketBaseUrl;
   activeSegment = 'pessoais'
   constructor(public viewCtrl: ViewController, 
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              private usuarioService:UsuarioService) {
   }
 
   ionViewDidLoad() {

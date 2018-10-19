@@ -38,22 +38,17 @@
                       (click)="nextSlide()"
                        [hidden]="slidesLinhasCuidado.isEnd()"
                        src="/assets/imgs/arrow-slide.png" >
-                    </ion-col>
-
-                    <ion-col class="fix-position-col" col-4>
-                   <button class="btn-primary btn">Adicionar Paciente</button>
-                    </ion-col>
+                    </ion-col>                   
                 </ion-row>
               </ion-grid>
               <ion-row class="align-horizontal">
                 {{linhaCuidado.nome}}
-              </ion-row>
-            
+              </ion-row>            
             </ion-slide>        
           </ion-slides> 
-
       </ion-row>
-    </ion-grid>
+      
+    </ion-grid>    
     <ion-searchbar  [(ngModel)]="campoPesquisa" 
     placeholder="Busca por nome,cpf ou email do paciente"
     (ionInput)="searchPaciente()"></ion-searchbar>
@@ -95,7 +90,7 @@
                 </td>
                 <td>
                   <div *ngIf="paciente.pessoa.perfis[0];else inativo">
-                      <span *ngIf="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso);else offline"  class="label label-outline-success">Ativo</span>  
+                      <span *ngIf="checkUserIsOnline(paciente.pessoa.ultimoAcesso);else offline"  class="label label-outline-success">Ativo</span>  
                       <ng-template #offline>
                         <span  class="label label-outline-primary">Offline</span>  
                       </ng-template>
@@ -147,4 +142,11 @@
           </ul>
         </nav>
     </div>
+
+    <ion-fab class="ion-fab-position-fixed" bottom  right >
+        <button (click)="presentActionSheet()" ion-fab >
+          <ion-icon color="light" name="add"></ion-icon>
+        </button>
+      </ion-fab>
+
 </ion-content>

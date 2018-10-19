@@ -11,6 +11,9 @@
 .flip-image{
     @include flip-image();
 }
+.action-sheet-group{
+    overflow: hidden;
+  }
 //DADOS DO PERFIL PACIENTE
 .label-informations{
     color:white;

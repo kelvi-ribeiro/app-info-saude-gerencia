@@ -51,8 +51,17 @@ $modal-inset-height-large:640px;
 $modal-inset-height-small:640px;	
 $modal-inset-min-height-large:640px;	
 $modal-inset-min-height-small:640px;
+// END Modal
 
- 
+ //Action Sheet
+
+ $action-sheet-ios-background:color($colors,primary);
+$action-sheet-md-background:color($colors,primary);
+$action-sheet-md-button-text-color:color($colors,light);
+$action-sheet-ios-button-text-color:color($colors,light);
+$action-sheet-md-button-background-activated:lighten(color($colors,primary),15%);
+
+// END Action Sheet
  
 // App iOS Variables
 // --------------------------------------------------

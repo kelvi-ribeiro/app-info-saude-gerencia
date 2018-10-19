@@ -1,5 +1,5 @@
 import { Component, ViewChild, HostListener } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, ModalController, ActionSheetController } from 'ionic-angular';
 import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
@@ -30,7 +30,8 @@ export class ListPacientesPage {
     private linhaCuidadoService:LinhaCuidadoService,
     private notificacoesService:NotificacoesService, 
     private usuarioService:UsuarioService,   
-    private modalCtrl:ModalController
+    private modalCtrl:ModalController,
+    private actionSheetCtrl:ActionSheetController
     ) {
   }
 
@@ -39,6 +40,10 @@ export class ListPacientesPage {
     this.findPacientes()  
     this.findLinhasCuidado()     
   } 
+
+  checkUserIsOnline(dataUltimoAceso){
+    this.usuarioService.checkUserIsOnline(dataUltimoAceso)
+  }
   
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -84,6 +89,24 @@ export class ListPacientesPage {
       this.linhasCuidado.unshift({id:0,nome:'Todas',caminhoImagem:'assets/imgs/todas.png'});
     })
   }
+  presentActionSheet() {
+    const actionSheet = this.actionSheetCtrl.create({          
+      buttons: [
+        {
+          text: 'Adicionar Paciente',             
+          icon:'flask',                   
+        },
+        {
+          text: 'Enviar Mensagem para esta linha de cuidado',
+          icon:'book',                     
+        },
+        {        
+      }
+    ]
+    });
+    actionSheet.present();
+  }
+
   changePage(clickedPage){
   if(this.pageAtual === clickedPage) return 
   this.pageAtual = clickedPage

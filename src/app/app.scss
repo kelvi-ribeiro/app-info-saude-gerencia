@@ -74,9 +74,7 @@ map {
     height: 100%;
 }
 
-.scroll {
-    height: 100%;
-}
+
 
 .no-margin {
     margin: 0;
@@ -86,20 +84,6 @@ map {
     padding: 0;
 }
 
-.back-button {
-    z-index: 10;
-}
-
-.loading {
-    margin: auto;
-    display: block;
-}
-
-.msg-erro {
-    padding: 10px;
-    font-size: large;
-    text-align: center;
-}
 
 .line {
     display: block;
@@ -119,7 +103,7 @@ map {
 
 // Menu user profile
 .scroll-content{
-    overflow-y:auto !important;
+    overflow: hidden;
 }
 .user-profile {
     .user-avatar {

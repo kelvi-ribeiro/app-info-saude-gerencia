@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, HostListener } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides, ModalController } from 'ionic-angular';
 import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
@@ -39,6 +39,16 @@ export class ListPacientesPage {
     this.findPacientes()  
     this.findLinhasCuidado()     
   } 
+  
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+      if (event.key === 'ArrowLeft') {
+         this.prevSlide()
+      }
+      else if (event.key === 'ArrowRight') {
+        this.nextSlide()
+      }
+  }
 
   nextSlide(){
     this.slidesLinhasCuidado.lockSwipes(false)

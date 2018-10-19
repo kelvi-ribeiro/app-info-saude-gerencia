@@ -12,7 +12,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage:any;
-
+  user
   constructor(
               public platform: Platform, 
               public statusBar: StatusBar,
@@ -34,12 +34,5 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-  }
-  sair(){
-    this.storageService.limparStorage()
-    this.nav.setRoot(LoginPage)
-  } 
-  openPage(page){
-    this.nav.setRoot(page)
   }
 }

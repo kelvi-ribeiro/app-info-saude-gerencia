@@ -16,6 +16,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { ValidadoresService } from '../services/utils/validadores.service';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ValidadoresService } from '../services/utils/validadores.service';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

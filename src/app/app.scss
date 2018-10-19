@@ -27,16 +27,10 @@
     position: relative;
     top: 2px;    
 }
-//DADOS DO  PERFIL PACIENTE END
-
-
 .content-md hr { 
     height: 2px;
     background-color: #ffffff;
 }
-
-
-
 ion-title {
     position: absolute;
     top: 0;
@@ -74,8 +68,6 @@ map {
     height: 100%;
 }
 
-
-
 .no-margin {
     margin: 0;
 }
@@ -83,7 +75,6 @@ map {
 .no-padding {
     padding: 0;
 }
-
 
 .line {
     display: block;
@@ -98,44 +89,6 @@ map {
 .alert-checkbox-label {
     white-space: normal !important;
 }
-
-
-
-// Menu user profile
-.scroll-content{
-    overflow: hidden;
-}
-.user-profile {
-    .user-avatar {
-      width: 68px;
-      height: 68px;
-      display: inline-block;
-      border-radius: 50%;
-      box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.25), 0 0 4rem rgba(255,255,255,.45);
-      img {
-        border-radius: 50%;
-      }
-    }
-    .toolbar-background {
-      background-image: linear-gradient(135deg, lighten(color($colors, primary),20%), color($colors, primary));
-    }
-
-    .other-data {
-      .column {
-        &:first-child {
-          border-right: 1px solid rgba(36, 50, 157, .25);
-        }
-      }
-    }
-  }
-
-  .no-margin {
-    margin: 0;
-  }
-  .content-side-menu{
-    background: color($colors, primary);
-  }
- //END MENU
 
 //SEGMENT
 .segment-md-secondary .segment-button.segment-activated,

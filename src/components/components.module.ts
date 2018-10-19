@@ -5,15 +5,18 @@ import { IonicModule } from 'ionic-angular';
 import { DadosMedicosComponent } from './dados-medicos/dados-medicos';
 import { DadosEnderecoComponent } from './dados-endereco/dados-endereco';
 import { DadosContatoComponent } from './dados-contato/dados-contato';
+import { SideMenuComponent } from './side-menu/side-menu';
 @NgModule({
 	declarations: [DadosPessoaisComponent,
     DadosMedicosComponent,
     DadosEnderecoComponent,
-    DadosContatoComponent],
+    DadosContatoComponent,
+    SideMenuComponent],
 	imports: [PipeModule,IonicModule],
 	exports: [DadosPessoaisComponent,
     DadosMedicosComponent,
     DadosEnderecoComponent,
-    DadosContatoComponent]
+    DadosContatoComponent,
+    SideMenuComponent]
 })
 export class ComponentsModule {}

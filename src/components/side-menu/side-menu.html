@@ -1,0 +1,56 @@
+<ion-menu side="left" id="authenticated" [content]="content">
+    <ion-header>
+        <ion-toolbar class="user-profile">
+  
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-4>
+                        <div   menuClose class="user-avatar">
+                            <img  [src]="profileImage">
+                        </div>
+                    </ion-col>
+                    <ion-col padding-top col-8>
+                        <h2 ion-text class="no-margin bold text-white">
+                          {{user.nome }}
+                        </h2>
+                        <span ion-text color="light">{{user.email}}</span>
+                    </ion-col>
+                </ion-row>
+  
+                <ion-row no-padding class="other-data">
+                    <ion-col no-padding class="column">
+                        <button color="light" (click)="openPage('ListPacientesPage')" 
+                        ion-button icon-left small full color="light" menuClose >
+                            <ion-icon name="contact"></ion-icon>
+                            Meu Perfil
+                        </button>
+                    </ion-col>
+                    <ion-col no-padding class="column">
+                        <button ion-button icon-left small full color="light" menuClose (click)="sair()">
+                            <ion-icon name="log-out"></ion-icon>
+                            Sair
+                        </button>
+                    </ion-col>
+                </ion-row>
+  
+            </ion-grid>
+  
+        </ion-toolbar>
+    </ion-header>
+  
+    <ion-content class="content-side-menu" color="light">
+        <ion-list no-lines class="user-list">
+            <button ion-item menuClose class="text-1x"  (click)="openPage('HomePage')">
+                <ion-icon item-left name="home" color="light"></ion-icon>
+                <span ion-text color="light">Início</span>
+            </button>            
+            <hr>
+            <button ion-item menuClose class="text-1x"  (click)="openPage('ListPacientesPage')">
+              <ion-icon item-left name="home" color="light"></ion-icon>
+              <span ion-text color="light">Lista de pacientes</span>
+          </button>            
+          <hr>
+        </ion-list>
+    </ion-content>
+  
+  </ion-menu>

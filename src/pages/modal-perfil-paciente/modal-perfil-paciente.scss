@@ -4,6 +4,9 @@ page-modal-perfil-paciente {
     margin-top: 20px;
     height: 160px;
 }  
+.scroll-content{
+    overflow: hidden;
+}
 ion-segment-button > span{
     padding: 10px;
 }
@@ -30,6 +33,6 @@ ion-segment{
 .grid-status-user{        
     position: relative;
     bottom: 47px;
-}
+    }
 
 }

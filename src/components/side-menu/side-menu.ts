@@ -13,13 +13,19 @@ import { LoginPage } from '../../pages/login/login';
   templateUrl: 'side-menu.html'
 })
 export class SideMenuComponent {  
-  user;  
-
+    
   @Input() content
   @Input() nav  
   constructor(    
     public storageService:StorageService) {
-    this.user = this.storageService.getUser().pessoa    
+        
+  }
+  ionViewDidLoad(){
+    if(!this.storageService.getUser()){      
+      return
+    }
+    
+    
   }
   sair(){
     this.storageService.limparStorage()

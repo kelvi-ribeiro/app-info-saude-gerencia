@@ -162,8 +162,10 @@ export class StorageService {
     }
   }
   limparStorage(){
-    const cpf = this.getCpf()
-    localStorage.clear();
+    const cpf = this.getCpf()    
     this.setCpf(cpf)
+    setTimeout(() => {
+      localStorage.clear();          
+    }, 500);
   }
 }

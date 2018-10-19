@@ -116,16 +116,23 @@ export class ListPacientesPage {
       buttons: [
         {
           text: 'Adicionar Paciente',             
-          icon:'flask',                   
+          icon:'add-circle',                   
         },
         {
           text: 'Enviar Mensagem para esta linha de cuidado',
-          icon:'book',                     
+          icon:'mail',                     
+        },
+        {
+          text: 'Enviar Mensagem para todos pacientes ativos',
+          icon:'mail',                     
         },
         {        
       }
     ]
     });
+    if(this.slidesLinhasCuidado.getActiveIndex() === 0){
+      actionSheet.data.buttons.splice(1,1)
+    }
     actionSheet.present();
   }
 

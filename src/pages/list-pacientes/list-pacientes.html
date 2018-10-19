@@ -90,7 +90,7 @@
                 </td>
                 <td>
                   <div *ngIf="paciente.pessoa.perfis[0];else inativo">
-                      <span *ngIf="checkUserIsOnline(paciente.pessoa.ultimoAcesso);else offline"  class="label label-outline-success">Ativo</span>  
+                      <span *ngIf="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso);else offline"  class="label label-outline-success">Online</span>  
                       <ng-template #offline>
                         <span  class="label label-outline-primary">Offline</span>  
                       </ng-template>

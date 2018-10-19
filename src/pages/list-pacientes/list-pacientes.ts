@@ -29,7 +29,7 @@ export class ListPacientesPage {
     private pacienteService:PacienteService,
     private linhaCuidadoService:LinhaCuidadoService,
     private notificacoesService:NotificacoesService, 
-    private usuarioService:UsuarioService,   
+    public usuarioService:UsuarioService,   
     private modalCtrl:ModalController,
     private actionSheetCtrl:ActionSheetController
     ) {
@@ -40,10 +40,6 @@ export class ListPacientesPage {
     this.findPacientes()  
     this.findLinhasCuidado()     
   } 
-
-  checkUserIsOnline(dataUltimoAceso){
-    this.usuarioService.checkUserIsOnline(dataUltimoAceso)
-  }
   
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -162,6 +158,6 @@ export class ListPacientesPage {
      
    });
    profileModal.present();
- }
+ } 
   
 }

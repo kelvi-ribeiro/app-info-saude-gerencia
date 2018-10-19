@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ModalPerfilPacientePage } from './modal-perfil-paciente';
 import { PipeModule } from '../../pipes/pipe.module';
+import { ComponentsModule } from '../../components/components.module';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { PipeModule } from '../../pipes/pipe.module';
   ],
   imports: [
     IonicPageModule.forChild(ModalPerfilPacientePage),
-    PipeModule,    
+    PipeModule,  
+    ComponentsModule  
   ],
 })
 export class ModalPerfilPacientePageModule {}

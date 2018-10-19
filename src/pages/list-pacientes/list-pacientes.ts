@@ -5,6 +5,8 @@ import { NotificacoesService } from '../../services/domain/notificacoes.service'
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
 import { API_CONFIG } from '../../config/api.config';
 import { UsuarioService } from '../../services/domain/usuario.service';
+import { StorageService } from '../../services/storage.service';
+import { LoginPage } from '../login/login';
 
 
 @IonicPage()
@@ -32,16 +34,22 @@ export class ListPacientesPage {
     private notificacoesService:NotificacoesService, 
     public usuarioService:UsuarioService,   
     private modalCtrl:ModalController,
-    private actionSheetCtrl:ActionSheetController
+    private actionSheetCtrl:ActionSheetController,
+    private storageService:StorageService
     ) {
   }
 
-  ionViewDidLoad() {    
+  ionViewDidLoad() {        
+    if(!this.storageService.getUser()){
+      this.navCtrl.setRoot(LoginPage)
+      return
+    }   
     this.slidesLinhasCuidado.lockSwipes(true)
     this.findPacientes()  
     this.findLinhasCuidado()     
     this.showOnlinePacientes()
   } 
+  
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {

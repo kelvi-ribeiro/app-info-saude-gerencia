@@ -41,6 +41,23 @@ export class PacienteService {
     });
   }
 
+  showOnlinePacientes() {
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "get",
+        `${API_CONFIG.baseUrl}/pacientes/number-online-users`,
+        null,
+        headers
+      );
+    });
+  }
+
 
   getImageFromBucket(urlFoto = this.storageService.getUser().pessoa.urlFoto ) {
       let headers = new HttpHeaders();

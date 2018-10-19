@@ -4,8 +4,14 @@
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-    <ion-title>Lista de pacientes</ion-title>        
-   
+    <ion-title>Lista de pacientes</ion-title>   
+    <ion-buttons end>
+        <button (click)="showToastExplanation()" ion-button icon-only>
+          <ion-icon  color="secondary" name="radio-button-on"></ion-icon>
+          <h5  class="text-white count-users" >{{pacientesOnline}}</h5>
+        </button>
+        
+      </ion-buttons >
   </ion-navbar>
 </ion-header>
 

@@ -23,6 +23,7 @@ export class ListPacientesPage {
   bucketBaseUrl = API_CONFIG.bucketBaseUrl;
   
   @ViewChild('slidesLinhasCuidado') slidesLinhasCuidado: Slides;
+  pacientesOnline: any;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -39,8 +40,9 @@ export class ListPacientesPage {
     this.slidesLinhasCuidado.lockSwipes(true)
     this.findPacientes()  
     this.findLinhasCuidado()     
+    this.showOnlinePacientes()
   } 
-  
+
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
       if (event.key === 'ArrowLeft') {
@@ -49,6 +51,10 @@ export class ListPacientesPage {
       else if (event.key === 'ArrowRight') {
         this.nextSlide()
       }
+  }
+
+  showToastExplanation(){
+    this.notificacoesService.presentToast('Quantidade de pacientes online','toast-attention',2000,'top')
   }
 
   nextSlide(){
@@ -65,6 +71,18 @@ export class ListPacientesPage {
   searchPaciente(){
     this.zerarPagination();
     this.findPacientes()
+  }
+  showOnlinePacientes(){
+    this.pacienteService.showOnlinePacientes()
+    .then(pacientesOnline =>{
+      this.pacientesOnline = pacientesOnline;
+      setTimeout(() => {
+        this.showOnlinePacientes()
+      }, 15000);
+    })
+    .catch(() => {
+      this.notificacoesService.presentAlertErro()
+    })
   }
   slideChanged(){
     this.zerarPagination()

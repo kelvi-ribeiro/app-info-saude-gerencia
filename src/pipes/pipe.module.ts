@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FormatCpf } from './format-cpf';
+import { ExtractWords } from './extract-words';
 
 @NgModule({
-	declarations: [FormatCpf],
+	declarations: [FormatCpf,ExtractWords],
 	imports: [],
-	exports: [FormatCpf]
+	exports: [FormatCpf,ExtractWords]
 })
 export class PipeModule {}

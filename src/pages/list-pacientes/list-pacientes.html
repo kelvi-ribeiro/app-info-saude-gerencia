@@ -25,7 +25,7 @@
                     transform: scaleX(-1);
                     filter: FlipH;"
                     
-                     class="arrow-slide" (click)="prevSlide()"
+                     class="cursor-pointer" (click)="prevSlide()"
                      [hidden]="slidesLinhasCuidado.isBeginning()"
                       src="/assets/imgs/arrow-slide.png" >
                   </ion-col>
@@ -34,7 +34,7 @@
                   </ion-col>
                   <ion-col  col-1>
                       <img 
-                      class="arrow-slide"
+                      class="cursor-pointer"
                       (click)="nextSlide()"
                        [hidden]="slidesLinhasCuidado.isEnd()"
                        src="/assets/imgs/arrow-slide.png" >
@@ -122,7 +122,7 @@
         </div>
       </div>    
     
-    <div *ngIf="pacientes.length > 0" class="panel-body">            
+    <div class="cursor-pointer" *ngIf="pacientes.length > 0" class="panel-body">            
         <nav>
           <ul class="pagination pagination-rounded m-y-0">
             <li  (click)="previousPage()">

@@ -33,31 +33,47 @@
       <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">      
     </ion-col>
   </ion-grid>
-  <ion-grid class="grid-header">
-    <ion-row>      
-      <ion-col offset-5 col-8>
-        <h1 class="title-status text-white">
-          {{usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'Online':'Offline'}}
-        </h1>
-        <ion-icon class="icon-status-user"
-      [color]="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'secondary':'primary'" name="radio-button-on"></ion-icon>
-    </ion-col>
-      <ion-grid class="grid-status-user">
-        <ion-col *ngIf="!usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso)" 
-        offset-3 col-8>          
-            <p *ngIf="paciente.pessoa.ultimoAcesso"  
-            style="color: white;">
-                Último acesso em 
-                {{paciente.pessoa.ultimoAcesso | date:'dd/MM/yyyy hh:mm:ss a' }}
-            </p>
-            <p *ngIf="!paciente.pessoa.ultimoAcesso" style="color: white;">
-              Usuário ainda não entrou no aplicativo
-            </p>
-          
+  <div  *ngIf="!paciente.pessoa.perfis[0];else ativo">
+    <ion-grid>
+      <ion-row>
+        <ion-col offset-5 col-8>
+          <h1 class="title-status text-white">
+            Inativo    
+          </h1> 
+          <ion-icon class="icon-status-user"
+            color="danger" name="radio-button-on"></ion-icon>
         </ion-col>
-      </ion-grid>
-    </ion-row>    
-  </ion-grid>
+      </ion-row>
+    </ion-grid>
+  </div>    
+  <ng-template #ativo>
+    <ion-grid class="grid-header">
+        <ion-row>  
+          <ion-col offset-5 col-8>
+              <h1 class="title-status text-white">
+                {{usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'Online':'Offline'}}
+              </h1>
+              <ion-icon class="icon-status-user"
+            [color]="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'secondary':'primary'" name="radio-button-on"></ion-icon>
+          </ion-col>
+            <ion-grid class="grid-status-user">
+              <ion-col *ngIf="!usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso)" 
+              offset-3 col-8>          
+                  <p *ngIf="paciente.pessoa.ultimoAcesso"  
+                  style="color: white;">
+                      Último acesso em 
+                      {{paciente.pessoa.ultimoAcesso | date:'dd/MM/yyyy hh:mm:ss a' }}
+                  </p>
+                  <p *ngIf="!paciente.pessoa.ultimoAcesso" style="color: white;">
+                    Usuário ainda não entrou no aplicativo
+                  </p>
+                
+              </ion-col>
+            </ion-grid>
+          </ion-row>    
+        </ion-grid>
+        
+          </ng-template>
   <div class="content">
     <dados-pessoais *ngIf="activeSegment === 'pessoais'" [paciente]="paciente" ></dados-pessoais>
     <dados-medicos *ngIf="activeSegment === 'medicos'" [paciente]="paciente" ></dados-medicos>

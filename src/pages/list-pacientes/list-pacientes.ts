@@ -4,6 +4,7 @@ import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
 import { API_CONFIG } from '../../config/api.config';
+import { UsuarioService } from '../../services/domain/usuario.service';
 
 
 @IonicPage()
@@ -27,7 +28,8 @@ export class ListPacientesPage {
     public navParams: NavParams,
     private pacienteService:PacienteService,
     private linhaCuidadoService:LinhaCuidadoService,
-    private notificacoesService:NotificacoesService,    
+    private notificacoesService:NotificacoesService, 
+    private usuarioService:UsuarioService,   
     private modalCtrl:ModalController
     ) {
   }

@@ -94,7 +94,13 @@
                   {{paciente?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
                 </td>
                 <td>
-                  <span *ngIf="paciente.pessoa.perfis[0];else inativo" class="label label-outline-success">Ativo</span>
+                  <div *ngIf="paciente.pessoa.perfis[0];else inativo">
+                      <span *ngIf="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso);else offline"  class="label label-outline-success">Ativo</span>  
+                      <ng-template #offline>
+                        <span  class="label label-outline-primary">Offline</span>  
+                      </ng-template>
+                  </div>
+                  
                   <ng-template #inativo>
                     <span  class="label label-outline-danger">Inativo</span>
                   </ng-template>

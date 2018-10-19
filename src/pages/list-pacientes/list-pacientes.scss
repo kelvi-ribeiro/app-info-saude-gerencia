@@ -547,6 +547,11 @@ page-list-pacientes {
       border-color: #34a853;
       color: #34a853;
     } 
+    .label-outline-primary {
+      background-color: transparent;
+      border-color: color($colors,primary);
+      color: color($colors,primary);
+    } 
     .label-outline-danger {
       background-color: transparent;
       border-color: #e53935;

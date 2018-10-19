@@ -136,8 +136,17 @@ map {
     background: color($colors, primary);
   }
  //END MENU
-  
 
+//SEGMENT
+.segment-md-secondary .segment-button.segment-activated,
+ .segment-ios-secondary .segment-button.segment-activated{
+    border-color: color($colors, light);
+    color: color($colors, light);
+}
+
+
+//END SEGMENT
+ 
   //TOASTS
 
 .toast-md .toast-wrapper,

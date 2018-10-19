@@ -1,51 +1,35 @@
-page-modal-perfil-paciente {
- 
-    .header{
-        background: black;
-        height: 50px;
-        width: 100%;
-        text-align: center;    
-       }
-    .title-header,.title-status{    
-        color: white;
-        font-weight: bolder;
-        font-size: 23px;   
-        }
-    .close-icon{
-        font-size: 24px;
-        cursor: pointer;
-        } 
-    .img-paciente{
-        border-radius: 50%;        
-        margin-top: 20px;
-        height: 160px;
-    }  
-    ion-segment-button > span{
-        padding: 10px;
-    }
-    .segment-md-secondary .segment-button {
-        color: white;
-    }
-    ion-segment{
-        background: black;
-    }
-    .content{
-        background:black;
-         height: 100%;
-         padding-left:25px;              
-    }
+page-modal-perfil-paciente { 
+.img-paciente{
+    border-radius: 50%;        
+    margin-top: 20px;
+    height: 160px;
+}  
+ion-segment-button > span{
+    padding: 10px;
+}
+.segment-md-secondary .segment-button {
+    color: white;
+}
+ion-segment{
+    background: darken(color($colors,primary),10%);
+}
+.content{
+    background:lighten(color($colors,primary),25%);
+        height: 100%;
+        padding-left:25px;              
+}
 
-    .grid-header{
-        height: 100px;
-    }
-    .icon-status-user{
-        position: relative;
-        bottom: 34px;
-        right: 26px;
-    }
-    .grid-status-user{        
-      position: relative;
-      bottom: 47px;
-    }
-    
+.grid-header{
+    height: 100px;
+}
+.icon-status-user{
+    position: relative;
+    bottom: 34px;
+    right: 26px;
+}
+.grid-status-user{        
+    position: relative;
+    bottom: 47px;
+}
+
 }

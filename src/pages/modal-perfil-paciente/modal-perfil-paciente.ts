@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, Events } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController, Events, ActionSheetController } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { PacienteService } from '../../services/domain/paciente.service';
@@ -15,13 +15,15 @@ export class ModalPerfilPacientePage {
   paciente = this.navParams.get('paciente');
   bucketBaseUrl = API_CONFIG.bucketBaseUrl;
   activeSegment = 'pessoais'
-  editMode: boolean;  
+  editMode: boolean;    
   constructor(public viewCtrl: ViewController, 
               public navParams: NavParams,
               public usuarioService:UsuarioService,
               private pacienteService:PacienteService,
               private events:Events,
-              private notificacoesService:NotificacoesService) {
+              private notificacoesService:NotificacoesService,
+              private actionSheetCtrl:ActionSheetController)
+               {
   }
 
   ionViewDidLoad() {
@@ -37,8 +39,12 @@ export class ModalPerfilPacientePage {
   closeModal(){
     this.viewCtrl.dismiss()
   }
-  setEditarCampos(){
-    this.editMode = this.editMode ? false : true
+  setEditMode(){
+    if(this.editMode){
+      this.editMode = false      
+      return
+    } 
+    this.editMode = true
   }
   editarPaciente(){        
     this.pacienteService.updatePaciente(this.paciente)
@@ -51,5 +57,5 @@ export class ModalPerfilPacientePage {
       console.log(error)
     })
   }
-
+ 
 }

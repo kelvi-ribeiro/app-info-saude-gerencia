@@ -1,6 +1,5 @@
 
-    <div *ngIf="!editMode">
-      <ion-grid>
+    <ion-grid > 
         <ion-row>
           <ion-col col-5>
             <span class="label-informations">
@@ -8,9 +7,8 @@
             </span>
           </ion-col>
           <ion-col   col-6>
-            <p class="content-informations">
-              {{paciente.pessoa.nome}}
-            </p>
+              <ion-input type="text" [value]="paciente.pessoa.nome" 
+              (ionChange)="onChange('nome',$event.value)" ></ion-input>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -23,9 +21,8 @@
               </span>
             </ion-col>
             <ion-col   col-6>
-              <p class="content-informations">
-                  {{paciente?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
-              </p>
+                <ion-input type="date" [value]="convertTimeStampToDate(paciente.pessoa.dataNascimento)" 
+                (ionChange)="onChange('dataNascimento','10-10-2015')" ></ion-input>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -37,10 +34,9 @@
                   Sexo
                 </span>
               </ion-col>
-              <ion-col offset-1  col-6>
-                <p class="content-informations">
-                  {{paciente.pessoa.sexo}}
-                </p>
+              <ion-col offset-1  col-6>                    
+                      <ion-input type="text" [value]="paciente.pessoa.sexo" 
+                      (ionChange)="onChange('sexo',$event.value)" ></ion-input>                    
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -52,10 +48,9 @@
                     CPF
                   </span>
                 </ion-col>
-                <ion-col offset-1  col-6>
-                  <p class="content-informations">
-                    {{paciente.pessoa.cpf  | formatCpf}}
-                  </p>
+                <ion-col  offset-1  col-6>
+                    <ion-input type="number"  [value]="paciente.pessoa.cpf" 
+                    (ionChange)="onChange('cpf',$event.value)" ></ion-input>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -68,11 +63,9 @@
                     </span>
                   </ion-col>
                   <ion-col offset-1  col-5>
-                    <p class="content-informations">
-                      {{paciente.pessoa.naturalidade.naturalidade}}
-                    </p>
-                    <img *ngIf="paciente.pessoa.naturalidade.naturalidade === 'Brasileira'" 
-                    class="llustration-img" src="assets/imgs/brazilian.png">
+                      <ion-select >
+                          <ion-option selected value="1" >Brasileira</ion-option>
+                        </ion-select>
                   </ion-col>               
                 </ion-row>          
               </ion-grid>
@@ -84,13 +77,11 @@
                         Raça
                       </span>
                     </ion-col>
-                    <ion-col offset-1  col-5>
-                      <p class="content-informations">
-                        {{paciente.pessoa.raca}}
-                      </p>                    
-                    </ion-col>                  
+                    <ion-col  offset-1  col-6>
+                        <ion-input  required type="text" [value]="paciente.pessoa.raca" 
+                        (ionChange)="onChange('raca',$event.value)" ></ion-input>
+                    </ion-col>             
                   </ion-row>
                 </ion-grid>
-    </div>
-   
-    
+  
+  

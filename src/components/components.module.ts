@@ -6,17 +6,20 @@ import { DadosMedicosComponent } from './dados-medicos/dados-medicos';
 import { DadosEnderecoComponent } from './dados-endereco/dados-endereco';
 import { DadosContatoComponent } from './dados-contato/dados-contato';
 import { SideMenuComponent } from './side-menu/side-menu';
+import { FormDadosPessoaisComponent } from './form-dados-pessoais/form-dados-pessoais';
 @NgModule({
 	declarations: [DadosPessoaisComponent,
     DadosMedicosComponent,
     DadosEnderecoComponent,
     DadosContatoComponent,
-    SideMenuComponent],
+    SideMenuComponent,
+    FormDadosPessoaisComponent],
 	imports: [PipeModule,IonicModule],
 	exports: [DadosPessoaisComponent,
     DadosMedicosComponent,
     DadosEnderecoComponent,
     DadosContatoComponent,
-    SideMenuComponent]
+    SideMenuComponent,
+    FormDadosPessoaisComponent]
 })
 export class ComponentsModule {}

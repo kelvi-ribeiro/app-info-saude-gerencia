@@ -23,6 +23,7 @@
     font-size: 20px;
     font-weight: bolder;
 }
+
 .content-informations{
     color:white;
     font-size: 20px;
@@ -37,6 +38,11 @@
     height: 2px;
     background-color: #ffffff;
 }
+.ion-fab-position-fixed{
+    right:  25px;
+  }  
+  
+
 ion-title {
     position: absolute;
     top: 0;
@@ -129,7 +135,9 @@ ion-toast.toast-md.toast-error div {
   }
 
 
-
+  .ion-fab-position-fixed{
+    right:  25px;
+  }  
 
 
 

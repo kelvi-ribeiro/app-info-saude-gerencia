@@ -75,9 +75,24 @@
         
           </ng-template>
           <form (ngSubmit)="editarPaciente()">
+            <ion-grid>
+              <ion-row>
+                <ion-col *ngIf="!editMode" col-6>
+                  <button (click)="setEditMode()" 
+                  type="button" ion-button color="primary">Editar campos</button>
+                </ion-col>
+                <ion-col *ngIf="editMode" col-6>
+                    <button  ion-button color="secondary">Atualizar Paciente</button>
+                  </ion-col>
+                  <ion-col col-6>
+                      <button type="button" (click)="closeModal()"  ion-button color="danger">Fechar</button>
+                    </ion-col>
+              </ion-row>
+            </ion-grid>
+            
 
             <div class="content">
-              <ion-buttons end>
+             <!--  <ion-buttons end>
                 <button style="position: relative;bottom: 39px;"
                  ion-button (click)="setEditarCampos()" type="button">editar campos</button>
                 <button style="position: relative;bottom: 39px;"
@@ -85,15 +100,22 @@
                 ion-button
                 
                 type="submit">Atualizar Paciente</button>
-              </ion-buttons >    
-              
-              <dados-pessoais *ngIf="activeSegment === 'pessoais'"
-              [paciente]="paciente" [editMode]="editMode" ></dados-pessoais>
-              <dados-medicos *ngIf="activeSegment === 'medicos'" [paciente]="paciente" ></dados-medicos>
-              <dados-endereco *ngIf="activeSegment === 'endereco'" [paciente]="paciente" ></dados-endereco>
-              <dados-contato *ngIf="activeSegment === 'contato'" [paciente]="paciente" ></dados-contato>
+              </ion-buttons >     -->
+
+              <div *ngIf="!editMode">
+                <dados-pessoais *ngIf="activeSegment === 'pessoais'"
+                [paciente]="paciente" [editMode]="editMode" ></dados-pessoais>
+                <dados-medicos *ngIf="activeSegment === 'medicos'" [paciente]="paciente" ></dados-medicos>
+                <dados-endereco *ngIf="activeSegment === 'endereco'" [paciente]="paciente" ></dados-endereco>
+                <dados-contato *ngIf="activeSegment === 'contato'" [paciente]="paciente" ></dados-contato>
+              </div>
+              <div *ngIf="editMode">
+                <form-dados-pessoais *ngIf="activeSegment === 'pessoais'"
+                 [paciente]="paciente"></form-dados-pessoais>
+              </div>
               
               
             </div>
           </form>
+          
 </ion-content>

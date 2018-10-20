@@ -33,7 +33,7 @@
       <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">      
     </ion-col>
   </ion-grid>
-  <div  *ngIf="!paciente.pessoa.perfis[0];else ativo">
+  <div  *ngIf="paciente.pessoa.perfis && !paciente.pessoa.perfis[0];else ativo">
     <ion-grid>
       <ion-row>
         <ion-col offset-5 col-8>
@@ -74,12 +74,26 @@
         </ion-grid>
         
           </ng-template>
-  <div class="content">
-    <dados-pessoais *ngIf="activeSegment === 'pessoais'" [paciente]="paciente" ></dados-pessoais>
-    <dados-medicos *ngIf="activeSegment === 'medicos'" [paciente]="paciente" ></dados-medicos>
-    <dados-endereco *ngIf="activeSegment === 'endereco'" [paciente]="paciente" ></dados-endereco>
-    <dados-contato *ngIf="activeSegment === 'contato'" [paciente]="paciente" ></dados-contato>
-       
-  
-  </div>
+          <form (ngSubmit)="editarPaciente()">
+
+            <div class="content">
+              <ion-buttons end>
+                <button style="position: relative;bottom: 39px;"
+                 ion-button (click)="setEditarCampos()" type="button">editar campos</button>
+                <button style="position: relative;bottom: 39px;"
+                color="primary"
+                ion-button
+                
+                type="submit">Atualizar Paciente</button>
+              </ion-buttons >    
+              
+              <dados-pessoais *ngIf="activeSegment === 'pessoais'"
+              [paciente]="paciente" [editMode]="editMode" ></dados-pessoais>
+              <dados-medicos *ngIf="activeSegment === 'medicos'" [paciente]="paciente" ></dados-medicos>
+              <dados-endereco *ngIf="activeSegment === 'endereco'" [paciente]="paciente" ></dados-endereco>
+              <dados-contato *ngIf="activeSegment === 'contato'" [paciente]="paciente" ></dados-contato>
+              
+              
+            </div>
+          </form>
 </ion-content>

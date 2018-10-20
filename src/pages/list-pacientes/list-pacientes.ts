@@ -1,5 +1,5 @@
 import { Component, ViewChild, HostListener } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, ModalController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, ModalController, ActionSheetController, Events } from 'ionic-angular';
 import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
@@ -35,7 +35,8 @@ export class ListPacientesPage {
     public usuarioService:UsuarioService,   
     private modalCtrl:ModalController,
     private actionSheetCtrl:ActionSheetController,
-    private storageService:StorageService
+    private storageService:StorageService,
+    private events:Events
     ) {
   }
 
@@ -44,6 +45,9 @@ export class ListPacientesPage {
       this.navCtrl.setRoot(LoginPage)
       return
     }   
+    this.events.subscribe('listar:pacientes',() => {
+      this.findPacientes()
+    })
     this.slidesLinhasCuidado.lockSwipes(true)
     this.findPacientes()  
     this.findLinhasCuidado()     

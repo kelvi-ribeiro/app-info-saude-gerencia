@@ -37,7 +37,13 @@ ion-segment{
     position: relative;
     bottom: 47px;
     }
-
-  
+    .header-md::after{
+        content: unset;
+    } 
+    .btn-close{
+        position: relative;
+        bottom: 3px;
+        right: 5px;
+    }
     
 }

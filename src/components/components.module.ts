@@ -7,6 +7,7 @@ import { DadosEnderecoComponent } from './dados-endereco/dados-endereco';
 import { DadosContatoComponent } from './dados-contato/dados-contato';
 import { SideMenuComponent } from './side-menu/side-menu';
 import { FormDadosPessoaisComponent } from './form-dados-pessoais/form-dados-pessoais';
+import { NaturalidadeService } from '../services/domain/naturalidade.service';
 @NgModule({
 	declarations: [DadosPessoaisComponent,
     DadosMedicosComponent,
@@ -20,6 +21,9 @@ import { FormDadosPessoaisComponent } from './form-dados-pessoais/form-dados-pes
     DadosEnderecoComponent,
     DadosContatoComponent,
     SideMenuComponent,
-    FormDadosPessoaisComponent]
+    FormDadosPessoaisComponent],
+    providers:[
+        NaturalidadeService
+    ]
 })
 export class ComponentsModule {}

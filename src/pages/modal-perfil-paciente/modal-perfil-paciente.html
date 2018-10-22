@@ -1,33 +1,37 @@
-<ion-content>  
-  <ion-segment [(ngModel)]="activeSegment" color="secondary">
-    <ion-segment-button value="pessoais">
-      <span>
-        Dados Pessoais
-      </span>
-      <ion-icon name="person"></ion-icon>
-    </ion-segment-button>
+<ion-header>  
+    <ion-segment [(ngModel)]="activeSegment" color="secondary">
+      <ion-segment-button value="pessoais">
+        <span>
+          Dados Pessoais
+        </span>
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+  
+      <ion-segment-button value="medicos">
+        <span>
+          Dados Médicos
+        </span>
+        <ion-icon name="medkit"></ion-icon>
+      </ion-segment-button>
+  
+      <ion-segment-button value="endereco">
+        <span>
+          Endereço
+        </span>
+        <ion-icon name="pin"></ion-icon>
+      </ion-segment-button>
+  
+      <ion-segment-button value="contato">
+        <span>
+          Contatos
+        </span>
+        <ion-icon name="call"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  
+</ion-header>
 
-    <ion-segment-button value="medicos">
-      <span>
-        Dados Médicos
-      </span>
-      <ion-icon name="medkit"></ion-icon>
-    </ion-segment-button>
-
-    <ion-segment-button value="endereco">
-      <span>
-        Endereço
-      </span>
-      <ion-icon name="pin"></ion-icon>
-    </ion-segment-button>
-
-    <ion-segment-button value="contato">
-      <span>
-        Contatos
-      </span>
-      <ion-icon name="call"></ion-icon>
-    </ion-segment-button>
-  </ion-segment>
+<ion-content>    
   <ion-grid>
     <ion-col style="text-align: center;" offset-3 col-6>
       <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">      

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController, Events, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController, Events } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { PacienteService } from '../../services/domain/paciente.service';
@@ -21,8 +21,8 @@ export class ModalPerfilPacientePage {
               public usuarioService:UsuarioService,
               private pacienteService:PacienteService,
               private events:Events,
-              private notificacoesService:NotificacoesService,
-              private actionSheetCtrl:ActionSheetController)
+              private notificacoesService:NotificacoesService
+              )
                {
   }
 

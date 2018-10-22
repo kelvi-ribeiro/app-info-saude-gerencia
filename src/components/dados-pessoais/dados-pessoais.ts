@@ -16,8 +16,4 @@ export class DadosPessoaisComponent {
 
   @Input() paciente;
   @Input()editMode = false;
-  date = new Date()
-
- 
-
 }

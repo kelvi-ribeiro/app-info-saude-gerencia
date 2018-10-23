@@ -24,7 +24,7 @@ export class PacienteService {
     ) {
   }
 
-  findPessoaByAnyField(campoPesquisa?:string,linhaCuidadoId?:number,page?:number) {
+  findPessoaByAnyField(linhaCuidadoId?:number,campoPesquisa?:string,page?:number) {
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
@@ -34,7 +34,7 @@ export class PacienteService {
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "get",
-        `${API_CONFIG.baseUrl}/pacientes/page?campoPesquisa=${campoPesquisa ? campoPesquisa : ''}&linhaCuidadoId=${linhaCuidadoId ? linhaCuidadoId:''}&page=${page ? page : ''}`,
+        `${API_CONFIG.baseUrl}/pacientes/page?linhaCuidadoId=${linhaCuidadoId ? linhaCuidadoId : ''}&campoPesquisa=${campoPesquisa ? campoPesquisa: ''}&page=${page ? page : ''}`,
         null,
         headers
       );

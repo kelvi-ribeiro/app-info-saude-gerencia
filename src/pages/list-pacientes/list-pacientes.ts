@@ -162,9 +162,15 @@ export class ListPacientesPage {
   }
 
   findPacientes(){
-    this.pacienteService.findPessoaByAnyField(this.campoPesquisa,this.linhaCuidadoId,this.pageAtual)
+    this.pacienteService.findPessoaByAnyField(this.linhaCuidadoId,this.campoPesquisa,this.pageAtual)
     .then(res=>{      
       this.pacientes = res.content;             
+      this.pacientes = this.pacientes.sort(function (a, b) {
+        var textA = a.pessoa.nome.toUpperCase();
+        var textB = b.pessoa.nome.toUpperCase();
+      
+        return textA.localeCompare(textB);
+      });
       this.totalPages = res.totalPages   
       if(res.content.length === 0){
         this.notificacoesService.presentToast('Nenhum paciente encontrado','toast-attention',2000,'top')

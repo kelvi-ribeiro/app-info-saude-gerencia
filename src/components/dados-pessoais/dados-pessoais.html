@@ -71,8 +71,12 @@
                     <p class="content-informations">
                       {{paciente.pessoa.naturalidade.naturalidade}}
                     </p>
-                    <img *ngIf="paciente.pessoa.naturalidade.naturalidade === 'Brasileira'" 
+                    <img *ngIf="paciente.pessoa.naturalidade.naturalidade === 'Brasileira';else foreign" 
                     class="llustration-img" src="assets/imgs/brazilian.png">
+                    <ng-template #foreign>
+                      <img  
+                      class="llustration-img" src="assets/imgs/universal-nationality.png">
+                    </ng-template>
                   </ion-col>               
                 </ion-row>          
               </ion-grid>

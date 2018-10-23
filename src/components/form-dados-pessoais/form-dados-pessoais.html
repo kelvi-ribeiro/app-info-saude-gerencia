@@ -63,8 +63,11 @@
                     </span>
                   </ion-col>
                   <ion-col offset-1  col-5>
-                      <ion-select >
-                          <ion-option selected value="1" >Brasileira</ion-option>
+                      <ion-select (ionChange)="onChange('naturalidade',$event)"  multiple="false" >
+                          <ion-option 
+                          [value]="naturalidade.id"
+                           [selected]="paciente.pessoa.naturalidade.id === naturalidade.id"
+                            *ngFor="let naturalidade of naturalidades;"   >{{naturalidade.naturalidade}}</ion-option>
                         </ion-select>
                   </ion-col>               
                 </ion-row>          

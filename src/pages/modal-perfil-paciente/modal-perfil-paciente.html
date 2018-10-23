@@ -1,33 +1,42 @@
-<ion-content>  
-  <ion-segment [(ngModel)]="activeSegment" color="secondary">
-    <ion-segment-button value="pessoais">
-      <span>
-        Dados Pessoais
-      </span>
-      <ion-icon name="person"></ion-icon>
-    </ion-segment-button>
+<ion-header>  
+    <ion-segment [(ngModel)]="activeSegment" color="secondary">
+      <ion-segment-button value="pessoais">
+        <span>
+          Dados Pessoais
+        </span>
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+  
+      <ion-segment-button value="medicos">
+        <span>
+          Dados Médicos
+        </span>
+        <ion-icon name="medkit"></ion-icon>
+      </ion-segment-button>
+  
+      <ion-segment-button value="endereco">
+        <span>
+          Endereço
+        </span>
+        <ion-icon name="pin"></ion-icon>
+      </ion-segment-button>
+  
+      <ion-segment-button value="contato">
+        <span>
+          Contatos
+        </span>
+        <ion-icon name="call"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-buttons start>
+      <button class="btn-close"  (click)="closeModal()"  ion-button icon-only>
+        <ion-icon color="danger" name="close"></ion-icon>
+      </button>
+    </ion-buttons >
+    
+</ion-header>
 
-    <ion-segment-button value="medicos">
-      <span>
-        Dados Médicos
-      </span>
-      <ion-icon name="medkit"></ion-icon>
-    </ion-segment-button>
-
-    <ion-segment-button value="endereco">
-      <span>
-        Endereço
-      </span>
-      <ion-icon name="pin"></ion-icon>
-    </ion-segment-button>
-
-    <ion-segment-button value="contato">
-      <span>
-        Contatos
-      </span>
-      <ion-icon name="call"></ion-icon>
-    </ion-segment-button>
-  </ion-segment>
+<ion-content>    
   <ion-grid>
     <ion-col style="text-align: center;" offset-3 col-6>
       <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">      
@@ -77,16 +86,13 @@
           <form (ngSubmit)="editarPaciente()">
             <ion-grid>
               <ion-row>
-                <ion-col *ngIf="!editMode" col-6>
+                <ion-col *ngIf="!editMode" offset-4 col-6>
                   <button (click)="setEditMode()" 
                   type="button" ion-button color="primary">Editar campos</button>
                 </ion-col>
-                <ion-col *ngIf="editMode" col-6>
+                <ion-col *ngIf="editMode" offset-4 col-6>
                     <button  ion-button color="secondary">Atualizar Paciente</button>
-                  </ion-col>
-                  <ion-col col-6>
-                      <button type="button" (click)="closeModal()"  ion-button color="danger">Fechar</button>
-                    </ion-col>
+                  </ion-col>                
               </ion-row>
             </ion-grid>
             

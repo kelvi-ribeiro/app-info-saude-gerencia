@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { PacienteLinhaCuidadoService } from '../../services/domain/paciente.linha.cuidado.service';
 
 /**
  * Generated class for the DadosMedicosComponent component.
@@ -13,8 +14,16 @@ import { Component, Input } from '@angular/core';
 export class DadosMedicosComponent {
 
   @Input() paciente;
+  pacienteLinhasCuidado = []
 
-  constructor() {
+  constructor(private pacienteLinhaCuidadoService:PacienteLinhaCuidadoService) {
+    setTimeout(() => {      
+      this.pacienteLinhaCuidadoService.findAllByPacienteId(this.paciente.id)
+      .then(res=>{
+        this.pacienteLinhasCuidado = res;
+      })
+      
+    }, 50);
     
   }
 }

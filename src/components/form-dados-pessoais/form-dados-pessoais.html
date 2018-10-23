@@ -1,90 +1,66 @@
+<ion-grid>
+  <ion-row>
+    <ion-col col-5>
+      <span class="label-informations">
+        Nome
+      </span>
+    </ion-col>
+    <ion-col col-6>
+      <ion-input type="text" [value]="paciente.pessoa.nome" (ionChange)="onChange('nome',$event.value)"></ion-input>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
-    <ion-grid > 
-        <ion-row>
-          <ion-col col-5>
-            <span class="label-informations">
-              Nome
-            </span>
-          </ion-col>
-          <ion-col   col-6>
-              <ion-input type="text" [value]="paciente.pessoa.nome" 
-              (ionChange)="onChange('nome',$event.value)" ></ion-input>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-  
-      <ion-grid>
-          <ion-row>
-            <ion-col col-5>
-              <span class="label-informations">
-                Data de Nascimento
-              </span>
-            </ion-col>
-            <ion-col   col-6>
-                <ion-input type="date" [value]="convertTimeStampToDate(paciente.pessoa.dataNascimento)" 
-                (ionBlur)="onChange('dataNascimento',$event.value)" ></ion-input>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-  
-        <ion-grid>
-            <ion-row>
-              <ion-col col-4>
-                <span class="label-informations">
-                  Sexo
-                </span>
-              </ion-col>
-              <ion-col offset-1  col-6>                    
-                      <ion-input type="text" [value]="paciente.pessoa.sexo" 
-                      (ionChange)="onChange('sexo',$event.value)" ></ion-input>                    
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-  
-          <ion-grid>
-              <ion-row>
-                <ion-col col-4>
-                  <span class="label-informations">
-                    CPF
-                  </span>
-                </ion-col>
-                <ion-col  offset-1  col-6>
-                    <ion-input type="number"  [value]="paciente.pessoa.cpf" 
-                    (ionChange)="onChange('cpf',$event.value)" ></ion-input>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-  
-            <ion-grid>
-                <ion-row>
-                  <ion-col col-4>
-                    <span class="label-informations">
-                      Naturalidade
-                    </span>
-                  </ion-col>
-                  <ion-col offset-1  col-5>
-                      <ion-select (ionChange)="onChange('naturalidade',$event)"  multiple="false" >
-                          <ion-option 
-                          [value]="naturalidade.id"
-                           [selected]="paciente.pessoa.naturalidade.id === naturalidade.id"
-                            *ngFor="let naturalidade of naturalidades;"   >{{naturalidade.naturalidade}}</ion-option>
-                        </ion-select>
-                  </ion-col>               
-                </ion-row>          
-              </ion-grid>
-  
-              <ion-grid>
-                  <ion-row>
-                    <ion-col col-4>
-                      <span class="label-informations">
-                        Raça
-                      </span>
-                    </ion-col>
-                    <ion-col  offset-1  col-6>
-                        <ion-input  required type="text" [value]="paciente.pessoa.raca" 
-                        (ionChange)="onChange('raca',$event.value)" ></ion-input>
-                    </ion-col>             
-                  </ion-row>
-                </ion-grid>
-  
-  
+<ion-grid>
+  <ion-row>
+    <ion-col col-5>
+      <span class="label-informations">
+        Data de Nascimento
+      </span>
+    </ion-col>
+    <ion-col col-6>
+      <ion-input type="date" [value]="convertTimeStampToDate(paciente.pessoa.dataNascimento)" (ionBlur)="onChange('dataNascimento',$event.value)"></ion-input>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-4>
+      <span class="label-informations">
+        Sexo
+      </span>
+    </ion-col>
+    <ion-col offset-1 col-6>
+      <ion-input type="text" [value]="paciente.pessoa.sexo" (ionChange)="onChange('sexo',$event.value)"></ion-input>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-4>
+      <span class="label-informations">
+        CPF
+      </span>
+    </ion-col>
+    <ion-col offset-1 col-6>
+      <ion-input type="number" [value]="paciente.pessoa.cpf" (ionChange)="onChange('cpf',$event.value)"></ion-input>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-4>
+      <span class="label-informations">
+        Naturalidade
+      </span>
+    </ion-col>
+    <ion-col offset-1 col-5>
+      <ion-select (ionChange)="onChange('naturalidade',$event)" multiple="false">
+        <ion-option [value]="naturalidade.id" [selected]="paciente.pessoa.naturalidade.id === naturalidade.id" *ngFor="let naturalidade of naturalidades;">{{naturalidade.naturalidade}}</ion-option>
+      </ion-select>
+    </ion-col>
+  </ion-row>
+</ion-grid>

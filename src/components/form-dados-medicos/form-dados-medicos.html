@@ -1,0 +1,31 @@
+<!-- <ion-grid *ngFor="let pacienteLinhaCuidado of pacienteLinhasCuidado;let i =  index">
+  <ion-row>
+    <ion-col col-5>
+      <span class="label-informations">
+        Linha de Cuidado {{i + 1}}
+      </span>
+    </ion-col>   
+    <ion-col col-6>
+      <ion-input type="text" 
+      [value]="pacienteLinhaCuidado.linhaCuidado.id" (ionChange)="onChange('nome',$event.value)"></ion-input>
+    </ion-col>
+  </ion-row>
+</ion-grid> -->
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-4>
+      <span class="label-informations">
+        Tipo Sanguineo
+      </span>
+    </ion-col>
+    <ion-col offset-1 col-5>
+      <ion-select (ionChange)="onChange('tipoSanguineo',$event)" 
+      [(ngModel)]="paciente.tipoSanguineo.id" >
+        <ion-option  *ngFor="let tipoSanguineo of tiposSanguineo;" [value]="tipoSanguineo.id" 
+        [selected]="paciente.tipoSanguineo.id === tipoSanguineo.id"
+        >{{tipoSanguineo.tipoSanguineo}}</ion-option>
+      </ion-select>
+    </ion-col>
+  </ion-row>
+</ion-grid>

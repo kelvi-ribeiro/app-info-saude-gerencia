@@ -118,6 +118,9 @@
               <div *ngIf="editMode">
                 <form-dados-pessoais *ngIf="activeSegment === 'pessoais'"
                  [paciente]="paciente"></form-dados-pessoais>
+                 <form-dados-medicos *ngIf="activeSegment === 'medicos'"
+                    [paciente]="paciente"></form-dados-medicos>
+                 
               </div>
               
               

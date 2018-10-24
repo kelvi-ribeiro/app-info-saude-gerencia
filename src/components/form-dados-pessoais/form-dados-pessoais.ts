@@ -46,8 +46,7 @@ export class FormDadosPessoaisComponent {
   findAllNaturalidades(){
     this.naturalidadeService.findAll()
     .then(res =>{
-      this.naturalidades = res;
-      console.log(this.naturalidades)
+      this.naturalidades = res;      
     })
   }
 }

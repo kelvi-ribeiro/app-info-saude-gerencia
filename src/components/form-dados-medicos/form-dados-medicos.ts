@@ -58,6 +58,16 @@ export class FormDadosMedicosComponent {
         this.linhasCuidado = res
       })
     }
+    // Serve para remover a linha de cuidado do array, caso já exista um registro de
+    // linha de cuidado para aquele paciente
+    verifyIfExistisPacienteLinhasCuidado(linhaCuidadoId,pacienteLinhaCuidado){
+      if(this.pacienteLinhasCuidado
+        .find(el => el.linhaCuidado.id === linhaCuidadoId && linhaCuidadoId !== pacienteLinhaCuidado.linhaCuidado.id)){
+        return true
+      }else{
+        return false
+      }
+    }
     onChange(field,value){              
         this.events.publish('editar-dados-medicos:paciente',field,value)            
     }

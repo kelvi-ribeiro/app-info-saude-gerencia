@@ -7,9 +7,13 @@
     </ion-col>   
     <ion-col offset-1 col-5>
       <ion-select   >
-        <ion-option  *ngFor="let linhaCuidado of linhasCuidado;" [value]="linhaCuidado.id" 
-        [selected]="pacienteLinhaCuidado.linhaCuidado.id === linhaCuidado.id"
-        >{{linhaCuidado.nome}}</ion-option>
+        <div *ngFor="let linhaCuidado of linhasCuidado;">
+          <ion-option  
+           *ngIf="!verifyIfExistisPacienteLinhasCuidado(linhaCuidado.id,pacienteLinhaCuidado)"
+           [value]="linhaCuidado.id" 
+          [selected]="pacienteLinhaCuidado.linhaCuidado.id === linhaCuidado.id"
+          >{{linhaCuidado.nome}}</ion-option>
+        </div>
       </ion-select>
       <button type="button" *ngIf="pacienteLinhasCuidado.length !== 1" (click)="alertRemoverPacienteLinhaCuidado(pacienteLinhaCuidado.id)"
        ion-button icon-only>

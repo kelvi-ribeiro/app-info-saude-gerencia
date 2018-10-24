@@ -17,13 +17,18 @@ export class DadosMedicosComponent {
   pacienteLinhasCuidado = []
 
   constructor(private pacienteLinhaCuidadoService:PacienteLinhaCuidadoService) {
-    setTimeout(() => {      
-      this.pacienteLinhaCuidadoService.findAllByPacienteId(this.paciente.id)
-      .then(res=>{
-        this.pacienteLinhasCuidado = res;
-      })
-      
-    }, 50);
+    setTimeout(() => {              
+      this.findAllPacienteLinhaCuidado();      
+        
+    }, 50);    
+  }
+  
+  findAllPacienteLinhaCuidado(){
     
+    this.pacienteLinhaCuidadoService.findAllByPacienteId(this.paciente.id)
+    .then(res=>{
+      this.pacienteLinhasCuidado = res;
+    }) 
+
   }
 }

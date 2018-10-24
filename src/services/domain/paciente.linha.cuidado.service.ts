@@ -32,7 +32,38 @@ export class PacienteLinhaCuidadoService {
         );
       })
   }
-
+  insertByPacienteIdAndLinhaCuidadoId(pacienteLinhaCuidado){
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+      .then(userCredentials => {
+        if (!userCredentials) {
+          return;
+        }
+        headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+        return this.handlerResponseService.handlerResponse(
+          "post",
+          `${API_CONFIG.baseUrl}/pacientes-linhas-cuidado`,
+          pacienteLinhaCuidado,
+          headers
+        );
+      })
+  }   
+  delete(pacienteLinhaCuidadoId){
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+      .then(userCredentials => {
+        if (!userCredentials) {
+          return;
+        }
+        headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+        return this.handlerResponseService.handlerResponse(
+          "delete",
+          `${API_CONFIG.baseUrl}/pacientes-linhas-cuidado/${pacienteLinhaCuidadoId}`,
+          null,
+          headers
+        );
+      })
+  }   
 }
 
 

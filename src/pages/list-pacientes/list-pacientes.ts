@@ -165,15 +165,7 @@ export class ListPacientesPage {
     this.pacienteService.findPessoaByAnyField(this.linhaCuidadoId,this.campoPesquisa,this.pageAtual)
     .then(res=>{            
       this.pacientes = res.content      
-      let temp = 0
-      this.pacientes.forEach((element,index) => {
-        if(element.id === temp){
-          this.pacientes.splice(index,1)
-          }  
-          temp = element.id
-      });
-          
-        
+      this.removerPacienteDuplicado();
       
       /* this.pacientes = this.pacientes.sort(function (a, b) {
         var textA = a.pessoa.nome.toUpperCase(); // ORDENANDO POR NOME
@@ -192,6 +184,17 @@ export class ListPacientesPage {
       this.notificacoesService.presentAlertErro();
     })
   }  
+  removerPacienteDuplicado(){
+    const firstElement = this.pacientes[0]
+    let temp = firstElement.id
+      this.pacientes = this.pacientes.filter((element) => {
+        if(element.id !== temp){
+            return element
+          }  
+          temp = element.id
+      });
+    this.pacientes.unshift(firstElement)
+  }
   returnPathImageByLinhaCuidadoId(){
     if(this.linhasCuidado.length === 0){return false}    
       if(this.linhasCuidado.length <= this.slidesLinhasCuidado.getActiveIndex()){

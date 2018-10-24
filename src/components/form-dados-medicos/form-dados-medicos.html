@@ -11,7 +11,7 @@
         [selected]="pacienteLinhaCuidado.linhaCuidado.id === linhaCuidado.id"
         >{{linhaCuidado.nome}}</ion-option>
       </ion-select>
-      <button type="button" (click)="alertRemoverPacienteLinhaCuidado(pacienteLinhaCuidado.id)"
+      <button type="button" *ngIf="pacienteLinhasCuidado.length !== 1" (click)="alertRemoverPacienteLinhaCuidado(pacienteLinhaCuidado.id)"
        ion-button icon-only>
           <ion-icon  color="danger" ios="ios-remove" md="md-remove"></ion-icon>
       </button>

@@ -64,17 +64,26 @@ export class FormDadosMedicosComponent {
 
     alertEscolhaNovaLinhaCuidado() {
       let alert = this.alertCtrl.create();
-      alert.setTitle('Escolha uma linha de cuidado')      
-      this.linhasCuidado.forEach(element => {
-        alert.addButton({
-          text: element.nome,
-          handler: () => { 
-            this.alertConfirmationNewLinhaCuidado(element.id);
+      alert.setTitle('Escolha uma linha de cuidado')            
+      this.linhasCuidado.forEach(linhaCuidado => {
+
+        this.pacienteLinhasCuidado.forEach(pacienteLinhaCuidado =>{
+          if(linhaCuidado.id === pacienteLinhaCuidado.linhaCuidado.id ){
+            linhaCuidado.pacienteJaPossuiLinhaCuidado = true
+            return
           }
-        });
-      });
-      alert.present()
-    }
+        })
+        if(!linhaCuidado.pacienteJaPossuiLinhaCuidado){
+          alert.addButton({
+            text: linhaCuidado.nome,
+            handler: () => { 
+              this.alertConfirmationNewLinhaCuidado(linhaCuidado.id);
+            }
+          });
+          alert.present()
+        }
+    });
+  }
     alertConfirmationNewLinhaCuidado(linhaCuidadoId){
       let alert = this.alertCtrl.create({
         title:'Tem certeza ?',

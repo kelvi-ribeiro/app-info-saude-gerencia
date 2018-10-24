@@ -9,23 +9,28 @@ import { SideMenuComponent } from './side-menu/side-menu';
 import { FormDadosPessoaisComponent } from './form-dados-pessoais/form-dados-pessoais';
 import { NaturalidadeService } from '../services/domain/naturalidade.service';
 import { PacienteLinhaCuidadoService } from '../services/domain/paciente.linha.cuidado.service';
+import { FormDadosMedicosComponent } from './form-dados-medicos/form-dados-medicos';
+import { TipoSanguineoService } from '../services/domain/tipo.sanguineo.service';
 @NgModule({
 	declarations: [DadosPessoaisComponent,
     DadosMedicosComponent,
     DadosEnderecoComponent,
     DadosContatoComponent,
     SideMenuComponent,
-    FormDadosPessoaisComponent],
+    FormDadosPessoaisComponent,
+    FormDadosMedicosComponent],
 	imports: [PipeModule,IonicModule],
 	exports: [DadosPessoaisComponent,
     DadosMedicosComponent,
     DadosEnderecoComponent,
     DadosContatoComponent,
     SideMenuComponent,
-    FormDadosPessoaisComponent],
+    FormDadosPessoaisComponent,
+    FormDadosMedicosComponent],
     providers:[
         NaturalidadeService,
-        PacienteLinhaCuidadoService
+        PacienteLinhaCuidadoService,
+        TipoSanguineoService
     ]
 })
 export class ComponentsModule {}

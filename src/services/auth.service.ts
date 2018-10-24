@@ -77,7 +77,7 @@ export class AuthService {
             endereco:{
               id:pessoa.endereco.id,
               numero:pessoa.endereco.numero,
-              logradouro:pessoa.endereco.logradouro,
+              rua:pessoa.endereco.rua,
               bairro:pessoa.endereco.bairro,
               cep:pessoa.endereco.cep,
               cidade:{id:pessoa.endereco.cidadeid,nome:pessoa.endereco.cidade.nome}

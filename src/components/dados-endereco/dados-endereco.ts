@@ -18,7 +18,7 @@ export class DadosEnderecoComponent {
   constructor(private events:Events) {
     setTimeout(() => {              
         this.events.publish('editar-dados-pessoa-endereco:paciente','bairro','Areia Branca')      
-        this.events.publish('editar-dados-pessoa:paciente','logradouro','Souza Herdy')              
+        this.events.publish('editar-dados-pessoa:paciente','rua','Souza Herdy')              
         this.events.publish('editar-dados-pessoa:paciente','numero','1000')      
         this.events.publish('editar-dados-pessoa:paciente','cep','23120180')      
         

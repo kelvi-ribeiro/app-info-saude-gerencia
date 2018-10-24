@@ -165,7 +165,7 @@ export class ListPacientesPage {
     this.pacienteService.findPessoaByAnyField(this.linhaCuidadoId,this.campoPesquisa,this.pageAtual)
     .then(res=>{            
       this.pacientes = res.content      
-      this.removerPacienteDuplicado();
+      //this.removerPacienteDuplicado();
       
       /* this.pacientes = this.pacientes.sort(function (a, b) {
         var textA = a.pessoa.nome.toUpperCase(); // ORDENANDO POR NOME

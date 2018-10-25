@@ -38,6 +38,15 @@ export class ModalPerfilPacientePage {
     this.events.subscribe('editar-dados-medicos:paciente',(field,value)=>{                 
       if(field === 'tipoSanguineo'){        
         this.paciente['tipoSanguineo']['id'] = value        
+      }      
+    })
+    this.events.subscribe('editar-dados-endereco:paciente',(field,value)=>{                 
+      if(field === 'cidade'){        
+        this.paciente['pessoa']['endereco']['cidade']['id'] = value    
+        console.log(this.paciente['pessoa']['endereco']['cidade']['id'])
+        console.log(this.paciente)
+      }else{
+        this.paciente['pessoa']['endereco'][field] = value        
       }
       
     })

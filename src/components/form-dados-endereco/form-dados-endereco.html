@@ -1,0 +1,69 @@
+<ion-grid>
+  <ion-row>
+    <ion-col col-4>
+      <span class="label-informations">
+        Cidade
+      </span>
+    </ion-col>
+    <ion-col offset-1 col-5>
+      <ion-select (ionChange)="onChange('cidade',$event)" >
+        <ion-option [value]="cidade.id" [selected]="paciente.pessoa.endereco.cidade.id === cidade.id" 
+        *ngFor="let cidade of cidades;">{{cidade.nome}}</ion-option>
+      </ion-select>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+<ion-row>
+<ion-col col-4>
+  <span class="label-informations">
+    Bairro
+  </span>
+</ion-col>
+<ion-col offset-1 col-6>
+  <ion-input type="text" [value]="paciente.pessoa.endereco.bairro" (ionChange)="onChange('bairro',$event.value)"></ion-input>
+</ion-col>
+</ion-row>
+</ion-grid>
+
+<ion-grid>
+<ion-row>
+  <ion-col col-4>
+    <span class="label-informations">
+      Rua
+    </span>
+  </ion-col>
+  <ion-col offset-1 col-6>
+    <ion-input type="text" [value]="paciente.pessoa.endereco.rua"
+     (ionChange)="onChange('rua',$event.value)"></ion-input>
+  </ion-col>
+</ion-row>
+</ion-grid>
+
+
+<ion-grid>
+<ion-row>
+<ion-col col-4>
+  <span class="label-informations">
+    Número
+  </span>
+</ion-col>
+<ion-col offset-1 col-6>
+  <ion-input type="number" [value]="paciente.pessoa.endereco.numero" (ionChange)="onChange('numero',$event.value)"></ion-input>
+</ion-col>
+</ion-row>
+</ion-grid>
+
+<ion-grid>
+<ion-row>
+<ion-col col-4>
+  <span class="label-informations">
+    CEP
+  </span>
+</ion-col>
+<ion-col offset-1 col-6>
+  <ion-input type="number" [value]="paciente.pessoa.endereco.cep" (ionChange)="onChange('cep',$event.value)"></ion-input>
+</ion-col>
+</ion-row>
+</ion-grid>

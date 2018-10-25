@@ -120,6 +120,9 @@
                  [paciente]="paciente"></form-dados-pessoais>
                  <form-dados-medicos *ngIf="activeSegment === 'medicos'"
                     [paciente]="paciente"></form-dados-medicos>
+
+                    <form-dados-endereco *ngIf="activeSegment === 'endereco'"
+                    [paciente]="paciente"></form-dados-endereco>
                  
               </div>
               

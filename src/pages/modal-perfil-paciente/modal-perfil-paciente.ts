@@ -50,12 +50,21 @@ export class ModalPerfilPacientePage {
       }
       
     }) */
-    this.events.subscribe('close-modal',() =>{
-      this.closeModal()
+    this.events.subscribe('atualizar:paciente',()=>{
+      this.pacienteService.updatePaciente(this.paciente)
+      .then(()=>{  
+        this.notificacoesService.presentToast('Sucesso ao atualizar paciente','',2500,'top')
+        this.closeModal()      
+        this.events.publish('listar:pacientes')
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
     })
   }
   closeModal(){
     this.viewCtrl.dismiss()
+    
   }
   setEditMode(){
     if(this.editMode){
@@ -64,16 +73,8 @@ export class ModalPerfilPacientePage {
     } 
     this.editMode = true
   }
-  editarPaciente(){        
-    this.pacienteService.updatePaciente(this.paciente)
-    .then(()=>{
-      this.notificacoesService.presentToast('Sucesso ao atualizar paciente','',2500,'top')
-      this.closeModal()
-      this.events.publish('listar:pacientes')
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
+  atualizarPaciente(){        
+    
   }
  
 }

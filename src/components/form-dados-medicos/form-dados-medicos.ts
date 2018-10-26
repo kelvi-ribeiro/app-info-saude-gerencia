@@ -5,14 +5,8 @@ import { PacienteLinhaCuidadoService } from '../../services/domain/paciente.linh
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
-import { PacienteService } from '../../services/domain/paciente.service';
 
-/**
- * Generated class for the FormDadosMedicosComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+
 @Component({
   selector: 'form-dados-medicos',
   templateUrl: 'form-dados-medicos.html'
@@ -31,8 +25,7 @@ export class FormDadosMedicosComponent {
     private linhaCuidadoService:LinhaCuidadoService,
     private events:Events,
     private alertCtrl:AlertController,
-    private notificacoesService:NotificacoesService,
-    private pacienteService:PacienteService
+    private notificacoesService:NotificacoesService    
     ) {  
       setTimeout(() => {              
         this.findAllPacienteLinhaCuidado();      
@@ -76,22 +69,13 @@ export class FormDadosMedicosComponent {
         this.paciente['tipoSanguineo']['id'] = value        
       }        
     }
-    editarPaciente(){        
-      this.pacienteService.updatePaciente(this.paciente)
-      .then(()=>{
-        this.notificacoesService.presentToast('Sucesso ao atualizar paciente','',2500,'top')
-        this.events.publish('close-modal')
-        this.events.publish('listar:pacientes')
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
+    atualizarPaciente(){        
+      this.events.publish('atualizar:paciente')
       if(this.editouLinhaCuidado){
         this.pacienteLinhasCuidado.forEach(element => {
           this.pacienteLinhaCuidadoService.update(element,this.paciente.id)
         });
       }
-      
     }
     editarLinhaCuidado(pacienteLinhaCuidado,event){
       pacienteLinhaCuidado.linhaCuidado.id = event

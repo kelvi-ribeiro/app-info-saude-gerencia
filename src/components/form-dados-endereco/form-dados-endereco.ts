@@ -1,15 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { CidadeService } from '../../services/domain/cidade.service';
-import { PacienteService } from '../../services/domain/paciente.service';
-import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
-/**
- * Generated class for the FormDadosEnderecoComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+
 @Component({
   selector: 'form-dados-endereco',
   templateUrl: 'form-dados-endereco.html'
@@ -21,9 +14,7 @@ export class FormDadosEnderecoComponent {
 
   constructor(
             private events:Events,
-            private cidadeService:CidadeService,
-            private pacienteService:PacienteService,
-            private notificacoesService:NotificacoesService
+            private cidadeService:CidadeService
             )    {
 
               this.findAllCidades()
@@ -41,16 +32,8 @@ export class FormDadosEnderecoComponent {
     })
   }
 
-  editarPaciente(){        
-    this.pacienteService.updatePaciente(this.paciente)
-    .then(()=>{
-      this.notificacoesService.presentToast('Sucesso ao atualizar paciente','',2500,'top')
-      this.events.publish('close-modal')
-      this.events.publish('listar:pacientes')
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
+  atualizarPaciente(){        
+   this.events.publish('atualizar:paciente')
   }
 
 }

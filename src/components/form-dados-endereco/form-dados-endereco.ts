@@ -31,6 +31,7 @@ export class FormDadosEnderecoComponent {
     }else{
       this.paciente.pessoa.endereco[field] = value
     }
+    console.log(this.paciente.pessoa.endereco)
     this.events.publish('editar-dados-endereco:paciente',field,value)       
   }
 
@@ -46,21 +47,22 @@ export class FormDadosEnderecoComponent {
   }
 
   findEnderecoByCep(value){
-    if(value.length > 7){
+   /*  if(value.length > 7){
       this.viaCepService.findEnderecoByCep(value)
       .then(enderecoEncontrado =>{
         const endereco = this.paciente.pessoa.endereco        
         endereco.bairro = enderecoEncontrado.bairro
         endereco.rua = enderecoEncontrado.logradouro        
-        endereco.cidade.id = this.cidades
-        .find(el => el.nome.includes(enderecoEncontrado.localidade)).id 
-        console.log(this.cidades
-          .find(el => el.nome.includes(enderecoEncontrado.localidade)).id  );
-                    
-        this.paciente.pessoa.endereco = endereco
-        console.log(this.paciente.pessoa.endereco)
+        const cidadeEncontrada = this.cidades
+        .find(el => el.nome.includes(enderecoEncontrado.localidade))
+        this.cidades = []
+        this.cidades.push(cidadeEncontrada)
+        endereco.id = cidadeEncontrada.id         
+        this.paciente.pessoa.endereco = endereco        
       })
-    }
-  }
+    } */
+  
+  
+}
 
 }

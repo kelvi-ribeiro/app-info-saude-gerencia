@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { CidadeService } from '../../services/domain/cidade.service';
+import { EnderecoService } from '../../services/domain/endereco.service';
+import { ViaCepService } from '../../services/domain/viaCep.service';
 
 
 @Component({
@@ -14,7 +16,9 @@ export class FormDadosEnderecoComponent {
 
   constructor(
             private events:Events,
-            private cidadeService:CidadeService
+            private cidadeService:CidadeService,
+            private viaCepService:ViaCepService
+            
             )    {
 
               this.findAllCidades()
@@ -22,6 +26,11 @@ export class FormDadosEnderecoComponent {
   }
 
   onChange(field,value){        
+    if(field === 'cidade'){
+      this.paciente.pessoa.endereco['cidade']['id'] = value  
+    }else{
+      this.paciente.pessoa.endereco[field] = value
+    }
     this.events.publish('editar-dados-endereco:paciente',field,value)       
   }
 
@@ -33,7 +42,25 @@ export class FormDadosEnderecoComponent {
   }
 
   atualizarPaciente(){        
-   this.events.publish('atualizar:paciente')
+    this.events.publish('atualizar:endereco')
+  }
+
+  findEnderecoByCep(value){
+    if(value.length > 7){
+      this.viaCepService.findEnderecoByCep(value)
+      .then(enderecoEncontrado =>{
+        const endereco = this.paciente.pessoa.endereco        
+        endereco.bairro = enderecoEncontrado.bairro
+        endereco.rua = enderecoEncontrado.logradouro        
+        endereco.cidade.id = this.cidades
+        .find(el => el.nome.includes(enderecoEncontrado.localidade)).id 
+        console.log(this.cidades
+          .find(el => el.nome.includes(enderecoEncontrado.localidade)).id  );
+                    
+        this.paciente.pessoa.endereco = endereco
+        console.log(this.paciente.pessoa.endereco)
+      })
+    }
   }
 
 }

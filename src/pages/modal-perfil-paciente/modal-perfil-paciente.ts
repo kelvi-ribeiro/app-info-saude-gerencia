@@ -4,6 +4,7 @@ import { API_CONFIG } from '../../config/api.config';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
+import { EnderecoService } from '../../services/domain/endereco.service';
 
 @IonicPage()
 @Component({
@@ -21,46 +22,21 @@ export class ModalPerfilPacientePage {
               public usuarioService:UsuarioService,
               private pacienteService:PacienteService,
               private events:Events,
-              private notificacoesService:NotificacoesService
+              private notificacoesService:NotificacoesService,
+              private enderecoService:EnderecoService
+
               )
                {
   }
 
-  ionViewDidLoad() {
-  /*  this.events.subscribe('editar-dados-pessoa:paciente',(field,value)=>{     
-     if(field === 'naturalidade'){
-       this.paciente['pessoa']['naturalidade']['id'] = value
-     }else{
-       this.paciente['pessoa'][field] = value
-     }
-
-    })
-    this.events.subscribe('editar-dados-medicos:paciente',(field,value)=>{                 
-      if(field === 'tipoSanguineo'){        
-        this.paciente['tipoSanguineo']['id'] = value        
-      }      
-    })
-    this.events.subscribe('editar-dados-endereco:paciente',(field,value)=>{                 
-      if(field === 'cidade'){        
-        this.paciente['pessoa']['endereco']['cidade']['id'] = value    
-        console.log(this.paciente['pessoa']['endereco']['cidade']['id'])
-        console.log(this.paciente)
-      }else{
-        this.paciente['pessoa']['endereco'][field] = value        
-      }
-      
-    }) */
+  ionViewDidLoad() { 
+ 
     this.events.subscribe('atualizar:paciente',()=>{
-      this.pacienteService.updatePaciente(this.paciente)
-      .then(()=>{  
-        this.notificacoesService.presentToast('Sucesso ao atualizar paciente','',2500,'top')
-        this.closeModal()      
-        this.events.publish('listar:pacientes')
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
+     this.atualizarPaciente()
     })
+    this.events.subscribe('atualizar:endereco',()=>{
+      this.atualizarEnderecoPessoa()
+     })
   }
   closeModal(){
     this.viewCtrl.dismiss()
@@ -74,7 +50,27 @@ export class ModalPerfilPacientePage {
     this.editMode = true
   }
   atualizarPaciente(){        
-    
+    this.pacienteService.updatePaciente(this.paciente)
+    .then(()=>{  
+      this.notificacoesService.presentToast('Sucesso ao atualizar paciente','',2500,'top')
+      this.closeModal()      
+      this.events.publish('listar:pacientes')
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
+  atualizarEnderecoPessoa(){
+    console.log(this.paciente.pessoa.endereco)
+    this.enderecoService.update(this.paciente.pessoa.endereco)    
+    .then(()=>{  
+      this.notificacoesService.presentToast('Sucesso ao atualizar paciente','',2500,'top')
+      this.closeModal()      
+      this.events.publish('listar:pacientes')
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
   }
  
 }

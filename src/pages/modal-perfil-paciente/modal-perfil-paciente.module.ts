@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { ModalPerfilPacientePage } from './modal-perfil-paciente';
 import { PipeModule } from '../../pipes/pipe.module';
 import { ComponentsModule } from '../../components/components.module';
+import { EnderecoService } from '../../services/domain/endereco.service';
 
 
 @NgModule({
@@ -14,5 +15,8 @@ import { ComponentsModule } from '../../components/components.module';
     PipeModule,  
     ComponentsModule  
   ],
+  providers:[
+    EnderecoService
+  ]
 })
 export class ModalPerfilPacientePageModule {}

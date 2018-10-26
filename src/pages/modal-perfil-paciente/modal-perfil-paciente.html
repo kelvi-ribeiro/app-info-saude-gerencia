@@ -80,33 +80,20 @@
               </ion-col>
             </ion-grid>
           </ion-row>    
-        </ion-grid>
-        
+        </ion-grid>        
           </ng-template>
-          <form (ngSubmit)="editarPaciente()">
-            <ion-grid>
+
+          <ion-grid>
               <ion-row>
-                <ion-col *ngIf="!editMode" offset-4 col-6>
-                  <button (click)="setEditMode()" 
+                <ion-col  offset-4 col-6>
+                  <button *ngIf="!editMode" (click)="setEditMode()" 
                   type="button" ion-button color="primary">Editar campos</button>
-                </ion-col>
-                <ion-col *ngIf="editMode" offset-4 col-6>
-                    <button  ion-button color="secondary">Atualizar Paciente</button>
-                  </ion-col>                
+                </ion-col>                        
               </ion-row>
             </ion-grid>
-            
 
             <div class="content">
-             <!--  <ion-buttons end>
-                <button style="position: relative;bottom: 39px;"
-                 ion-button (click)="setEditarCampos()" type="button">editar campos</button>
-                <button style="position: relative;bottom: 39px;"
-                color="primary"
-                ion-button
-                
-                type="submit">Atualizar Paciente</button>
-              </ion-buttons >     -->
+          
 
               <div *ngIf="!editMode">
                 <dados-pessoais *ngIf="activeSegment === 'pessoais'"
@@ -122,12 +109,7 @@
                     [paciente]="paciente"></form-dados-medicos>
 
                     <form-dados-endereco *ngIf="activeSegment === 'endereco'"
-                    [paciente]="paciente"></form-dados-endereco>
-                 
+                    [paciente]="paciente"></form-dados-endereco>                 
               </div>
-              
-              
             </div>
-          </form>
-          
 </ion-content>

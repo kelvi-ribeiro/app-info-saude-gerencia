@@ -1,13 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { NaturalidadeService } from '../../services/domain/naturalidade.service';
+import { PacienteService } from '../../services/domain/paciente.service';
+import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
-/**
- * Generated class for the FormDadosPessoaisComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'form-dados-pessoais',
   templateUrl: 'form-dados-pessoais.html'
@@ -16,9 +12,13 @@ export class FormDadosPessoaisComponent {
 
   @Input()paciente
   naturalidades = []
+  
   constructor(private events:Events,
-              private naturalidadeService:NaturalidadeService
+              private naturalidadeService:NaturalidadeService,
+              private pacienteService:PacienteService,
+              private notificacoesService:NotificacoesService
               ) { 
+                
                 this.findAllNaturalidades()
   }
   
@@ -29,13 +29,13 @@ export class FormDadosPessoaisComponent {
           return
         } else {                
             value = new Date(value).setDate(new Date(value).getDate() +1)             
-            this.events.publish('editar-dados-pessoa:paciente',field,value)            
+            this.paciente['pessoa'][field] = value
         }
       } else {
         return
       }      
     }else{
-      this.events.publish('editar-dados-pessoa:paciente',field,value)            
+      this.paciente['pessoa'][field] = value
 
     }    
   }
@@ -47,6 +47,17 @@ export class FormDadosPessoaisComponent {
     this.naturalidadeService.findAll()
     .then(res =>{
       this.naturalidades = res;      
+    })
+  }
+  editarPaciente(){        
+    this.pacienteService.updatePaciente(this.paciente)
+    .then(()=>{
+      this.notificacoesService.presentToast('Sucesso ao atualizar paciente','',2500,'top')
+      this.events.publish('close-modal')
+      this.events.publish('listar:pacientes')
+    })
+    .catch((error)=>{
+      console.log(error)
     })
   }
 }

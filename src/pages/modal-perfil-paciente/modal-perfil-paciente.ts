@@ -27,7 +27,7 @@ export class ModalPerfilPacientePage {
   }
 
   ionViewDidLoad() {
-   this.events.subscribe('editar-dados-pessoa:paciente',(field,value)=>{     
+  /*  this.events.subscribe('editar-dados-pessoa:paciente',(field,value)=>{     
      if(field === 'naturalidade'){
        this.paciente['pessoa']['naturalidade']['id'] = value
      }else{
@@ -49,6 +49,9 @@ export class ModalPerfilPacientePage {
         this.paciente['pessoa']['endereco'][field] = value        
       }
       
+    }) */
+    this.events.subscribe('close-modal',() =>{
+      this.closeModal()
     })
   }
   closeModal(){

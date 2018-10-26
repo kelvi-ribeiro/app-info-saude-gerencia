@@ -1,3 +1,12 @@
+<form (ngSubmit)="editarPaciente()">
+    <ion-grid>
+      <ion-row>       
+        <ion-col  offset-4 col-6>
+            <button  ion-button color="secondary">Atualizar Paciente</button>
+          </ion-col>                
+      </ion-row>
+    </ion-grid>
+ 
  <ion-grid *ngFor="let pacienteLinhaCuidado of pacienteLinhasCuidado;let i =  index">
   <ion-row>
     <ion-col col-4>
@@ -46,3 +55,4 @@
       <button type="button" (click)="alertEscolhaNovaLinhaCuidado()"ion-button >Adicionar Nova Linha de cuidado</button>
     </ion-col>
   </ion-grid>
+  </form>

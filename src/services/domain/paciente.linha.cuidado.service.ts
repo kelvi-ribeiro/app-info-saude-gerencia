@@ -48,6 +48,23 @@ export class PacienteLinhaCuidadoService {
         );
       })
   }   
+  update(pacienteLinhasCuidado,id) {
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "put",
+        `${API_CONFIG.baseUrl}/paciente-linhas-cuidado/${id}`,
+        pacienteLinhasCuidado,
+        headers
+      );
+    });
+  }
+
   delete(pacienteLinhaCuidadoId){
     let headers = new Headers();
     return this.storage.getUserCredentials()

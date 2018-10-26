@@ -20,8 +20,8 @@ export class NotificacoesService {
     ) {
   }
 
-  presentToast(message:string,css:string,duration:number,position:string) {
-    if(this.toast && this.toast.readReady.closed){
+  presentToast(message:string,css:string,duration:number,position:string) {    
+    if(this.toast && this.toast.instance){
       return            
     }
     this.toast = this.toastCtrl.create({
@@ -32,6 +32,7 @@ export class NotificacoesService {
     });
     this.toast.present();
   }
+    
   presentAlertDefault(title,message,page?,navCtrl?:NavController){  
     let alert = this.alertCtrl.create({
       title:title,

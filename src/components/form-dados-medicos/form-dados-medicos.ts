@@ -23,6 +23,7 @@ export class FormDadosMedicosComponent {
   tiposSanguineo: any;
   pacienteLinhasCuidado: any;
   linhasCuidado: any;
+  editouLinhaCuidado = false
 
   constructor(
     private tipoSanguineoService:TipoSanguineoService,
@@ -85,13 +86,22 @@ export class FormDadosMedicosComponent {
       .catch((error)=>{
         console.log(error)
       })
+      if(this.editouLinhaCuidado){
+        this.pacienteLinhasCuidado.forEach(element => {
+          this.pacienteLinhaCuidadoService.update(element,this.paciente.id)
+        });
+      }
+      
+    }
+    editarLinhaCuidado(pacienteLinhaCuidado,event){
+      pacienteLinhaCuidado.linhaCuidado.id = event
+      this.editouLinhaCuidado = true
     }
 
     alertEscolhaNovaLinhaCuidado() {
       let alert = this.alertCtrl.create();
       alert.setTitle('Escolha uma linha de cuidado')            
       this.linhasCuidado.forEach(linhaCuidado => {
-
         this.pacienteLinhasCuidado.forEach(pacienteLinhaCuidado =>{
           if(linhaCuidado.id === pacienteLinhaCuidado.linhaCuidado.id ){
             linhaCuidado.pacienteJaPossuiLinhaCuidado = true

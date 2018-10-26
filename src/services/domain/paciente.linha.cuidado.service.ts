@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
 import { Headers } from '@angular/http';
+import { elementAttribute } from '@angular/core/src/render3/instructions';
 
 
 
@@ -48,7 +49,11 @@ export class PacienteLinhaCuidadoService {
         );
       })
   }   
-  update(pacienteLinhasCuidado,id) {
+  update(pacienteLinhasCuidado,pacienteId) {
+    const pacienteLinhaCuidadoDTO = {
+      linhaCuidadoId:pacienteLinhasCuidado.linhaCuidado.id,
+      pacienteId:pacienteId
+    }
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
@@ -58,8 +63,8 @@ export class PacienteLinhaCuidadoService {
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "put",
-        `${API_CONFIG.baseUrl}/paciente-linhas-cuidado/${id}`,
-        pacienteLinhasCuidado,
+        `${API_CONFIG.baseUrl}/pacientes-linhas-cuidado/${pacienteLinhasCuidado.id}`,
+        pacienteLinhaCuidadoDTO,
         headers
       );
     });

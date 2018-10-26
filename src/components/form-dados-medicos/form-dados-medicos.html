@@ -15,7 +15,7 @@
       </span>
     </ion-col>   
     <ion-col offset-1 col-5>
-      <ion-select   >
+      <ion-select (ionChange)="editarLinhaCuidado(pacienteLinhaCuidado,$event)"   >
         <div *ngFor="let linhaCuidado of linhasCuidado;">
           <ion-option  
            *ngIf="!verifyIfExistisPacienteLinhasCuidado(linhaCuidado.id,pacienteLinhaCuidado)"

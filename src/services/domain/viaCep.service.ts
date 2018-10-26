@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 
 import { API_CONFIG } from "../../config/api.config";
+import { HandlerResponseProvider } from "../handler-response/handler-response";
 
 
 
@@ -9,12 +9,17 @@ import { API_CONFIG } from "../../config/api.config";
 export class ViaCepService {
 
   constructor(
-    public http: HttpClient
+    public handlerResponseService: HandlerResponseProvider
     ) {
   }
 
   findEnderecoByCep(cep) {
-    return this.http.get(`${API_CONFIG.viaCepUrl}/${cep}/json`);
+    return this.handlerResponseService.handlerResponse(
+      "get",
+      `${API_CONFIG.viaCepUrl}/${cep}/json`,
+      null,
+      null
+    );  
   }
   
 }

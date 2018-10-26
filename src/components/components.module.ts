@@ -13,6 +13,7 @@ import { FormDadosMedicosComponent } from './form-dados-medicos/form-dados-medic
 import { TipoSanguineoService } from '../services/domain/tipo.sanguineo.service';
 import { FormDadosEnderecoComponent } from './form-dados-endereco/form-dados-endereco';
 import { CidadeService } from '../services/domain/cidade.service';
+import { ViaCepService } from '../services/domain/viaCep.service';
 @NgModule({
 	declarations: [DadosPessoaisComponent,
     DadosMedicosComponent,
@@ -35,7 +36,8 @@ import { CidadeService } from '../services/domain/cidade.service';
         NaturalidadeService,
         PacienteLinhaCuidadoService,
         TipoSanguineoService,
-        CidadeService
+        CidadeService,
+        ViaCepService
     ]
 })
 export class ComponentsModule {}

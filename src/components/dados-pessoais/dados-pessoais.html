@@ -39,6 +39,9 @@
       <p class="content-informations">
         {{paciente.pessoa.sexo}}
       </p>
+      <img       
+      class="llustration-img"
+       [src]="paciente.pessoa.sexo === 'Masculino' ? pathImages +  'man.png': pathImages +  'girl.png'">      
     </ion-col>
   </ion-row>
 </ion-grid>
@@ -71,7 +74,7 @@
       </p>
       <img       
        class="llustration-img"
-        [src]="paciente.pessoa.naturalidade.naturalidade === 'Brasileira' ? 'assets/imgs/brazilian.png': 'assets/imgs/universal-nationality.png'">      
+        [src]="paciente.pessoa.naturalidade.naturalidade === 'Brasileira' ? pathImages + 'brazilian.png': pathImages + 'universal-nationality.png'">      
     </ion-col>
   </ion-row>
 </ion-grid>

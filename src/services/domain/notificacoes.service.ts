@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { StorageService } from "../storage.service";
 import { ToastController,NavController, LoadingController, Toast } from "ionic-angular";
 
 
@@ -10,9 +8,7 @@ import { ToastController,NavController, LoadingController, Toast } from "ionic-a
 @Injectable()
 export class NotificacoesService {
   toast:Toast;
-  constructor(
-    public http: HttpClient,
-    public storage: StorageService,
+  constructor(        
     public alertCtrl:AlertController,
     public toastCtrl:ToastController,
     public loadingCtrl:LoadingController

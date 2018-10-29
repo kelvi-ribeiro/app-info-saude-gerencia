@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TelefoneService } from '../../services/domain/telefone.service';
 
 /**
  * Generated class for the DadosContatoComponent component.
@@ -13,9 +14,18 @@ import { Component, Input } from '@angular/core';
 export class DadosContatoComponent {
 
   @Input() paciente;
+  telefones: any;
 
-  constructor() {
-    
+  constructor(private telefoneService:TelefoneService) {
+    setTimeout(() => {
+      this.findAllByPessoaId()      
+    }, 50);
+  }
+  findAllByPessoaId(){
+    this.telefoneService.findAllByPessoaId(this.paciente.pessoa.id)
+    .then(res=>{
+      this.telefones = res
+    })
   }
 
 }

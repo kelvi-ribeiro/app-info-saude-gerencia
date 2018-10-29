@@ -14,6 +14,8 @@ import { TipoSanguineoService } from '../services/domain/tipo.sanguineo.service'
 import { FormDadosEnderecoComponent } from './form-dados-endereco/form-dados-endereco';
 import { CidadeService } from '../services/domain/cidade.service';
 import { ViaCepService } from '../services/domain/viaCep.service';
+import { FormDadosContatoComponent } from './form-dados-contato/form-dados-contato';
+
 @NgModule({
 	declarations: [DadosPessoaisComponent,
     DadosMedicosComponent,
@@ -22,7 +24,8 @@ import { ViaCepService } from '../services/domain/viaCep.service';
     SideMenuComponent,
     FormDadosPessoaisComponent,
     FormDadosMedicosComponent,
-    FormDadosEnderecoComponent],
+    FormDadosEnderecoComponent,
+    FormDadosContatoComponent],
 	imports: [PipeModule,IonicModule],
 	exports: [DadosPessoaisComponent,
     DadosMedicosComponent,
@@ -31,7 +34,8 @@ import { ViaCepService } from '../services/domain/viaCep.service';
     SideMenuComponent,
     FormDadosPessoaisComponent,
     FormDadosMedicosComponent,
-    FormDadosEnderecoComponent],
+    FormDadosEnderecoComponent,
+    FormDadosContatoComponent],
     providers:[
         NaturalidadeService,
         PacienteLinhaCuidadoService,

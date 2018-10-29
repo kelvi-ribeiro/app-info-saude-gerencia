@@ -109,7 +109,10 @@
                     [paciente]="paciente"></form-dados-medicos>
 
                     <form-dados-endereco *ngIf="activeSegment === 'endereco'"
-                    [paciente]="paciente"></form-dados-endereco>                 
+                    [paciente]="paciente"></form-dados-endereco>   
+                    
+                    <form-dados-contato *ngIf="activeSegment === 'contato'"
+                    [paciente]="paciente"></form-dados-contato>   
               </div>
             </div>
 </ion-content>

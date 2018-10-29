@@ -1,0 +1,29 @@
+<ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <span class="label-informations">
+          Email
+        </span>
+      </ion-col>
+      <ion-col offset-1 col-6>
+          <ion-input type="text" 
+          [value]="paciente.pessoa.email"
+           (ionBlur)="onChange('email',$event.value)"></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+<!--   <ion-grid *ngFor="let telefone of paciente.pessoa.telefones">
+    <ion-row>
+      <ion-col col-5>
+        <span class="label-informations">
+          Telefone {{telefone.tipo}}
+        </span>
+      </ion-col>
+      <ion-col   col-6>
+        <p class="content-informations">
+          ({{telefone.codigoArea}}) {{telefone.numero}}
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->

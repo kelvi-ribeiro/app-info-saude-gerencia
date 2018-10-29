@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { ToastController,NavController, LoadingController, Toast } from "ionic-angular";
+import { ToastController,NavController, LoadingController, Toast, Alert } from "ionic-angular";
 
 
 
@@ -8,6 +8,7 @@ import { ToastController,NavController, LoadingController, Toast } from "ionic-a
 @Injectable()
 export class NotificacoesService {
   toast:Toast;
+  alert: any
   constructor(        
     public alertCtrl:AlertController,
     public toastCtrl:ToastController,
@@ -30,7 +31,10 @@ export class NotificacoesService {
   }
     
   presentAlertDefault(title,message,page?,navCtrl?:NavController){  
-    let alert = this.alertCtrl.create({
+    if(this.verificarSeExisteAlertInstanciado()){
+      return
+    }
+    this.alert = this.alertCtrl.create({
       title:title,
       message:message,
       enableBackdropDismiss:false,
@@ -47,11 +51,11 @@ export class NotificacoesService {
         }
       ]
     });
-    alert.present();
+    this.alert.present();
   }
 
   presentAlertJustMessage(title,message){
-    let alert = this.alertCtrl.create({
+    this.alert = this.alertCtrl.create({
       title:title,
       message:message,
       enableBackdropDismiss:false,
@@ -61,10 +65,13 @@ export class NotificacoesService {
         }
       ]
     });
-    alert.present();
+    this.alert.present();
   }
   presentAlertErro(){
-    let alert = this.alertCtrl.create({
+   if(this.verificarSeExisteAlertInstanciado()){
+     return
+   }
+    this.alert = this.alertCtrl.create({
       title:'Erro',
       message:'Ocorreu algum problema no nosso sistema, por favor, nos desculpe!',
       enableBackdropDismiss:false,
@@ -74,7 +81,7 @@ export class NotificacoesService {
         }
       ]
     });
-    alert.present();
+    this.alert.present();
   }
   presentLoadingDefault(message) {
     let loading = this.loadingCtrl.create({
@@ -82,6 +89,13 @@ export class NotificacoesService {
     });
     loading.present();
     return loading;
+  }
+  verificarSeExisteAlertInstanciado(){
+    if(this.alert && this.alert.instance){
+      return true           
+    }else{
+      return false
+    }
   }
 
 }

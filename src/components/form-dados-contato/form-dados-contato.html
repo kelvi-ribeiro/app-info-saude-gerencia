@@ -13,17 +13,23 @@
     </ion-row>
   </ion-grid>
   
-<!--   <ion-grid *ngFor="let telefone of paciente.pessoa.telefones">
+  <ion-grid *ngFor="let telefone of telefones;let i = index">
     <ion-row>
-      <ion-col col-5>
-        <span class="label-informations">
-          Telefone {{telefone.tipo}}
-        </span>
-      </ion-col>
-      <ion-col   col-6>
-        <p class="content-informations">
-          ({{telefone.codigoArea}}) {{telefone.numero}}
-        </p>
-      </ion-col>
+        <ion-col col-4>
+            <span class="label-informations">
+                Telefone {{i + 1}}                 
+              </span>             
+        </ion-col>
+        <ion-col offset-1 col-5>         
+                  <ion-input type="text" 
+                  [value]="telefone.numero"
+                  (ionBlur)="onChange('numero',$event.value)"></ion-input>                  
+                  <button type="button"  (click)="alertRemoverTelefone(telefone.id)"
+                  ion-button icon-only>
+                  <ion-icon  color="danger" ios="ios-remove" md="md-remove"></ion-icon>
+                </button>
+              </ion-col>            
     </ion-row>
-  </ion-grid> -->
+  </ion-grid>
+
+  

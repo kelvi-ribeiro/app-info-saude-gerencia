@@ -13,11 +13,11 @@
   </ion-row>
 </ion-grid>
 
-<ion-grid *ngFor="let telefone of telefones">
+<ion-grid *ngFor="let telefone of telefones;let i = index">
   <ion-row>
     <ion-col col-5>
       <span class="label-informations">
-        Telefone {{telefone.tipo}}
+        Telefone {{i + 1}}
       </span>
     </ion-col>
     <ion-col   col-6>

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TelefoneService } from '../../services/domain/telefone.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
-import { AlertController } from 'ionic-angular';
+import { AlertController, Events } from 'ionic-angular';
 
 /**
  * Generated class for the FormContatoComponent component.
@@ -21,7 +21,8 @@ export class FormDadosContatoComponent {
   constructor(
     private telefoneService:TelefoneService,
     private notificacoesService:NotificacoesService,
-    private alertCtrl:AlertController) {
+    private alertCtrl:AlertController,
+    private events:Events) {
     setTimeout(() => {
       this.findAllByPessoaId()      
     }, 50)    
@@ -34,6 +35,41 @@ export class FormDadosContatoComponent {
     .catch(()=>{
       this.notificacoesService.presentAlertErro()
     })
+  }
+  onChange(field,value){              
+    if(field === 'email'){           
+      this.paciente['pessoa']['email'] = value        
+    }        
+  }
+  atualizarPaciente(){        
+    this.events.publish('atualizar:paciente')          
+  } 
+  presentPromptAdicionarTelefone() {
+    let alert = this.alertCtrl.create({
+      title: 'Número de telefone',
+      inputs: [
+        {
+          name: 'numero',
+          placeholder: 'ex: 2127614324'
+        },       
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',          
+        },
+        {
+          text: 'Adicionar',
+          handler: data => {            
+            this.telefoneService.insertByPessoaId(data.numero,this.paciente.pessoa.id)
+            .then(()=>{
+              this.findAllByPessoaId();
+            })
+          }
+        }
+      ]
+    });
+    alert.present();
   }
   alertRemoverTelefone(pessoaId){      
     let alert = this.alertCtrl.create({

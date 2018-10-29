@@ -30,8 +30,7 @@ export class FormDadosEnderecoComponent {
       this.paciente.pessoa.endereco['cidade']['id'] = value  
     }else{
       this.paciente.pessoa.endereco[field] = value
-    }
-    console.log(this.paciente.pessoa.endereco)
+    }    
     this.events.publish('editar-dados-endereco:paciente',field,value)       
   }
 

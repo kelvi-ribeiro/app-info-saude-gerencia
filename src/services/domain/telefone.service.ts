@@ -29,7 +29,11 @@ export class TelefoneService {
         );
       })
   }
-  insertByPessoaId(telefone){
+  insertByPessoaId(numero,pessoaId){
+    const telefone = {
+      numero:numero,
+      pessoaId:pessoaId
+    }
     let headers = new Headers();
     return this.storage.getUserCredentials()
       .then(userCredentials => {

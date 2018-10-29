@@ -1,3 +1,12 @@
+<form (ngSubmit)="atualizarPaciente()">
+  <ion-grid>
+    <ion-row>       
+      <ion-col  offset-4 col-6>
+          <button  ion-button color="secondary">Atualizar Paciente</button>
+        </ion-col>                
+    </ion-row>
+  </ion-grid>
+
 <ion-grid>
     <ion-row>
       <ion-col col-4>
@@ -8,7 +17,7 @@
       <ion-col offset-1 col-6>
           <ion-input type="text" 
           [value]="paciente.pessoa.email"
-           (ionBlur)="onChange('email',$event.value)"></ion-input>
+           (ionChange)="onChange('email',$event.value)"></ion-input>
         </ion-col>
     </ion-row>
   </ion-grid>
@@ -31,5 +40,9 @@
               </ion-col>            
     </ion-row>
   </ion-grid>
-
-  
+  <ion-grid>
+    <ion-col offset-3 col-8>
+      <button type="button" (click)="presentPromptAdicionarTelefone()"ion-button >Adicionar Telefone</button>
+    </ion-col>
+  </ion-grid>
+  </form>

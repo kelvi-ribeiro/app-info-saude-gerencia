@@ -29,14 +29,13 @@ export class ModalPerfilPacientePage {
                {
   }
 
-  ionViewDidLoad() { 
- 
+  ionViewDidLoad() {  
     this.events.subscribe('atualizar:paciente',()=>{
      this.atualizarPaciente()
     })
     this.events.subscribe('atualizar:endereco',()=>{
       this.atualizarEnderecoPessoa()
-     })
+     })    
   }
   closeModal(){
     this.viewCtrl.dismiss()

@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { CidadeService } from '../../services/domain/cidade.service';
-import { EnderecoService } from '../../services/domain/endereco.service';
 import { ViaCepService } from '../../services/domain/viaCep.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
 
 @Component({
@@ -12,18 +13,46 @@ import { ViaCepService } from '../../services/domain/viaCep.service';
 export class FormDadosEnderecoComponent {
   cidades: any;
   @Input()paciente
-  
+  formGroup : FormGroup;
 
   constructor(
             private events:Events,
             private cidadeService:CidadeService,
-            private viaCepService:ViaCepService
+            private formBuilder: FormBuilder,             
+            private viaCepService:ViaCepService,
+            private notificacoesService:NotificacoesService
             
             )    {
-
-              this.findAllCidades()
-    
+          setTimeout(() => {
+            this.findAllCidades()    
+            this.iniciarFormGroup()            
+          }, 1);
   }
+
+  iniciarFormGroup(): any {
+    setTimeout(() => {
+      this.formGroup = this.formBuilder.group({
+        cidade: [
+          this.paciente.pessoa.endereco.cidade.id,Validators.required],                                                    
+            bairro: [
+              this.paciente.pessoa.endereco.bairro,
+               Validators.compose([Validators.required, Validators.minLength(5),
+                Validators.maxLength(50)])],
+            rua: [
+              this.paciente.pessoa.endereco.rua,
+                Validators.compose([Validators.required, Validators.minLength(5),
+                Validators.maxLength(50)])],                                                         
+            numero: [
+              this.paciente.pessoa.endereco.numero,
+                Validators.compose([Validators.required, Validators.minLength(1),
+                Validators.maxLength(5)])],       
+            cep: [
+              this.paciente.pessoa.endereco.cep,
+                Validators.compose([Validators.required, Validators.minLength(8),
+                Validators.maxLength(8)])],       
+      });        
+    }, 1);
+}
 
   onChange(field,value){        
     if(field === 'cidade'){
@@ -42,7 +71,21 @@ export class FormDadosEnderecoComponent {
   }
 
   atualizarPaciente(){        
-    this.events.publish('atualizar:endereco')
+    if(this.verificaErrosForm()){
+      return
+    }        
+    this.events.publish('atualizar:endereco',this.paciente)
+  }
+  verificaErrosForm():any{
+    let hasErrors = false;
+    Object.keys(this.formGroup.controls).forEach(element => {
+      if(this.formGroup['controls'][element]['errors']){        
+        this.notificacoesService.presentErrorValidationToast(element);        
+        hasErrors = true
+      }
+    });
+    return hasErrors;
+    
   }
 
   findEnderecoByCep(value){

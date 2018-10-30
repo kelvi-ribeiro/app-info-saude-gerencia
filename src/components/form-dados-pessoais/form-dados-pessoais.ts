@@ -98,7 +98,6 @@ export class FormDadosPessoaisComponent {
         hasErrors = true
       }
     });
-    return hasErrors;
-    
+    return hasErrors;    
   }
 }

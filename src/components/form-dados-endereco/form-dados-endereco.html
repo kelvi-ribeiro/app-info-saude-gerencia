@@ -1,4 +1,4 @@
-<form (ngSubmit)="atualizarPaciente()">
+<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="atualizarPaciente()">
     <ion-grid>
       <ion-row>       
         <ion-col  offset-4 col-6>
@@ -7,22 +7,8 @@
       </ion-row>
     </ion-grid>
 
+    
     <ion-grid>
-        <ion-row>
-        <ion-col col-4>
-          <span class="label-informations">
-            CEP
-          </span>
-        </ion-col>
-        <ion-col offset-1 col-6>
-          <ion-input type="number" 
-          [value]="paciente.pessoa.endereco?.cep"
-           (ionBlur)="findEnderecoByCep($event.value)"></ion-input>
-        </ion-col>
-        </ion-row>
-        </ion-grid>
-
-<ion-grid>
   <ion-row>
     <ion-col col-4>
       <span class="label-informations">
@@ -32,9 +18,11 @@
     <ion-col offset-1 col-5>
       <ion-item>
         <ion-label>Selecione uma cidade</ion-label>
-        <ion-select (ionBlur)="onChange('cidade',$event.value)" >
-          <ion-option [value]="cidade.id"
-           [selected]="paciente.pessoa.endereco.cidade.id  === cidade.id" 
+        <ion-select (ionChange)="onChange('cidade',$event)"
+        formControlName="cidade" >
+          <ion-option 
+          [value]="cidade.id"
+          [selected]="paciente.pessoa.endereco.cidade.id  === cidade.id" 
           *ngFor="let cidade of cidades;">{{cidade.nome}}</ion-option>
         </ion-select>
       </ion-item>
@@ -43,49 +31,65 @@
 </ion-grid>
 
 <ion-grid>
-<ion-row>
-<ion-col col-4>
-  <span class="label-informations">
-    Bairro
-  </span>
-</ion-col>
-<ion-col offset-1 col-6>
-  <ion-input type="text" 
-  [value]="paciente.pessoa.endereco?.bairro"
-   (ionBlur)="onChange('bairro',$event.value)"></ion-input>
-</ion-col>
-</ion-row>
+  <ion-row>
+    <ion-col col-4>
+      <span class="label-informations">
+        Bairro
+      </span>
+    </ion-col>
+    <ion-col offset-1 col-6>
+      
+      <ion-input type="text" 
+      maxLength="50"
+      formControlName="bairro"
+      (ionChange)="onChange('bairro',$event.value)"></ion-input>
+    </ion-col>
+  </ion-row>
 </ion-grid>
 
 <ion-grid>
-<ion-row>
-  <ion-col col-4>
-    <span class="label-informations">
-      Rua
-    </span>
-  </ion-col>
-  <ion-col offset-1 col-6>
-    <ion-input type="text" 
-    [value]="paciente.pessoa.endereco?.rua"
-     (ionBlur)="onChange('rua',$event.value)"></ion-input>
-  </ion-col>
-</ion-row>
+  <ion-row>
+    <ion-col col-4>
+      <span class="label-informations">
+        Rua
+      </span>
+    </ion-col>
+    <ion-col offset-1 col-6>
+      <ion-input type="text" 
+      formControlName="rua"
+      (ionChange)="onChange('rua',$event.value)"></ion-input>
+    </ion-col>
+  </ion-row>
 </ion-grid>
 
 
 <ion-grid>
-<ion-row>
-<ion-col col-4>
-  <span class="label-informations">
-    Número
-  </span>
-</ion-col>
-<ion-col offset-1 col-6>
-  <ion-input type="number" [value]="paciente.pessoa.endereco?.numero" 
-  (ionBlur)="onChange('numero',$event.value)"></ion-input>
-</ion-col>
+  <ion-row>
+    <ion-col col-4>
+      <span class="label-informations">
+        Número
+      </span>
+    </ion-col>
+    <ion-col offset-1 col-6>
+      <ion-input type="number"      
+      formControlName="numero"
+      (ionChange)="onChange('numero',$event.value)"></ion-input>
+    </ion-col>
 </ion-row>
 </ion-grid>
-
-
+<ion-grid>
+    <ion-row>
+    <ion-col col-4>
+      <span class="label-informations">
+        CEP
+      </span>
+    </ion-col>
+    <ion-col offset-1 col-6>
+      <ion-input type="text" 
+      maxLength="8"
+      formControlName="cep"
+       (ionChange)="onChange('cep',$event.value)"></ion-input>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
 </form>

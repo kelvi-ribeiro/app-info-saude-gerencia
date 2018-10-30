@@ -1,8 +1,8 @@
-<form (ngSubmit)="atualizarPaciente()">
+<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="atualizarPaciente()">
     <ion-grid>
       <ion-row>       
         <ion-col  offset-4 col-6>
-            <button  ion-button color="secondary">Atualizar Paciente</button>
+            <button   ion-button color="secondary">Atualizar Paciente</button>
           </ion-col>                
       </ion-row>
     </ion-grid>
@@ -16,7 +16,8 @@
     </ion-col>
     <ion-col col-6>
       <ion-input type="text" 
-      [value]="paciente.pessoa.nome" (ionChange)="onChange('nome',$event.value)"></ion-input>
+      formControlName="nome"  maxLength="50" 
+      (ionChange)="onChange('nome',$event.value)"></ion-input>      
     </ion-col>
   </ion-row>
 </ion-grid>
@@ -30,13 +31,13 @@
     </ion-col>
     <ion-col col-6>
       <ion-input type="date"
-       [value]="convertTimeStampToDate(paciente.pessoa.dataNascimento)"
+       formControlName="dataNascimento"
         (ionBlur)="onChange('dataNascimento',$event.value)"></ion-input>
     </ion-col>
   </ion-row>
 </ion-grid>
-
-<ion-grid>
+ 
+ <ion-grid>
   <ion-row>
     <ion-col col-4>
       <span class="label-informations">
@@ -46,8 +47,8 @@
     <ion-col offset-1  col-5>
       <ion-item>
         <ion-label>Selecione um Gênero</ion-label>
-        <ion-select (ionChange)="onChange('sexo',$event)" >
-            <ion-option value="Masculino" 
+        <ion-select formControlName="sexo"  (ionChange)="onChange('sexo',$event)" >
+            <ion-option 
             [selected]="paciente.pessoa.sexo === 'Masculino'" >Masculino</ion-option>
             <ion-option value="Feminino" 
             [selected]="paciente.pessoa.sexo === 'Feminino'" >Feminino</ion-option>
@@ -55,7 +56,7 @@
       </ion-item>
     </ion-col>
   </ion-row>
-</ion-grid>
+</ion-grid> 
 
 <ion-grid>
   <ion-row>
@@ -65,12 +66,15 @@
       </span>
     </ion-col>
     <ion-col offset-1 col-6>
-      <ion-input type="number" [value]="paciente.pessoa.cpf" (ionChange)="onChange('cpf',$event.value)"></ion-input>
+      <ion-input type="text"
+        maxLength="11"
+       (ionChange)="onChange('cpf',$event.value)"
+       formControlName="cpf"></ion-input>
     </ion-col>
   </ion-row>
 </ion-grid>
 
-<ion-grid>
+ <ion-grid>
   <ion-row>
     <ion-col col-4>
       <span class="label-informations">
@@ -80,13 +84,15 @@
     <ion-col offset-1 col-5>
       <ion-item>
         <ion-label>Selecione uma naturalidade</ion-label>
-        <ion-select (ionChange)="onChange('naturalidade',$event)" >
-          <ion-option [value]="naturalidade.id"
+        <ion-select formControlName="naturalidade" 
+        (ionChange)="onChange('naturalidade',$event)" >
+          <ion-option 
            [selected]="paciente.pessoa.naturalidade.id === naturalidade.id" 
+           [value]="naturalidade.id"
            *ngFor="let naturalidade of naturalidades;">{{naturalidade.naturalidade}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-col>
   </ion-row>
-</ion-grid>
+</ion-grid> 
 </form>

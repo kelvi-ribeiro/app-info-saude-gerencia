@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Events } from 'ionic-angular';
+import { Events} from 'ionic-angular';
 import { NaturalidadeService } from '../../services/domain/naturalidade.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
 
 
@@ -9,18 +11,45 @@ import { NaturalidadeService } from '../../services/domain/naturalidade.service'
   templateUrl: 'form-dados-pessoais.html'
 })
 export class FormDadosPessoaisComponent {
+  
 
-  @Input()paciente
-  naturalidades = []
+  @Input('paciente')paciente
+  naturalidades = [];
+  formGroup : FormGroup;
   
   constructor(private events:Events,
               private naturalidadeService:NaturalidadeService,
-              ) { 
-                
-                this.findAllNaturalidades()
+              private formBuilder: FormBuilder,              
+              private notificacoesService:NotificacoesService
+              ) {
+                this.iniciarFormGroup()
+                this.findAllNaturalidades()               
+  }  
+  iniciarFormGroup(): any {
+      setTimeout(() => {
+        this.formGroup = this.formBuilder.group({
+          nome: [
+            this.paciente.pessoa.nome,
+             Validators.compose([Validators.required, Validators.minLength(3),
+              Validators.maxLength(50)])],                                            
+          dataNascimento: [
+            this.convertTimeStampToDate(this.paciente.pessoa.dataNascimento),
+            Validators.required,],                                            
+          cpf: [this.paciente.pessoa.cpf,
+            Validators.compose([Validators.required,
+            Validators.minLength(11),
+            Validators.maxLength(11)])],  
+            naturalidade:[
+              this.paciente.pessoa.naturalidade.id,
+              Validators.required,],                                          
+              sexo:[
+                this.paciente.pessoa.sexo,
+                Validators.required,],  
+        });        
+      }, 1);
   }
   
-  onChange(field,value){        
+  onChange(field,value){
     if(field === 'dataNascimento'){           
     this.paciente['pessoa']['dataNascimento'] = this.returnDataValida(value)
           
@@ -52,9 +81,25 @@ export class FormDadosPessoaisComponent {
     .then(res =>{
       this.naturalidades = res;      
     })
+    
   }
-  atualizarPaciente(){ 
-    console.log('Chegou aqui')       
+  atualizarPaciente(){       
+    if(this.verificaErrosForm()){
+      return
+    }
+    
     this.events.publish('atualizar:paciente',this.paciente)
+  }
+  verificaErrosForm():any{
+    let hasErrors = false;
+    Object.keys(this.formGroup.controls).forEach(element => {
+      if(this.formGroup['controls'][element]['errors']){        
+        this.notificacoesService.presentErrorValidationToast(element);
+        console.log('Bate aqui')
+        hasErrors = true
+      }
+    });
+    return hasErrors;
+    
   }
 }

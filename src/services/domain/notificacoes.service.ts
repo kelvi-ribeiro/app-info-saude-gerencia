@@ -95,7 +95,28 @@ export class NotificacoesService {
       return true           
     }else{
       return false
+    }    
+  }
+  verificarExisteToastInstanciado(){
+    if(this.toast && this.toast.instance){
+      return true           
+    }else{
+      return false
     }
+  }
+  presentErrorValidationToast(controlName) {
+    if(this.verificarExisteToastInstanciado()){
+      return
+    }
+    this.toast = this.toastCtrl.create({
+      message: `Campo (${controlName.charAt(0).toUpperCase() + controlName.substr(1)}) preenchido incorretamente`,
+      cssClass:'toast-error',
+      position:'top',
+      duration: 2500,
+      closeButtonText:'Fechar',
+      showCloseButton:true
+    });
+    this.toast.present();
   }
 
 }

@@ -94,8 +94,7 @@ export class FormDadosPessoaisComponent {
     let hasErrors = false;
     Object.keys(this.formGroup.controls).forEach(element => {
       if(this.formGroup['controls'][element]['errors']){        
-        this.notificacoesService.presentErrorValidationToast(element);
-        console.log('Bate aqui')
+        this.notificacoesService.presentErrorValidationToast(element);        
         hasErrors = true
       }
     });

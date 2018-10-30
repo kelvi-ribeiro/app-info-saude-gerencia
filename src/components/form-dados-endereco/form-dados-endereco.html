@@ -30,11 +30,14 @@
       </span>
     </ion-col>
     <ion-col offset-1 col-5>
-      <ion-select (ionBlur)="onChange('cidade',$event.value)" >
-        <ion-option [value]="cidade.id"
-         [selected]="paciente.pessoa.endereco.cidade.id  === cidade.id" 
-        *ngFor="let cidade of cidades;">{{cidade.nome}}</ion-option>
-      </ion-select>
+      <ion-item>
+        <ion-label>Selecione uma cidade</ion-label>
+        <ion-select (ionBlur)="onChange('cidade',$event.value)" >
+          <ion-option [value]="cidade.id"
+           [selected]="paciente.pessoa.endereco.cidade.id  === cidade.id" 
+          *ngFor="let cidade of cidades;">{{cidade.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
     </ion-col>
   </ion-row>
 </ion-grid>

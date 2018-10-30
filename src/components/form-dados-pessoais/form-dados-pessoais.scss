@@ -9,6 +9,16 @@ form-dados-pessoais {
         background: yellow;
         max-width: 121%;       
     }
+    .item-block {     
+        width: 130%;
+    }
+    .item-md.item-block .item-inner{
+        border-bottom: none;
+        
+    }
+    .item-md{
+        background-color: #fbff00;
+    }
    
       
 }

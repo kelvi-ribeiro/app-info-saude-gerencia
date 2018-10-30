@@ -44,12 +44,15 @@
       </span>
     </ion-col>
     <ion-col offset-1  col-5>
+      <ion-item>
+        <ion-label>Selecione um Gênero</ion-label>
         <ion-select (ionChange)="onChange('sexo',$event)" >
             <ion-option value="Masculino" 
             [selected]="paciente.pessoa.sexo === 'Masculino'" >Masculino</ion-option>
             <ion-option value="Feminino" 
             [selected]="paciente.pessoa.sexo === 'Feminino'" >Feminino</ion-option>
           </ion-select>
+      </ion-item>
     </ion-col>
   </ion-row>
 </ion-grid>
@@ -75,11 +78,14 @@
       </span>
     </ion-col>
     <ion-col offset-1 col-5>
-      <ion-select (ionChange)="onChange('naturalidade',$event)" >
-        <ion-option [value]="naturalidade.id"
-         [selected]="paciente.pessoa.naturalidade.id === naturalidade.id" 
-         *ngFor="let naturalidade of naturalidades;">{{naturalidade.naturalidade}}</ion-option>
-      </ion-select>
+      <ion-item>
+        <ion-label>Selecione uma naturalidade</ion-label>
+        <ion-select (ionChange)="onChange('naturalidade',$event)" >
+          <ion-option [value]="naturalidade.id"
+           [selected]="paciente.pessoa.naturalidade.id === naturalidade.id" 
+           *ngFor="let naturalidade of naturalidades;">{{naturalidade.naturalidade}}</ion-option>
+        </ion-select>
+      </ion-item>
     </ion-col>
   </ion-row>
 </ion-grid>

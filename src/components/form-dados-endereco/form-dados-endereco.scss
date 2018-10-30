@@ -9,5 +9,16 @@ form-dados-endereco {
         background: yellow;
         max-width: 121%;       
     }
+
+    .item-block {     
+        width: 123%;
+    }
+    .item-md.item-block .item-inner{
+        border-bottom: none;
+        
+    }
+    .item-md{
+        background-color: #fbff00;
+    }
    
 }

@@ -50,7 +50,8 @@ export class FormDadosContatoComponent {
       inputs: [
         {
           name: 'numero',
-          placeholder: 'ex: 2127614324'
+          placeholder: 'ex: 2127614324',
+          type:'number'
         },       
       ],
       buttons: [
@@ -63,7 +64,8 @@ export class FormDadosContatoComponent {
           handler: data => {            
             this.telefoneService.insertByPessoaId(data.numero,this.paciente.pessoa.id)
             .then(()=>{
-              this.findAllByPessoaId();
+              this.notificacoesService.presentToast('Telefone Adicionado',null,2000,'top')
+              this.findAllByPessoaId()
             })
           }
         }
@@ -73,7 +75,8 @@ export class FormDadosContatoComponent {
   }
   alertRemoverTelefone(pessoaId){      
     let alert = this.alertCtrl.create({
-      title:'Tem certeza ?',
+      title:'Alerta',
+      message:'Deseja mesmo remover esse telefone ?',
       buttons: [
         {
           text: 'Sim',            

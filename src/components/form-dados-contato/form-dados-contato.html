@@ -32,12 +32,14 @@
         <ion-col offset-1 col-5>         
                   <ion-input type="text" 
                   [value]="telefone.numero"
-                  (ionBlur)="onChange('numero',$event.value)"></ion-input>                  
-                  <button type="button"  (click)="alertRemoverTelefone(telefone.id)"
-                  ion-button icon-only>
-                  <ion-icon  color="danger" ios="ios-remove" md="md-remove"></ion-icon>
-                </button>
-              </ion-col>            
+                  (ionBlur)="onChange('numero',$event.value)"></ion-input>          
+                </ion-col>            
+                  <ion-col  col-2>
+                    <button type="button"  (click)="alertRemoverTelefone(telefone.id)"
+                    ion-button icon-only>
+                    <ion-icon  color="danger" ios="ios-remove" md="md-remove"></ion-icon>
+                  </button>
+                  </ion-col>        
     </ion-row>
   </ion-grid>
   <ion-grid>

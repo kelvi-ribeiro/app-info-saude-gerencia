@@ -5,6 +5,7 @@ import { PacienteLinhaCuidadoService } from '../../services/domain/paciente.linh
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class FormDadosMedicosComponent {
   tiposSanguineo: any;
   pacienteLinhasCuidado: any;
   linhasCuidado: any;
-  editouLinhaCuidado = false
+  editouLinhaCuidado = false;
+  formGroup : FormGroup;
 
   constructor(
     private tipoSanguineoService:TipoSanguineoService,
@@ -25,14 +27,22 @@ export class FormDadosMedicosComponent {
     private linhaCuidadoService:LinhaCuidadoService,
     private events:Events,
     private alertCtrl:AlertController,
-    private notificacoesService:NotificacoesService    
+    private notificacoesService:NotificacoesService  ,
+    private formBuilder: FormBuilder,       
     ) {  
       setTimeout(() => {              
         this.findAllPacienteLinhaCuidado();      
         this.findAllTipoSanguineo();
-        this.findAllLinhaCuidado();        
-      }, 50);    
+        this.findAllLinhaCuidado();  
+        this.iniciarFormGroup();      
+      }, 1);    
     }
+    iniciarFormGroup(): any {      
+        this.formGroup = this.formBuilder.group({
+          tipoSanguineo: [
+            this.paciente.tipoSanguineo.id, Validators.required],                                                      
+        });              
+  }
     
     findAllPacienteLinhaCuidado(){      
       this.pacienteLinhaCuidadoService.findAllByPacienteId(this.paciente.id)
@@ -80,6 +90,17 @@ export class FormDadosMedicosComponent {
     editarLinhaCuidado(pacienteLinhaCuidado,event){
       pacienteLinhaCuidado.linhaCuidado.id = event
       this.editouLinhaCuidado = true
+    }
+    verificaErrosForm():any{
+      let hasErrors = false;
+      Object.keys(this.formGroup.controls).forEach(element => {
+        if(this.formGroup['controls'][element]['errors']){        
+          this.notificacoesService.presentErrorValidationToast(element);        
+          hasErrors = true
+        }
+      });
+      return hasErrors;
+      
     }
 
     alertEscolhaNovaLinhaCuidado() {

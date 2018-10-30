@@ -1,4 +1,4 @@
-<form (ngSubmit)="atualizarPaciente()">
+<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="atualizarPaciente()">
     <ion-grid>
       <ion-row>       
         <ion-col  offset-4 col-6>
@@ -49,8 +49,10 @@
     <ion-col offset-1 col-4>   
         <ion-item>
             <ion-label>Selecione um tipo sanguine</ion-label>
-            <ion-select (ionChange)="onChange('tipoSanguineo',$event)">
-              <ion-option  *ngFor="let tipoSanguineo of tiposSanguineo;" [value]="tipoSanguineo.id" 
+            <ion-select formControlName="tipoSanguineo" (ionChange)="onChange('tipoSanguineo',$event)">
+              <ion-option  
+              *ngFor="let tipoSanguineo of tiposSanguineo;"
+               [value]="tipoSanguineo.id" 
               [selected]="paciente.tipoSanguineo.id === tipoSanguineo.id"
               >{{tipoSanguineo.tipoSanguineo}}</ion-option>
             </ion-select>            

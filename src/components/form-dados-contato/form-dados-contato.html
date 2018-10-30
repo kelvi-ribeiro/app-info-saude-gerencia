@@ -1,4 +1,4 @@
-<form (ngSubmit)="atualizarPaciente()">
+<form  *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="atualizarPaciente()">
   <ion-grid>
     <ion-row>       
       <ion-col  offset-4 col-6>
@@ -15,8 +15,10 @@
         </span>
       </ion-col>
       <ion-col offset-1 col-6>
-          <ion-input type="text" 
-          [value]="paciente.pessoa.email"
+          <ion-input 
+          type="email" 
+          maxLength="50"
+          formControlName="email"
            (ionChange)="onChange('email',$event.value)"></ion-input>
         </ion-col>
     </ion-row>

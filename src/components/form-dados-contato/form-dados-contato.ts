@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TelefoneService } from '../../services/domain/telefone.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { AlertController, Events } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * Generated class for the FormContatoComponent component.
@@ -17,16 +18,27 @@ export class FormDadosContatoComponent {
 
   @Input() paciente;
   telefones: any;
-
+  formGroup : FormGroup;
   constructor(
     private telefoneService:TelefoneService,
     private notificacoesService:NotificacoesService,
     private alertCtrl:AlertController,
+    private formBuilder: FormBuilder,                  
     private events:Events) {
     setTimeout(() => {
-      this.findAllByPessoaId()      
-    }, 50)    
+      this.findAllByPessoaId()    
+      this.iniciarFormGroup()  
+    }, 1)    
   }
+  iniciarFormGroup(): any {    
+      this.formGroup = this.formBuilder.group({
+        email: [
+          this.paciente.pessoa.email,
+           Validators.compose([Validators.required, Validators.minLength(3),
+            Validators.maxLength(50),Validators.email])],                                                     
+      });        
+    
+}
   findAllByPessoaId(){
     this.telefoneService.findAllByPessoaId(this.paciente.pessoa.id)
     .then(res=>{
@@ -41,9 +53,23 @@ export class FormDadosContatoComponent {
       this.paciente['pessoa']['email'] = value        
     }        
   }
-  atualizarPaciente(){        
-    this.events.publish('atualizar:paciente')          
-  } 
+  atualizarPaciente(){       
+    if(this.verificaErrosForm()){
+      return
+    }
+    
+    this.events.publish('atualizar:paciente',this.paciente)
+  }
+  verificaErrosForm():any{
+    let hasErrors = false;
+    Object.keys(this.formGroup.controls).forEach(element => {
+      if(this.formGroup['controls'][element]['errors']){        
+        this.notificacoesService.presentErrorValidationToast(element);        
+        hasErrors = true
+      }
+    });
+    return hasErrors;    
+  }
   presentPromptAdicionarTelefone() {
     let alert = this.alertCtrl.create({
       title: 'Número de telefone',

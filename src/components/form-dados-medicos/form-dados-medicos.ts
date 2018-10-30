@@ -93,9 +93,11 @@ export class FormDadosMedicosComponent {
           }
         })
         if(!linhaCuidado.pacienteJaPossuiLinhaCuidado){
-          alert.addButton({
-            text: linhaCuidado.nome,
+          alert.addInput({
+            type: 'checkbox',
+            label: linhaCuidado.nome,
             handler: () => { 
+              alert.dismiss()
               this.alertConfirmationNewLinhaCuidado(linhaCuidado.id);
             }
           });
@@ -105,7 +107,8 @@ export class FormDadosMedicosComponent {
   }
     alertConfirmationNewLinhaCuidado(linhaCuidadoId){
       let alert = this.alertCtrl.create({
-        title:'Tem certeza ?',
+        title:'Atenção!',
+        message:'deseja adicionar nova linha de cuidado ? ',
         buttons: [
           {
             text: 'Sim',            
@@ -125,10 +128,7 @@ export class FormDadosMedicosComponent {
             }
           },
           {
-            text: 'Não',
-            handler: data => {
-             
-            },
+            text: 'Não'          
           },
        
            ]
@@ -137,7 +137,8 @@ export class FormDadosMedicosComponent {
     }
     alertRemoverPacienteLinhaCuidado(pacienteLinhaCuidadoId){      
         let alert = this.alertCtrl.create({
-          title:'Tem certeza ?',
+          title:'Atenção!',
+          message:'Deseja remover essa linha de cuidado ?',
           buttons: [
             {
               text: 'Sim',            

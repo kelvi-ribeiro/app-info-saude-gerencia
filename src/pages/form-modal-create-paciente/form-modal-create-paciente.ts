@@ -11,6 +11,7 @@ import { TipoSanguineoService } from '../../services/domain/tipo.sanguineo.servi
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
 import { CidadeService } from '../../services/domain/cidade.service';
 import { PacienteLinhaCuidadoService } from '../../services/domain/paciente.linha.cuidado.service';
+import { PessoaService } from '../../services/domain/pessoa.service';
 
 
 /**
@@ -48,7 +49,8 @@ export class FormModalCreatePacientePage {
               private linhaCuidadoService:LinhaCuidadoService,
               private pacienteLinhaCuidadoService:PacienteLinhaCuidadoService,
               private cidadeService:CidadeService,
-              private alertCtrl:AlertController
+              private alertCtrl:AlertController,
+              private pessoaService:PessoaService
 
               )
                {  this.fillObject()
@@ -197,7 +199,6 @@ findAllLinhaCuidado(){
     })
   }
 
-
   presentPromptAdicionarTelefone() {
     let alert = this.alertCtrl.create({
       title: 'Número de telefone',
@@ -250,6 +251,31 @@ findAllLinhaCuidado(){
       }
   });
 }
+verificaExistePessoaComCpf(){
+  return this.pessoaService.findPessoaByCpf(this.paciente.pessoa.cpf)
+  .then(res => {
+    if(res){
+      return true
+    }else{
+      return false
+    }
+  }).catch(()=>{    
+    return false
+  })
+}
+
+verificaExistePessoaComEmail(){
+  return this.pessoaService.findPessoaByEmail(this.paciente.pessoa.email)
+  .then(res => {
+    if(res){
+      return true
+    }else{
+      return false
+    }
+  }).catch(()=>{    
+    return false
+  })
+}
  
   verificaErrosFomrDadosPesoais():any{
     let hasErrors = false;
@@ -259,17 +285,25 @@ findAllLinhaCuidado(){
       cpf:'',
       naturalidade:'',
       sexo:''
-    }
-    Object.keys(inputs).forEach(element =>{
-      if(this.formGroup['controls'][element]['errors']){
-        this.notificacoesService.presentErrorValidationToast(element);        
-        hasErrors = true
-      }
-    })
-    if(hasErrors){
-      return
-    }
-    this.avancarPasso('medicos')
+    }      
+   
+
+      Object.keys(inputs).forEach(element =>{
+        if(this.formGroup['controls'][element]['errors']){
+          this.notificacoesService.presentErrorValidationToast(element);        
+          hasErrors = true
+        }
+      })
+      this.verificaExistePessoaComCpf().then(res=>{
+        if(res){
+          this.notificacoesService.presentErrorValidationToastCustom('Já existe alguém com esse CPF');
+          hasErrors = true
+        }
+      if(hasErrors){
+        return
+      }      
+      this.avancarPasso('medicos')       
+    })  
   }  
 
   verificaErrosFomDadosMedicos():any{    
@@ -305,28 +339,35 @@ findAllLinhaCuidado(){
     this.avancarPasso('contato')
   }
   avancarPasso(passo){
-    this.activeSegment = passo
-    console.log('see',this.paciente)
+    this.activeSegment = passo    
   } 
 
-  criarPaciente(){
+  criarPaciente(){        
     if(this.formGroup['controls']['email']['errors']){
       this.notificacoesService.presentErrorValidationToast('email')
       return
     }
-    this.pacienteService.insert(this.paciente)
-    .then(res =>{      
-      this.pacienteLinhasCuidado.forEach(element => {
-        const pacienteLinhaCuidado = {
-          linhaCuidadoId:element.linhaCuidadoId,
-          pacienteId:res.id
-        }        
-        this.pacienteLinhaCuidadoService.insertByPacienteIdAndLinhaCuidadoId(pacienteLinhaCuidado)
-        this.notificacoesService.presentToast('Paciente Criado',null,2500,'top')
-        this.closeModal()
-      });
-    }).catch(() =>{
-      this.notificacoesService.presentAlertErro()
+    this.verificaExistePessoaComEmail().then(res=>{
+      if(res){
+        this.notificacoesService.presentErrorValidationToastCustom('Já existe alguém com esse email');
+        return
+      }        
+      
+      this.pacienteService.insert(this.paciente)
+      .then(res =>{      
+        this.pacienteLinhasCuidado.forEach(element => {
+          const pacienteLinhaCuidado = {
+            linhaCuidadoId:element.linhaCuidadoId,
+            pacienteId:res.id
+          }        
+          this.pacienteLinhaCuidadoService.insertByPacienteIdAndLinhaCuidadoId(pacienteLinhaCuidado)
+          this.notificacoesService.presentToast('Paciente Criado',null,2500,'top')
+          this.closeModal()
+        });
+      }).catch(() =>{
+        this.notificacoesService.presentAlertErro()
+      })
     })
   }
+    
 }

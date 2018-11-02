@@ -17,6 +17,7 @@ import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { ValidadoresService } from '../services/utils/validadores.service';
 import { ComponentsModule } from '../components/components.module';
+import { PessoaService } from '../services/domain/pessoa.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,9 @@ import { ComponentsModule } from '../components/components.module';
     UsuarioService,
     PacienteService,
     LinhaCuidadoService,
-    ValidadoresService
+    ValidadoresService,
+    PessoaService,
+
   ]
 })
 export class AppModule {}

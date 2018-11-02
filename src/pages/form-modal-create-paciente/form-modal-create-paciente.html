@@ -149,7 +149,7 @@
 
 
 
-      <form *ngIf="formGroup && activeSegment=== 'medicos'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomrDadosMedicos()">
+      <form *ngIf="formGroup && activeSegment=== 'medicos'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomDadosMedicos()">
           <ion-grid>
               <ion-row>       
                 <ion-col  offset-4 col-6>
@@ -217,7 +217,102 @@
           </ion-grid>
         
   </form>
+
+
+  <form *ngIf="formGroup && activeSegment === 'endereco'"
+   [formGroup]="formGroup" (ngSubmit)="verificaErrosFomDadosEndereco()">
+      <ion-grid>
+        <ion-row>       
+          <ion-col  offset-4 col-6>
+              <button  ion-button color="secondary">Avançar</button>
+            </ion-col>                
+        </ion-row>
+      </ion-grid>
+  
       
-      
+      <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <span class="label-informations">
+          Cidade
+        </span>
+      </ion-col>
+      <ion-col offset-1 col-5>
+        <ion-item>
+          <ion-label>Selecione uma cidade</ion-label>
+          <ion-select (ionChange)="onChangeEndereco('cidade',$event)"
+          formControlName="cidade" >
+            <ion-option 
+            [value]="cidade.id"         
+            *ngFor="let cidade of cidades;">{{cidade.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <span class="label-informations">
+          Bairro
+        </span>
+      </ion-col>
+      <ion-col offset-1 col-6>
+        
+        <ion-input type="text" 
+        maxLength="50"
+        formControlName="bairro"
+        (ionChange)="onChangeEndereco('bairro',$event.value)"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <span class="label-informations">
+          Rua
+        </span>
+      </ion-col>
+      <ion-col offset-1 col-6>
+        <ion-input type="text" 
+        formControlName="rua"
+        (ionChange)="onChangeEndereco('rua',$event.value)"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <span class="label-informations">
+          Número
+        </span>
+      </ion-col>
+      <ion-col offset-1 col-6>
+        <ion-input type="number"      
+        formControlName="numero"
+        (ionChange)="onChangeEndereco('numero',$event.value)"></ion-input>
+      </ion-col>
+  </ion-row>
+  </ion-grid>
+  <ion-grid>
+      <ion-row>
+      <ion-col col-4>
+        <span class="label-informations">
+          CEP
+        </span>
+      </ion-col>
+      <ion-col offset-1 col-6>
+        <ion-input type="text" 
+        maxLength="8"
+        formControlName="cep"
+         (ionChange)="onChangeEndereco('cep',$event.value)"></ion-input>
+      </ion-col>
+      </ion-row>
+      </ion-grid>
+  </form>
     </div>
   </ion-content>

@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TipoSanguineoService } from '../../services/domain/tipo.sanguineo.service';
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
 import { CidadeService } from '../../services/domain/cidade.service';
+import { PacienteLinhaCuidadoService } from '../../services/domain/paciente.linha.cuidado.service';
 
 
 /**
@@ -35,14 +36,17 @@ export class FormModalCreatePacientePage {
   linhasCuidado: any;
   pacienteLinhasCuidado = [];
   cidades: any;
+  telefones = []
   constructor(public viewCtrl: ViewController, 
               public navParams: NavParams,
               public usuarioService:UsuarioService,
               private formBuilder: FormBuilder,    
               private naturalidadeService:NaturalidadeService,
               private notificacoesService:NotificacoesService,
+              private pacienteService:PacienteService,
               private tipoSanguineoService:TipoSanguineoService,
               private linhaCuidadoService:LinhaCuidadoService,
+              private pacienteLinhaCuidadoService:PacienteLinhaCuidadoService,
               private cidadeService:CidadeService,
               private alertCtrl:AlertController
 
@@ -56,8 +60,12 @@ export class FormModalCreatePacientePage {
   }
 
   fillObject(){
-    const naturalidade = Object
-    const cidade = Object
+    const naturalidade = {
+      id:''
+    }
+    const cidade = {
+      id:''
+    }
     const endereco = {
       cidade:cidade
     }
@@ -65,7 +73,9 @@ export class FormModalCreatePacientePage {
       endereco:endereco,
       naturalidade:naturalidade
     }
-    const tipoSanguineo = Object
+    const tipoSanguineo = {
+      id:''
+    }
     this.paciente = {
       pessoa:pessoa,
       tipoSanguineo:tipoSanguineo
@@ -112,7 +122,11 @@ export class FormModalCreatePacientePage {
                     cep: [
                       this.paciente.pessoa.endereco.cep,
                         Validators.compose([Validators.required, Validators.minLength(8),
-                        Validators.maxLength(8)])],                                                         
+                        Validators.maxLength(8)])],    
+                    email: [
+                      this.paciente.pessoa.email,
+                        Validators.compose([Validators.required, Validators.minLength(3),
+                        Validators.maxLength(50),Validators.email])],                                                     
             
       });        
     }, 1);
@@ -122,17 +136,16 @@ export class FormModalCreatePacientePage {
     this.viewCtrl.dismiss()    
   }
   
-  onChange(field,value){
+  onChange(field,value){    
     if(field === 'dataNascimento'){           
-    this.paciente['pessoa']['dataNascimento'] = this.returnDataValida(value)
-          
+    this.paciente['pessoa']['dataNascimento'] = this.returnDataValida(value)          
     }else if(field === 'naturalidade'){
       this.paciente['pessoa']['naturalidade']['id'] = value
     }else if(field === 'tipoSanguineo'){        
       this.paciente['tipoSanguineo']['id'] = value              
     }else{
       this.paciente['pessoa'][field] = value
-    }    
+    }        
   }
 
   onChangeEndereco(field,value){        
@@ -141,6 +154,7 @@ export class FormModalCreatePacientePage {
     }else{
       this.paciente.pessoa.endereco[field] = value
     }        
+    console.log(this.paciente)
   }
   convertTimeStampToDate(timestamp){
     const dataTratada = new Date(timestamp)
@@ -182,6 +196,35 @@ findAllLinhaCuidado(){
       this.cidades = res;      
     })
   }
+
+
+  presentPromptAdicionarTelefone() {
+    let alert = this.alertCtrl.create({
+      title: 'Número de telefone',
+      inputs: [
+        {
+          name: 'numero',
+          placeholder: 'ex: 2127614324',
+          type:'number'
+        },       
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',          
+        },
+        {
+          text: 'Adicionar',
+          handler: data => {            
+           this.telefones.push({numero:data.numero})
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+  
+  
 
   alertEscolhaNovaLinhaCuidado() {
     let alert = this.alertCtrl.create();
@@ -266,4 +309,24 @@ findAllLinhaCuidado(){
     console.log('see',this.paciente)
   } 
 
+  criarPaciente(){
+    if(this.formGroup['controls']['email']['errors']){
+      this.notificacoesService.presentErrorValidationToast('email')
+      return
+    }
+    this.pacienteService.insert(this.paciente)
+    .then(res =>{      
+      this.pacienteLinhasCuidado.forEach(element => {
+        const pacienteLinhaCuidado = {
+          linhaCuidadoId:element.linhaCuidadoId,
+          pacienteId:res.id
+        }        
+        this.pacienteLinhaCuidadoService.insertByPacienteIdAndLinhaCuidadoId(pacienteLinhaCuidado)
+        this.notificacoesService.presentToast('Paciente Criado',null,2500,'top')
+        this.closeModal()
+      });
+    }).catch(() =>{
+      this.notificacoesService.presentAlertErro()
+    })
+  }
 }

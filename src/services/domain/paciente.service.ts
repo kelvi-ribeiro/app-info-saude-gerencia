@@ -13,7 +13,6 @@ export class PacienteService {
   perfis;
   email;
 
-  //{{host}}/pacientes/page?linhaCuidadoId=2&pessoaNome=Ada
   constructor(
     public http: HttpClient,
     public storage: StorageService,
@@ -59,6 +58,24 @@ export class PacienteService {
       );
     });
   }
+
+  insert(paciente) {    
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "post",
+        `${API_CONFIG.baseUrl}/pacientes`,
+        paciente,
+        headers
+      );
+    });
+  }
+
 
   showOnlinePacientes() {
     let headers = new Headers();

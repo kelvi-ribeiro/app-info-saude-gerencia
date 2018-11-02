@@ -134,8 +134,10 @@ export class FormModalCreatePacientePage {
     }, 1);
 }
 
-  closeModal(){
-    this.viewCtrl.dismiss()    
+  closeModal(){    
+    if(this.viewCtrl && !this.viewCtrl.readReady.closed){
+      this.viewCtrl.dismiss()          
+    }
   }
   
   onChange(field,value){    
@@ -155,8 +157,7 @@ export class FormModalCreatePacientePage {
       this.paciente.pessoa.endereco['cidade']['id'] = value  
     }else{
       this.paciente.pessoa.endereco[field] = value
-    }        
-    console.log(this.paciente)
+    }            
   }
   convertTimeStampToDate(timestamp){
     const dataTratada = new Date(timestamp)

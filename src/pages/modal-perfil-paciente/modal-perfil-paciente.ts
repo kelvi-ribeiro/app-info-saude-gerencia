@@ -59,8 +59,7 @@ export class ModalPerfilPacientePage {
       console.log(error)
     })
   }
-  atualizarEnderecoPessoa(){
-    console.log(this.paciente.pessoa.endereco)
+  atualizarEnderecoPessoa(){    
     this.enderecoService.update(this.paciente.pessoa.endereco)    
     .then(()=>{  
       this.notificacoesService.presentToast('Sucesso ao atualizar paciente','',2500,'top')

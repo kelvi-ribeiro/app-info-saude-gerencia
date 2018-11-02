@@ -120,7 +120,10 @@ export class ListPacientesPage {
       buttons: [
         {
           text: 'Adicionar Paciente',             
-          icon:'add-circle',                   
+          icon:'add-circle',         
+          handler:()=>{
+            this.openModalCreate();
+          }          
         },
         {
           text: 'Enviar Mensagem para esta linha de cuidado',
@@ -208,12 +211,20 @@ export class ListPacientesPage {
   zerarPagination(){
     this.pageAtual = 0;
   }
-  openModal(paciente){    
+  openModalUpdate(paciente){    
     let profileModal = this.modalCtrl.create('ModalPerfilPacientePage',{paciente:paciente});
    profileModal.onDidDismiss(data => {
      
    });
    profileModal.present();
  } 
+
+ openModalCreate(){    
+  let profileModal = this.modalCtrl.create('FormModalCreatePacientePage');
+ profileModal.onDidDismiss(data => {
+   
+ });
+ profileModal.present();
+} 
   
 }

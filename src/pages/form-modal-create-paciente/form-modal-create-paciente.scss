@@ -1,0 +1,50 @@
+page-form-modal-create-paciente {
+    @import "theme/forms";    
+    
+    .img-paciente{
+        border-radius: 50%;        
+        margin-top: 20px;
+        height: 160px;
+    }  
+    /* .scroll-content{
+        overflow: hidden;
+    } */
+    .ion-fab-position-fixed{
+        right:  25px;
+      }  
+    ion-segment-button > span{
+        padding: 10px;
+    }
+    .segment-md-secondary .segment-button {
+        color: white;
+    }
+    ion-segment{
+        background: darken(color($colors,primary),10%);
+    }
+    .content{
+        background:lighten(color($colors,primary),25%);
+            height: 100%;
+            padding-left:25px;              
+    }
+    
+    .grid-header{
+        height: 100px;
+    }
+    .icon-status-user{
+        position: relative;
+        bottom: 34px;
+        right: 26px;
+    }
+    .grid-status-user{        
+        position: relative;
+        bottom: 47px;
+        }
+        .header-md::after{
+            content: unset;
+        } 
+        .btn-close{
+            position: relative;
+            bottom: 3px;
+            right: 5px;
+        }
+}

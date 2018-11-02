@@ -76,25 +76,25 @@
             <tbody>
               <tr  *ngFor="let paciente of pacientes;">
                 
-                <td (click)="openModal(paciente)" style="padding: 0; ">
+                <td (click)="openModalUpdate(paciente)" style="padding: 0; ">
                   <img 
                    class="img-circle"
                    [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'"  width="1400" height="30">
                 </td>
-                <td (click)="openModal(paciente)" >{{paciente?.pessoa.nome}}</td>
-                <td (click)="openModal(paciente)" >
+                <td (click)="openModalUpdate(paciente)" >{{paciente?.pessoa.nome}}</td>
+                <td (click)="openModalUpdate(paciente)" >
                     {{paciente?.pessoa.email}}
                 </td>
-                <td (click)="openModal(paciente)" >
+                <td (click)="openModalUpdate(paciente)" >
                   <span class="flag-icon flag-icon-us">
                       {{paciente?.pessoa?.cpf  | formatCpf}}
                   </span>
                 </td>
-                <td (click)="openModal(paciente)">{{paciente?.pessoa?.endereco?.cidade?.nome}}</td>
-                <td (click)="openModal(paciente)">
+                <td (click)="openModalUpdate(paciente)">{{paciente?.pessoa?.endereco?.cidade?.nome}}</td>
+                <td (click)="openModalUpdate(paciente)">
                   {{paciente?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
                 </td>
-                <td (click)="openModal(paciente)">
+                <td (click)="openModalUpdate(paciente)">
                   <div *ngIf="paciente.pessoa.perfis && paciente.pessoa.perfis[0];else inativo">
                       <span *ngIf="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso);else offline"  class="label label-outline-success">Online</span>  
                       <ng-template #offline>
@@ -116,7 +116,7 @@
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                      <li><a (click)="openModal(paciente)">Visualizar Paciente / Editar Paciente</a></li>
+                      <li><a (click)="openModalUpdate(paciente)">Visualizar Paciente / Editar Paciente</a></li>
                       <li><a href="#">Enviar Mensagem</a></li>                      
                     </ul>
                   </div>

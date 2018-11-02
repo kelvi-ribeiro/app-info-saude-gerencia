@@ -36,11 +36,11 @@ export class FormDadosEnderecoComponent {
           this.paciente.pessoa.endereco.cidade.id,Validators.required],                                                    
             bairro: [
               this.paciente.pessoa.endereco.bairro,
-               Validators.compose([Validators.required, Validators.minLength(5),
+               Validators.compose([Validators.required, Validators.minLength(3),
                 Validators.maxLength(50)])],
             rua: [
               this.paciente.pessoa.endereco.rua,
-                Validators.compose([Validators.required, Validators.minLength(5),
+                Validators.compose([Validators.required, Validators.minLength(3),
                 Validators.maxLength(50)])],                                                         
             numero: [
               this.paciente.pessoa.endereco.numero,

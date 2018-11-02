@@ -149,8 +149,73 @@
 
 
 
-      <form *ngIf="formGroup && activeSegment=== 'medicos'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomrDadosPesoais()">
-         dados médicos
+      <form *ngIf="formGroup && activeSegment=== 'medicos'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomrDadosMedicos()">
+          <ion-grid>
+              <ion-row>       
+                <ion-col  offset-4 col-6>
+                    <button  ion-button color="secondary">Avançar</button>
+                  </ion-col>                
+              </ion-row>
+            </ion-grid>
+         
+            <ion-grid *ngFor="let pacienteLinhaCuidado of pacienteLinhasCuidado;let i =  index">
+                <ion-row>
+                  <ion-col col-4>
+                    <span class="label-informations">
+                      Linha de Cuidado {{i + 1}}
+                    </span>
+                  </ion-col>   
+                  <ion-col offset-1  col-4>
+                    <ion-item>                      
+                      <ion-select >
+                        <div *ngFor="let linhaCuidado of linhasCuidado;">
+                          <ion-option  
+                          disabled                           
+                           [value]="linhaCuidado.id" 
+                          [selected]="pacienteLinhaCuidado.linhaCuidadoId === linhaCuidado.id"
+                          >{{linhaCuidado.nome}}</ion-option>
+                        </div>
+                      </ion-select>
+              
+                    </ion-item>
+                  </ion-col>
+                    <ion-col offset-1 col-2>
+                      <button type="button" *ngIf="pacienteLinhasCuidado.length !== 1" (click)="pacienteLinhasCuidado.splice(index,1)"
+                       ion-button icon-only>
+                          <ion-icon  color="danger" ios="ios-remove" md="md-remove"></ion-icon>
+                      </button>
+              
+                    </ion-col>
+                </ion-row>
+              </ion-grid> 
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <span class="label-informations">
+                Tipo Sanguineo
+              </span>
+            </ion-col>
+            <ion-col offset-1 col-4>   
+                <ion-item>
+                    <ion-label>Selecione um tipo sanguineo</ion-label>
+                    <ion-select formControlName="tipoSanguineo" (ionChange)="onChange('tipoSanguineo',$event)">
+                      <ion-option  
+                      *ngFor="let tipoSanguineo of tiposSanguineo;"
+                       [value]="tipoSanguineo.id" 
+                      [selected]="paciente.tipoSanguineo.id === tipoSanguineo.id"
+                      >{{tipoSanguineo.tipoSanguineo}}</ion-option>
+                    </ion-select>            
+                  </ion-item>     
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+          <ion-grid>
+            <ion-col offset-3 col-8>
+              <button type="button" (click)="alertEscolhaNovaLinhaCuidado()"ion-button >Adicionar Nova Linha de cuidado</button>
+            </ion-col>
+          </ion-grid>
+        
   </form>
       
       

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ViewController, AlertController } from 'ionic-angular';
 import { EnderecoService } from '../../services/domain/endereco.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { PacienteService } from '../../services/domain/paciente.service';
@@ -7,6 +7,8 @@ import { UsuarioService } from '../../services/domain/usuario.service';
 import { API_CONFIG } from '../../config/api.config';
 import { NaturalidadeService } from '../../services/domain/naturalidade.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TipoSanguineoService } from '../../services/domain/tipo.sanguineo.service';
+import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
 
 
 /**
@@ -28,17 +30,25 @@ export class FormModalCreatePacientePage {
   editMode: boolean;    
   naturalidades: any;
   formGroup : FormGroup;
+  tiposSanguineo: any;
+  linhasCuidado: any;
+  pacienteLinhasCuidado = [];
   constructor(public viewCtrl: ViewController, 
               public navParams: NavParams,
               public usuarioService:UsuarioService,
               private formBuilder: FormBuilder,    
               private naturalidadeService:NaturalidadeService,
-              private notificacoesService:NotificacoesService
+              private notificacoesService:NotificacoesService,
+              private tipoSanguineoService:TipoSanguineoService,
+              private linhaCuidadoService:LinhaCuidadoService,
+              private alertCtrl:AlertController
 
               )
                {  this.fillObject()
                   this.findAllNaturalidades()
-                 this.iniciarFormGroup()
+                  this.iniciarFormGroup()
+                  this.findAllTipoSanguineo();
+                  this.findAllLinhaCuidado();  
   }
 
   fillObject(){
@@ -79,6 +89,9 @@ export class FormModalCreatePacientePage {
             sexo:[
               '',
               Validators.required,],  
+              tipoSanguineo: [
+                this.paciente.tipoSanguineo.id, Validators.required],                                                      
+            
       });        
     }, 1);
 }
@@ -93,6 +106,8 @@ export class FormModalCreatePacientePage {
           
     }else if(field === 'naturalidade'){
       this.paciente['pessoa']['naturalidade']['id'] = value
+    }else if(field === 'tipoSanguineo'){        
+      this.paciente['tipoSanguineo']['id'] = value        
     }else{
       this.paciente['pessoa'][field] = value
 
@@ -114,6 +129,18 @@ export class FormModalCreatePacientePage {
       return value
   }
 }
+findAllTipoSanguineo(){      
+  this.tipoSanguineoService.findAll()
+  .then(res=>{
+    this.tiposSanguineo = res;
+  })       
+}
+findAllLinhaCuidado(){
+  this.linhaCuidadoService.findAll()
+  .then(res => {
+    this.linhasCuidado = res
+  })
+}
   findAllNaturalidades(){
     this.naturalidadeService.findAll()
     .then(res =>{
@@ -121,6 +148,31 @@ export class FormModalCreatePacientePage {
     })
     
   }
+
+  alertEscolhaNovaLinhaCuidado() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Escolha uma linha de cuidado')            
+    this.linhasCuidado.forEach(linhaCuidado => {
+      this.pacienteLinhasCuidado.forEach(pacienteLinhaCuidado =>{
+        if(linhaCuidado.id === pacienteLinhaCuidado.linhaCuidadoId ){
+          linhaCuidado.pacienteJaPossuiLinhaCuidado = true
+          return
+        }
+      })
+      if(!linhaCuidado.pacienteJaPossuiLinhaCuidado){
+        alert.addInput({
+          type: 'checkbox',
+          label: linhaCuidado.nome,
+          handler: () => { 
+            alert.dismiss()
+            this.pacienteLinhasCuidado.push({linhaCuidadoId:linhaCuidado.id}) 
+            
+          }
+        });
+        alert.present()
+      }
+  });
+}
  
   verificaErrosFomrDadosPesoais():any{
     let hasErrors = false;
@@ -141,9 +193,25 @@ export class FormModalCreatePacientePage {
       return
     }
     this.avancarPasso('medicos')
+  }  
+
+  verificaErrosFomrDadosMedicos():any{
+    
+    if(this.pacienteLinhasCuidado.length === 0){
+      this.notificacoesService.presentErrorValidationToastCustom('Um paciente deve ter pelo menos uma linha de cuidado')
+      return;
+    }
+    if(this.formGroup['controls']['tipoSanguineo']['errors']){
+      this.notificacoesService.presentErrorValidationToastCustom('Selecione um tipo sanguíneo')
+      return;
+    }
+    
+    
+    this.avancarPasso('endereco')
   }
   avancarPasso(passo){
     this.activeSegment = passo
+    console.log('see',this.paciente)
   } 
 
 }

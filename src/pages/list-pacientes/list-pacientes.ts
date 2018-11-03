@@ -128,10 +128,17 @@ export class ListPacientesPage {
         {
           text: 'Enviar Mensagem para esta linha de cuidado',
           icon:'mail',                     
+          handler:()=>{
+            this.openModalCreateMessage(
+              this.linhasCuidado.find(el => el.id === this.linhaCuidadoId),'linhaCuidado')
+          }
         },
         {
           text: 'Enviar Mensagem para todos pacientes ativos',
-          icon:'mail',                     
+          icon:'mail',    
+          handler:()=>{
+            this.openModalCreateMessage(null,'todos')
+          }                 
         },
         {        
       }
@@ -221,6 +228,14 @@ export class ListPacientesPage {
 
  openModalCreate(){    
   let profileModal = this.modalCtrl.create('FormModalCreatePacientePage');
+ profileModal.onDidDismiss(data => {
+   
+ });
+ profileModal.present();
+} 
+openModalCreateMessage(recipientObject,recipient){    
+  let profileModal = this.modalCtrl.create('ModalFormMensagemPage',
+  {recipientObject:recipientObject,recipient:recipient});
  profileModal.onDidDismiss(data => {
    
  });

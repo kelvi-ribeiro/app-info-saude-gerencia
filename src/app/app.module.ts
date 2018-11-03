@@ -18,6 +18,7 @@ import { UsuarioService } from '../services/domain/usuario.service';
 import { ValidadoresService } from '../services/utils/validadores.service';
 import { ComponentsModule } from '../components/components.module';
 import { PessoaService } from '../services/domain/pessoa.service';
+import { MensagemService } from '../services/domain/mensagem.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { PessoaService } from '../services/domain/pessoa.service';
     LinhaCuidadoService,
     ValidadoresService,
     PessoaService,
+    MensagemService
 
   ]
 })

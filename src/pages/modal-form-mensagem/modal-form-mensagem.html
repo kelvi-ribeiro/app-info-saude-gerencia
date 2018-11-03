@@ -1,0 +1,70 @@
+<!--
+  Generated template for the ModalFormMensagemPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Enviar mensagem para 
+      <span *ngIf="recipient === 'paciente'">
+         o paciente {{recipientObject.pessoa.nome}}</span>
+      <span *ngIf="recipient === 'linhaCuidado'"> 
+        a linha de cuidado {{recipientObject.nome}}</span>
+      <span *ngIf="recipient === 'todos'"> todos os pacientes</span>
+    </ion-title>
+  </ion-navbar>
+  <ion-buttons start>
+      <button class="btn-close-modal"  (click)="closeModal()"  ion-button icon-only>
+        <ion-icon color="danger" name="close"></ion-icon>
+      </button>
+    </ion-buttons >
+
+</ion-header>
+
+
+<ion-content padding>  
+    <form *ngIf="formGroup" [formGroup]="formGroup" >
+    <ion-grid>
+      <ion-row>
+        <ion-col col-5>
+          <span class="label-informations">
+            Assunto
+          </span>
+        </ion-col>
+        <ion-col col-6>
+          <ion-input type="text" 
+          maxLength="30" 
+          formControlName="assunto"
+          ></ion-input>      
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col col-5>
+          <span class="label-informations">
+            Mensagem
+          </span>
+        </ion-col>
+        <ion-col col-6>
+          <ion-input type="text" 
+          maxLength="100" 
+          formControlName="mensagem">
+        </ion-input>        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col offset-5 col-4>
+          <button (click)="sendMessage()" ion-button >Enviar</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>  
+  
+</form>
+  
+</ion-content>

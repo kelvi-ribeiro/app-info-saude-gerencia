@@ -4,12 +4,7 @@ page-modal-perfil-paciente {
     margin-top: 20px;
     height: 160px;
 }  
-/* .scroll-content{
-    overflow: hidden;
-} */
-.ion-fab-position-fixed{
-    right:  25px;
-  }  
+
 ion-segment-button > span{
     padding: 10px;
 }
@@ -20,7 +15,7 @@ ion-segment{
     background: darken(color($colors,primary),10%);
 }
 .content{
-    background:lighten(color($colors,primary),25%);
+        background:lighten(color($colors,primary),25%);
         height: 100%;
         padding-left:25px;              
 }
@@ -40,10 +35,4 @@ ion-segment{
     .header-md::after{
         content: unset;
     } 
-    .btn-close{
-        position: relative;
-        bottom: 3px;
-        right: 5px;
-    }
-    
 }

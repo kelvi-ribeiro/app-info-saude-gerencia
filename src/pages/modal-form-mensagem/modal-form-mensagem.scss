@@ -1,0 +1,12 @@
+page-modal-form-mensagem {
+    @import "theme/forms";        
+    .content{
+            background:lighten(color($colors,primary),25%);
+            height: 100%;
+            padding-left:25px;              
+}    
+    .header-md::after{
+        content: unset;
+    } 
+}
+    

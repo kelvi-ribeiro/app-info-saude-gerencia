@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MensagemService } from '../../services/domain/mensagem.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
+import { PacienteService } from '../../services/domain/paciente.service';
+import { InteracaoService } from '../../services/domain/interacao.service';
 
 /**
  * Generated class for the ListMensagensPage page.
@@ -24,7 +26,9 @@ export class ListMensagensPage {
               public navCtrl: NavController,
               public navParams: NavParams,
               private mensagemService:MensagemService,
-              private notificacoesService:NotificacoesService) {
+              private notificacoesService:NotificacoesService,
+              private pacienteService:PacienteService,
+              private intercaoService:InteracaoService) {
   }
 
   ionViewDidLoad() {
@@ -34,7 +38,23 @@ export class ListMensagensPage {
   findAllMensagens(){
     this.mensagemService.findAllPageable(this.pageAtual)
     .then(res=>{            
-      this.mensagens = res.content      
+      res.content.forEach(element => {        
+        if(element.paciente){
+          element.totalMensagemEnviado = 1         
+        }else{
+          this.pacienteService
+        .showNumbersPacienteByLinhaCuidado(element.linhaCuidado ? element.linhaCuidado.id : 0)
+        .then(res=>{          
+          element.totalMensagemEnviado = res;          
+          })          
+        }
+        this.intercaoService.showNumberMessageRed(element.id)
+        .then(numberOfMessageRead =>{
+            element.numberOfMessageRead = numberOfMessageRead              
+          })
+        
+        this.mensagens = res.content       
+      });
       //this.removerPacienteDuplicado();
       
       /* this.pacientes = this.pacientes.sort(function (a, b) {
@@ -50,7 +70,8 @@ export class ListMensagensPage {
       }
       this.pages =  Array(res.totalPages).fill(res.totalPages).map((x,i)=>  i) /* Array(res.totalPages).fill(res.totalPages).map((x,i)=>i); // [0,1,2,3,4] */
       this.pages = this.pages.filter(res => res<=this.pageAtual+5 && res>=this.pageAtual-5)
-    }).catch(()=>{
+    }).catch((error)=>{
+      console.log(error)
       this.notificacoesService.presentAlertErro();
     })
   }  

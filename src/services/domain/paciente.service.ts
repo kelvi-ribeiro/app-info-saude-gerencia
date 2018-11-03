@@ -76,7 +76,6 @@ export class PacienteService {
     });
   }
 
-
   showOnlinePacientes() {
     let headers = new Headers();
     return this.storage.getUserCredentials()
@@ -88,6 +87,22 @@ export class PacienteService {
       return this.handlerResponseService.handlerResponse(
         "get",
         `${API_CONFIG.baseUrl}/pacientes/number-online-users`,
+        null,
+        headers
+      );
+    });
+  }
+  showNumbersPacienteByLinhaCuidado(linhaCuidadoId) {
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "get",
+        `${API_CONFIG.baseUrl}/pacientes/numbers-paciente-by-linha-cuidado?linhaCuidadoId=${linhaCuidadoId}`,
         null,
         headers
       );

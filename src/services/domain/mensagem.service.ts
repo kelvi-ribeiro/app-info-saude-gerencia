@@ -25,7 +25,7 @@ export class MensagemService {
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "get",
-        `${API_CONFIG.baseUrl}/pacientes/page?page=${page}`,
+        `${API_CONFIG.baseUrl}/mensagens/page?page=${page}`,
         null,
         headers
       );

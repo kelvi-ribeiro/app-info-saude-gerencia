@@ -88,7 +88,11 @@ export class FormDadosContatoComponent {
         {
           text: 'Adicionar',
           handler: data => {            
-            this.telefoneService.insertByPessoaId(data.numero,this.paciente.pessoa.id)
+            const telefoneDto = {
+              pessoaId:this.paciente.pessoa.id,
+              numero:data.numero
+            }
+            this.telefoneService.insert(telefoneDto)
             .then(()=>{
               this.notificacoesService.presentToast('Telefone Adicionado',null,2000,'top')
               this.findAllByPessoaId()

@@ -12,6 +12,7 @@ import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service
 import { CidadeService } from '../../services/domain/cidade.service';
 import { PacienteLinhaCuidadoService } from '../../services/domain/paciente.linha.cuidado.service';
 import { PessoaService } from '../../services/domain/pessoa.service';
+import { TelefoneService } from '../../services/domain/telefone.service';
 
 
 /**
@@ -50,7 +51,8 @@ export class FormModalCreatePacientePage {
               private pacienteLinhaCuidadoService:PacienteLinhaCuidadoService,
               private cidadeService:CidadeService,
               private alertCtrl:AlertController,
-              private pessoaService:PessoaService
+              private pessoaService:PessoaService,
+              private telefoneService:TelefoneService
 
               )
                {  this.fillObject()
@@ -355,16 +357,24 @@ verificaExistePessoaComEmail(){
       }        
       
       this.pacienteService.insert(this.paciente)
-      .then(res =>{      
+      .then(paciente =>{      
         this.pacienteLinhasCuidado.forEach(element => {
           const pacienteLinhaCuidado = {
             linhaCuidadoId:element.linhaCuidadoId,
-            pacienteId:res.id
+            pacienteId:paciente.id
           }        
           this.pacienteLinhaCuidadoService.insertByPacienteIdAndLinhaCuidadoId(pacienteLinhaCuidado)
+          });
+          this.telefones.forEach(element => {
+            const telefoneDto = {
+              pessoaId:paciente.pessoa.id,
+              numero:element.numero
+            }
+          this.telefoneService.insert(telefoneDto)
+          
+          });
           this.notificacoesService.presentToast('Paciente Criado',null,2500,'top')
           this.closeModal()
-        });
       }).catch(() =>{
         this.notificacoesService.presentAlertErro()
       })

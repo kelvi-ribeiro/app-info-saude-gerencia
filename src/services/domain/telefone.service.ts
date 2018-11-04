@@ -29,11 +29,7 @@ export class TelefoneService {
         );
       })
   }
-  insertByPessoaId(numero,pessoaId){
-    const telefone = {
-      numero:numero,
-      pessoaId:pessoaId
-    }
+  insert(telefoneDto){    
     let headers = new Headers();
     return this.storage.getUserCredentials()
       .then(userCredentials => {
@@ -44,11 +40,12 @@ export class TelefoneService {
         return this.handlerResponseService.handlerResponse(
           "post",
           `${API_CONFIG.baseUrl}/telefones`,
-          telefone,
+          telefoneDto,
           headers
         );
       })
   }   
+  
   update(telefone,pessoaId) {  
     let headers = new Headers();
     return this.storage.getUserCredentials()

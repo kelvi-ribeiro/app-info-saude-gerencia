@@ -30,16 +30,16 @@
                     {{mensagem.mensagem}}
                 </td>
                 <td  >
-                    {{mensagem.profissionalSaude.pessoa.nome}}
+                    {{mensagem.nomeProfissionalSaude}}
                 </td>
                 <td >
-                  {{mensagem.dataEnvio | date:'dd/MM/yyyy hh:mm:ss'}}
+                  {{mensagem.dataEnvio}}
                 </td>                
                 <td >
                     {{exibirDestinatario(mensagem)}}
                   </td>                
                   <td >
-                      {{mensagem.numberOfMessageRead}}/{{mensagem.totalMensagemEnviado}}
+                      {{mensagem.numberOfMessageRead}}/{{mensagem.totalPacienteMensagemEnviado}}
                     </td> 
             </tbody>
           </table>

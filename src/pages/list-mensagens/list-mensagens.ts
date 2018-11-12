@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, HostListener } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import { MensagemService } from '../../services/domain/mensagem.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
@@ -49,6 +49,16 @@ export class ListMensagensPage {
     }).catch(()=>{      
       this.notificacoesService.presentAlertErro();
     })
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+      if (event.key === 'ArrowLeft') {
+         this.prevSlide()
+      }
+      else if (event.key === 'ArrowRight') {
+        this.nextSlide()
+      }
   }
 
   findLinhasCuidado(){

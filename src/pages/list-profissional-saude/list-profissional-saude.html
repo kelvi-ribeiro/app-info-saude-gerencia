@@ -1,0 +1,94 @@
+<ion-header>
+
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Profissionais de Saúde</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-searchbar debounce="500" [(ngModel)]="nomePessoa" 
+    placeholder="Busca por nome do profissional de saúde"
+    (ionInput)="searchProfissinalSaude()"></ion-searchbar>
+    <div class="panel panel-default panel-table">       
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width: 32px"></th>                
+                <th>Nome</th>
+                <th>Email</th>
+                <th>CPF</th>
+                <th>Cidade</th>
+                <th style="width: 15%">Data de Nascimento</th>              
+                <th style="width: 5%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let profissionalSaude of profissionaisSaude;">
+                
+                <td (click)="openModalUpdate(profissionalSaude)" style="padding: 0; ">
+                  <img 
+                   class="img-circle"
+                   [src]="profissionalSaude?.pessoa?.urlFoto ? bucketBaseUrl + '/' + profissionalSaude?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'"  width="1400" height="30">
+                </td>
+                <td (click)="openModalUpdate(profissionalSaude)" >{{profissionalSaude?.pessoa.nome}}</td>
+                <td (click)="openModalUpdate(profissionalSaude)" >
+                    {{profissionalSaude?.pessoa.email}}
+                </td>
+                <td (click)="openModalUpdate(profissionalSaude)" >
+                  <span class="flag-icon flag-icon-us">
+                      {{profissionalSaude?.pessoa?.cpf  | formatCpf}}
+                  </span>
+                </td>
+                <td (click)="openModalUpdate(profissionalSaude)">{{profissionalSaude?.pessoa?.endereco?.cidade?.nome}}</td>
+                <td (click)="openModalUpdate(profissionalSaude)">
+                  {{profissionalSaude?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
+                </td>               
+                <td>
+                  <div  [class]="profissionalSaude.actionOpened ? 'btn-group open': 'btn-group'">
+                    <button (click)="openActions(profissionalSaude)" type="button" class="btn btn-default btn-sm dropdown-toggle"
+                     data-toggle="dropdown" 
+                     aria-haspopup="true" 
+                     aria-expanded="false">
+                      Ações
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li><a (click)="openModalUpdate(profissionalSaude)">Visualizar Profissional de Saúde / Editar Profissional de Saúde</a></li>
+                      <li><a (click)="openModalCreateMessage(profissionalSaude,'profissionalSaude')" >Enviar Mensagem</a></li>                      
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>    
+    
+    <div class="cursor-pointer" *ngIf="profissionaisSaude.length > 0" class="panel-body">            
+        <nav>
+          <ul class="pagination pagination-rounded m-y-0">
+            <li  (click)="previousPage()">
+              <a  aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li  (click)="changePage(page)" [value]="page" *ngFor="let page of pages;" [class]="page === pageAtual ? 'active':''">
+              <a   >{{page + 1}}</a>
+            </li>
+            
+            <li  (click)="nextPage()">
+              <a  aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+    </div>
+
+</ion-content>

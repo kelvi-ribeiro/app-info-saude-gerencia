@@ -1,3 +1,7 @@
+<div class="conteudo content-login" 
+style="background-image: url('assets/imgs/background.jpg'); background-size: cover;
+background-repeat: no-repeat;
+background-position: center;">
 <div  style="position: absolute;height: 100%;width: 100%;background: #0258f5;
 opacity: .3;"></div>
   
@@ -16,21 +20,53 @@ opacity: .3;"></div>
         <ion-input placeholder="CPF" (input)="creds.cpf = format(creds.cpf)" round block name="cpf" type="text"
           required [(ngModel)]="creds.cpf"></ion-input>
       </ion-item>
-      <ion-item class="input-login password">
+      <!-- <ion-item class="input-login password">
+
         <ion-label>
           <ion-icon name="key" class="icone-form"></ion-icon>
 
         </ion-label>
-        <ion-input round block name="senha" [type]="typeSenha" placeholder="Senha"
-          required [(ngModel)]="creds.senha"></ion-input>
-      </ion-item>    
+        <ion-input round block (ionFocus)="focusPasswordInput()" name="senha" [type]="typeSenha" placeholder="Senha"
+          required [(ngModel)]="creds.senha">
+
+          <ion-icon name="ios-eye-outline" item-right></ion-icon>
+        </ion-input>
+      </ion-item> -->
+      <ion-item class="input-login password">
+          <ion-label>
+              <ion-icon name="key" class="icone-form"></ion-icon>    
+            </ion-label>
+            <ion-input round block             
+             name="senha"
+              [type]="typeSenha"
+              placeholder="Senha"
+              required [(ngModel)]="creds.senha">
+            </ion-input>
+             <button ion-button clear
+           color="dark" type="button" item-right (click)="exibirSenhaInput()"> 
+           <ion-icon  class="icone-form" color="light"
+             [name]="typeSenha === 'password' ? 'eye-off':'eye'">
+        </ion-icon>
+           </button>
+           </ion-item> 
+
       
+        
+              <div class="div-esqueci" text-center>
+                <span   [navPush]="'FormEsqueceuSenhaPage'">Esqueci minha senha</span>            
+
+              </div>           
+           
+      
+
       <ion-row class="row-btn">
         <ion-grid>
           <ion-col offset-1 col-10>
-            <button color="primary" ion-button full [disabled]="!loginForm.form.valid" type="submit">Entrar</button>
+            <button color="secondary" ion-button full [disabled]="!loginForm.form.valid" type="submit">Entrar</button>
           </ion-col>
         </ion-grid>
       </ion-row>
-    </form>  
+
+    </form>
+  </div>
 </div>

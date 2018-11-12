@@ -18,7 +18,41 @@ page-login {
     
   }
  
+    .conteudo {
+      height: 100%;
+      width: 100%;
+      background: #4075DC;
+      background-attachment: fixed;
+      font-family: Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+      opacity: 0.8;
+    }
+  #logoApp {
+    position: absolute;
+    margin-top: 50px;
+    align-self: center;
+    left: 23%;
+  }
+  .img-finger {
+    height: 100%;
+  }
+  .list-form {
+    height: 90%;
+  }
 
+  .conteudo {
+    height: 100%;
+    width: 100%;        
+    background-attachment: fixed;
+    font-family: Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    opacity: 0.9;
+    background:#005aff;
+  }  
+  .icone-form {
+    padding-left: 1px;
+    font-size: $font-size;
+  }   
   .input-login {
     margin: 1em auto;    
     background: transparent;
@@ -30,7 +64,9 @@ page-login {
       font-size: $font-size;
       color: $color-white;
     }
-    
+  }
+  ion-list.content-login.list {
+    background: transparent;
   }
   .scroll-content {
     display: list-item !important;
@@ -78,9 +114,6 @@ page-login {
     border-radius: 25px;
     height: 48px;
   }  
- /*  input {
-    background: transparent;
-  } */
   .form-login {
     position: absolute;
     bottom: 0;
@@ -89,25 +122,13 @@ page-login {
     padding-bottom: 20%;
    
   }  
-    .esqueci{      
-      color:$color-white;
-      margin-bottom: 20px;
+    .div-esqueci{      
+      color:$color-white;     
       text-decoration: none;
-      position: relative;
-      top: 15px;      
-      span{
-        position: relative;
-        left: -41%;        
-      }     
+      font-weight: bold;
     }
 
-  #icon-hide-show{
-   position: absolute;
-   left: 82%;
-   top: 33%;
-   font-size:$font-size;
-   color: $color-white;
-  }
+
   .img-background{
     position: fixed;
 			right: 0;
@@ -119,9 +140,35 @@ page-login {
 			z-index: -1000;
       background-size: cover;
       opacity: 0.6;
-  } 
+  }
+  .btn-esquceu{
+    top:5px;
+    height: 53px;
+  }
   .btn-logar{
     top:-28px;
     height: 53px;
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+  }
+  input, select, textarea{
+    color: $color-white;
+  }
+  .text-input::-moz-placeholder {
+    color: white;
+  }
+  
+  .text-input:-ms-input-placeholder {
+    color: white;
+  }
+  
+  .text-input::-webkit-input-placeholder {
+    text-indent: 0;
+    color: white;
+  }  
+  
 }

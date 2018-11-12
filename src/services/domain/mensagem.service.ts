@@ -31,6 +31,23 @@ export class MensagemService {
       );
     });
   }
+
+  findMensagemByAnyField(linhaCuidadoId?:number,campoPesquisa?:string,page?:number) {
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "get",
+        `${API_CONFIG.baseUrl}/mensagens/page/any-field?linhaCuidadoId=${linhaCuidadoId ? linhaCuidadoId : ''}&campoPesquisa=${campoPesquisa ? campoPesquisa: ''}&page=${page ? page : ''}`,
+        null,
+        headers
+      );
+    });
+  }
  
 
   insert(mensagemDTO) {    

@@ -10,6 +10,48 @@
 
 
 <ion-content padding>
+    <ion-grid>
+        <ion-row >
+          <ion-slides #slidesLinhasCuidado (ionSlideDidChange)="slideChanged()" style="
+          height: 112px;">      
+              <ion-slide swipeBackEnabled="false"  *ngFor="let linhaCuidado of linhasCuidado" >
+                <ion-grid>
+                  <ion-row>
+                    <ion-col offset-4 col-1>
+                      <img style="-moz-transform: scaleX(-1);
+                      -o-transform: scaleX(-1);
+                      -webkit-transform: scaleX(-1);
+                      transform: scaleX(-1);
+                      filter: FlipH;"
+                      
+                       class="cursor-pointer" (click)="prevSlide()"
+                       [hidden]="slidesLinhasCuidado.isBeginning()"
+                        src="/assets/imgs/arrow-slide.png" >
+                    </ion-col>
+                    <ion-col  col-2>
+                      <img [src]="linhaCuidado.caminhoImagem">
+                    </ion-col>
+                    <ion-col  col-1>
+                        <img 
+                        class="cursor-pointer"
+                        (click)="nextSlide()"
+                         [hidden]="slidesLinhasCuidado.isEnd()"
+                         src="/assets/imgs/arrow-slide.png" >
+                      </ion-col>                   
+                  </ion-row>
+                </ion-grid>
+                <ion-row class="align-horizontal">
+                  {{linhaCuidado.nome}}
+                </ion-row>            
+              </ion-slide>        
+            </ion-slides> 
+        </ion-row>
+        
+      </ion-grid>  
+
+      <ion-searchbar debounce="500" [(ngModel)]="campoPesquisa" 
+      placeholder="Busca por nome do profissional de saúde,assunto ou corpo da mensagem"
+      (ionInput)="searchPaciente()"></ion-searchbar>
     <div class="panel panel-default panel-table">       
         <div class="table-responsive">
           <table class="table table-hover">

@@ -16,7 +16,7 @@ export class LoginPage {
   perfis = [];
   creds : CreadenciaisDTO = {
     cpf: "",
-    senha: ""
+    senha: "123"
   };
 
   DECIMAL_SEPARATOR=".";
@@ -37,8 +37,8 @@ export class LoginPage {
     public storageService:StorageService,         
     public notificacoesService:NotificacoesService) {
 
-      //this.creds.cpf = this.format()
-      this.creds.cpf = this.format(storageService.getCpf());
+      this.creds.cpf = this.format('95159191003')
+      //this.creds.cpf = this.format(storageService.getCpf());
   }
 
   ionViewWillEnter() {

@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, ViewController, AlertController } from 'ionic-angular';
-import { EnderecoService } from '../../services/domain/endereco.service';
+import { IonicPage, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { PacienteService } from '../../services/domain/paciente.service';
 import { UsuarioService } from '../../services/domain/usuario.service';
-import { API_CONFIG } from '../../config/api.config';
 import { NaturalidadeService } from '../../services/domain/naturalidade.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TipoSanguineoService } from '../../services/domain/tipo.sanguineo.service';
@@ -13,23 +11,17 @@ import { CidadeService } from '../../services/domain/cidade.service';
 import { PacienteLinhaCuidadoService } from '../../services/domain/paciente.linha.cuidado.service';
 import { PessoaService } from '../../services/domain/pessoa.service';
 import { TelefoneService } from '../../services/domain/telefone.service';
-
-
-/**
- * Generated class for the FormModalCreatePacientePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ProfissionalSaudeService } from '../../services/domain/profissional.saude.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-form-modal-create-paciente',
-  templateUrl: 'form-modal-create-paciente.html',
+  selector: 'page-form-modal-object-to-save',
+  templateUrl: 'form-modal-object-to-save.html',
 })
-export class FormModalCreatePacientePage {
+export class FormModalObjectToSavePage {
 
-  paciente;  
+  objectToSave;
+  typeObjectToSave = this.navParams.get('typeObjectToSave');  
   activeSegment = 'pessoais'
   editMode: boolean;    
   naturalidades: any;
@@ -52,7 +44,8 @@ export class FormModalCreatePacientePage {
               private cidadeService:CidadeService,
               private alertCtrl:AlertController,
               private pessoaService:PessoaService,
-              private telefoneService:TelefoneService
+              private telefoneService:TelefoneService,
+              private profissionalSaudeService:ProfissionalSaudeService
 
               )
                {  this.fillObject()
@@ -80,9 +73,12 @@ export class FormModalCreatePacientePage {
     const tipoSanguineo = {
       id:''
     }
-    this.paciente = {
+    this.objectToSave = {
       pessoa:pessoa,
       tipoSanguineo:tipoSanguineo
+    }
+    if(this.typeObjectToSave!= 'paciente'){
+      delete this.objectToSave.tipoSanguineo;
     }
   }
 
@@ -106,29 +102,29 @@ export class FormModalCreatePacientePage {
             Validators.required,],                                          
             sexo:[
               '',
-              Validators.required,],  
+              Validators.required,],                
               tipoSanguineo: [
-                this.paciente.tipoSanguineo.id, Validators.required],  
+                this.typeObjectToSave === 'paciente' ? this.objectToSave.tipoSanguineo.id :'', this.typeObjectToSave === 'paciente' ? Validators.required :''],  
                 cidade: [
-                  this.paciente.pessoa.endereco.cidade.id,Validators.required],                                                    
+                  this.objectToSave.pessoa.endereco.cidade.id,Validators.required],                                                    
                     bairro: [
-                      this.paciente.pessoa.endereco.bairro,
+                      this.objectToSave.pessoa.endereco.bairro,
                        Validators.compose([Validators.required, Validators.minLength(3),
                         Validators.maxLength(50)])],
                     rua: [
-                      this.paciente.pessoa.endereco.rua,
+                      this.objectToSave.pessoa.endereco.rua,
                         Validators.compose([Validators.required, Validators.minLength(3),
                         Validators.maxLength(50)])],                                                         
                     numero: [
-                      this.paciente.pessoa.endereco.numero,
+                      this.objectToSave.pessoa.endereco.numero,
                         Validators.compose([Validators.required, Validators.minLength(1),
                         Validators.maxLength(5)])],       
                     cep: [
-                      this.paciente.pessoa.endereco.cep,
+                      this.objectToSave.pessoa.endereco.cep,
                         Validators.compose([Validators.required, Validators.minLength(8),
                         Validators.maxLength(8)])],    
                     email: [
-                      this.paciente.pessoa.email,
+                      this.objectToSave.pessoa.email,
                         Validators.compose([Validators.required, Validators.minLength(3),
                         Validators.maxLength(50),Validators.email])],                                                     
             
@@ -144,21 +140,21 @@ export class FormModalCreatePacientePage {
   
   onChange(field,value){    
     if(field === 'dataNascimento'){           
-    this.paciente['pessoa']['dataNascimento'] = this.returnDataValida(value)          
+    this.objectToSave['pessoa']['dataNascimento'] = this.returnDataValida(value)          
     }else if(field === 'naturalidade'){
-      this.paciente['pessoa']['naturalidade']['id'] = value
+      this.objectToSave['pessoa']['naturalidade']['id'] = value
     }else if(field === 'tipoSanguineo'){        
-      this.paciente['tipoSanguineo']['id'] = value              
+      this.objectToSave['tipoSanguineo']['id'] = value              
     }else{
-      this.paciente['pessoa'][field] = value
+      this.objectToSave['pessoa'][field] = value
     }        
   }
 
   onChangeEndereco(field,value){        
     if(field === 'cidade'){
-      this.paciente.pessoa.endereco['cidade']['id'] = value  
+      this.objectToSave.pessoa.endereco['cidade']['id'] = value  
     }else{
-      this.paciente.pessoa.endereco[field] = value
+      this.objectToSave.pessoa.endereco[field] = value
     }            
   }
   convertTimeStampToDate(timestamp){
@@ -177,6 +173,7 @@ export class FormModalCreatePacientePage {
       return value
   }
 }
+
 findAllTipoSanguineo(){      
   this.tipoSanguineoService.findAll()
   .then(res=>{
@@ -255,7 +252,7 @@ findAllLinhaCuidado(){
   });
 }
 verificaExistePessoaComCpf(){
-  return this.pessoaService.findPessoaByCpf(this.paciente.pessoa.cpf)
+  return this.pessoaService.findPessoaByCpf(this.objectToSave.pessoa.cpf)
   .then(res => {
     if(res){
       return true
@@ -268,7 +265,7 @@ verificaExistePessoaComCpf(){
 }
 
 verificaExistePessoaComEmail(){
-  return this.pessoaService.findPessoaByEmail(this.paciente.pessoa.email)
+  return this.pessoaService.findPessoaByEmail(this.objectToSave.pessoa.email)
   .then(res => {
     if(res){
       return true
@@ -305,7 +302,7 @@ verificaExistePessoaComEmail(){
       if(hasErrors){
         return
       }      
-      this.avancarPasso('medicos')       
+      this.avancarPasso(this.typeObjectToSave === 'paciente' ? 'medicos' : 'endereco')       
     })  
   }  
 
@@ -345,7 +342,7 @@ verificaExistePessoaComEmail(){
     this.activeSegment = passo    
   } 
 
-  criarPaciente(){        
+  createObjectToSave(){        
     if(this.formGroup['controls']['email']['errors']){
       this.notificacoesService.presentErrorValidationToast('email')
       return
@@ -354,9 +351,17 @@ verificaExistePessoaComEmail(){
       if(res){
         this.notificacoesService.presentErrorValidationToastCustom('Já existe alguém com esse email');
         return
-      }        
+      }
+      if(this.typeObjectToSave === 'paciente'){
+        this.createPaciente()
+      }else if(this.typeObjectToSave === 'profissionalSaude'){
+        this.createProfissionalSaude()
+      }
       
-      this.pacienteService.insert(this.paciente)
+    })
+  }
+  createPaciente(){
+    this.pacienteService.insert(this.objectToSave)
       .then(paciente =>{      
         this.pacienteLinhasCuidado.forEach(element => {
           const pacienteLinhaCuidado = {
@@ -378,7 +383,30 @@ verificaExistePessoaComEmail(){
       }).catch(() =>{
         this.notificacoesService.presentAlertErro()
       })
+  }
+  createProfissionalSaude(){
+    this.profissionalSaudeService.insert(this.objectToSave)
+    .then(profissionalSaude =>{            
+       
+        this.telefones.forEach(element => {
+          const telefoneDto = {
+            pessoaId:profissionalSaude.pessoa.id,
+            numero:element.numero
+          }
+        this.telefoneService.insert(telefoneDto)
+        
+        });
+        this.notificacoesService.presentToast('Profissional de saúde Criado',null,2500,'top')
+        this.closeModal()
+    }).catch(() =>{
+      this.notificacoesService.presentAlertErro()
     })
   }
-    
+  returnTypeObjectToSave(){
+    if(this.typeObjectToSave === 'paciente'){
+      return 'Paciente'
+    }else if(this.typeObjectToSave === 'profissionalSaude'){
+      return 'Profissional de saúde'
+    }
+  }    
 }

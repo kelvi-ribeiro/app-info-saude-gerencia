@@ -1,4 +1,4 @@
-page-form-modal-create-paciente {
+page-form-modal-object-to-save {
     @import "theme/forms";    
     
     .img-paciente{
@@ -9,9 +9,7 @@ page-form-modal-create-paciente {
     /* .scroll-content{
         overflow: hidden;
     } */
-    .ion-fab-position-fixed{
-        right:  25px;
-      }  
+     
     ion-segment-button > span{
         padding: 10px;
     }

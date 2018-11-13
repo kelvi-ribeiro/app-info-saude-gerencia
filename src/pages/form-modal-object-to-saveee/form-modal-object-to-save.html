@@ -7,7 +7,7 @@
       <ion-icon name="person"></ion-icon>
     </ion-segment-button>
 
-    <ion-segment-button disabled value="medicos">
+    <ion-segment-button *ngIf="typeObjectToSave === 'paciente'" disabled value="medicos">
       <span>
         Dados Médicos
       </span>
@@ -314,11 +314,11 @@
       </ion-grid>
   </form>
 
-  <form   *ngIf="formGroup && activeSegment === 'contato'" [formGroup]="formGroup" (ngSubmit)="criarPaciente()">
+  <form   *ngIf="formGroup && activeSegment === 'contato'" [formGroup]="formGroup" (ngSubmit)="createObjectToSave()">
       <ion-grid>
         <ion-row>       
           <ion-col  offset-4 col-6>
-              <button color="primary"  ion-button color="secondary">Criar Paciente</button>
+              <button color="primary"  ion-button color="secondary">Criar {{returnTypeObjectToSave()}}</button>
             </ion-col>                
         </ion-row>
       </ion-grid>

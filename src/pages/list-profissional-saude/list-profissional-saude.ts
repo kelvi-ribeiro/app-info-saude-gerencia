@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
 import { ProfissionalSaudeService } from '../../services/domain/profissional.saude.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
@@ -21,7 +21,9 @@ export class ListProfissionalSaudePage {
               public navCtrl: NavController,
               public navParams: NavParams,
               public profissionalSaudeService:ProfissionalSaudeService,
-              public notificacoesService:NotificacoesService) {
+              public notificacoesService:NotificacoesService,
+              private actionSheetCtrl:ActionSheetController,
+              private modalCtrl:ModalController) {
   }
 
   ionViewDidLoad() {
@@ -68,6 +70,32 @@ export class ListProfissionalSaudePage {
     }).catch(()=>{
       this.notificacoesService.presentAlertErro();
     })
+  }
+  openModalCreate(){    
+    let profileModal = this.modalCtrl.create('FormModalObjectToSavePage',{typeObjectToSave:'profissionalSaude'});
+   profileModal.onDidDismiss(() => {
+     this.findAllProfissionaisSaude()
+   });
+   profileModal.present();
+  } 
+  presentActionSheet() {
+    const actionSheet = this.actionSheetCtrl.create({          
+      buttons: [
+        {
+          text: 'Adicionar Profissional de Saúde',             
+          icon:'add-circle',         
+          handler:()=>{
+            this.openModalCreate();
+          }          
+        },   
+        {
+          text: 'Cancelar',             
+          icon:'close',                   
+        },      
+    
+    ]
+    }); 
+    actionSheet.present();
   }
 
 }

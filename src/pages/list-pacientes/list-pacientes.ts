@@ -227,7 +227,7 @@ export class ListPacientesPage {
  } 
 
  openModalCreate(){    
-  let profileModal = this.modalCtrl.create('FormModalCreatePacientePage');
+  let profileModal = this.modalCtrl.create('FormModalObjectToSavePage',{typeObjectToSave:'paciente'});
  profileModal.onDidDismiss(data => {
    
  });

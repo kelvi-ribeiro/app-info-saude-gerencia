@@ -31,9 +31,8 @@ export class ProfissionalSaudeService {
     });
   }
 
-  updatePaciente(paciente) {
-    delete paciente.pessoa.perfis
-    console.log(paciente)
+  update(object) {
+    delete object.pessoa.perfis    
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
@@ -43,14 +42,14 @@ export class ProfissionalSaudeService {
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "put",
-        `${API_CONFIG.baseUrl}/pacientes/${paciente.id}`,
-        paciente,
+        `${API_CONFIG.baseUrl}/profissionais-saude/${object.id}`,
+        object,
         headers
       );
     });
   }
 
-  insert(paciente) {    
+  insert(object) {    
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
@@ -60,8 +59,8 @@ export class ProfissionalSaudeService {
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "post",
-        `${API_CONFIG.baseUrl}/pacientes`,
-        paciente,
+        `${API_CONFIG.baseUrl}/profissionais-saude`,
+        object,
         headers
       );
     });

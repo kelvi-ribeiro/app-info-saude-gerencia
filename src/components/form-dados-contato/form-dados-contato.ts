@@ -16,7 +16,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class FormDadosContatoComponent {
 
-  @Input() paciente;
+  @Input() objectToUpdate;
   telefones: any;
   formGroup : FormGroup;
   constructor(
@@ -33,14 +33,14 @@ export class FormDadosContatoComponent {
   iniciarFormGroup(): any {    
       this.formGroup = this.formBuilder.group({
         email: [
-          this.paciente.pessoa.email,
+          this.objectToUpdate.pessoa.email,
            Validators.compose([Validators.required, Validators.minLength(3),
             Validators.maxLength(50),Validators.email])],                                                     
       });        
     
 }
   findAllByPessoaId(){
-    this.telefoneService.findAllByPessoaId(this.paciente.pessoa.id)
+    this.telefoneService.findAllByPessoaId(this.objectToUpdate.pessoa.id)
     .then(res=>{
       this.telefones = res
     })
@@ -50,15 +50,15 @@ export class FormDadosContatoComponent {
   }
   onChange(field,value){              
     if(field === 'email'){           
-      this.paciente['pessoa']['email'] = value        
+      this.objectToUpdate['pessoa']['email'] = value        
     }        
   }
-  atualizarPaciente(){       
+  atualizar(){       
     if(this.verificaErrosForm()){
       return
     }
     
-    this.events.publish('atualizar:paciente',this.paciente)
+    this.events.publish('atualizar',this.objectToUpdate)
   }
   verificaErrosForm():any{
     let hasErrors = false;
@@ -89,7 +89,7 @@ export class FormDadosContatoComponent {
           text: 'Adicionar',
           handler: data => {            
             const telefoneDto = {
-              pessoaId:this.paciente.pessoa.id,
+              pessoaId:this.objectToUpdate.pessoa.id,
               numero:data.numero
             }
             this.telefoneService.insert(telefoneDto)

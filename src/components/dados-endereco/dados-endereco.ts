@@ -13,20 +13,5 @@ import { Events } from 'ionic-angular';
 })
 export class DadosEnderecoComponent {
 
-  @Input() paciente;
-
-  constructor(private events:Events) {
-    setTimeout(() => {              
-        this.events.publish('editar-dados-pessoa-endereco:paciente','bairro','Areia Branca')      
-        this.events.publish('editar-dados-pessoa:paciente','rua','Souza Herdy')              
-        this.events.publish('editar-dados-pessoa:paciente','numero','1000')      
-        this.events.publish('editar-dados-pessoa:paciente','cep','23120180')      
-        
-        
-        
-    }, 1000);
-  }
-  
-
-
+  @Input() objectToUpdate;
 }

@@ -219,9 +219,9 @@ export class ListPacientesPage {
     this.pageAtual = 0;
   }
   openModalUpdate(paciente){    
-    let profileModal = this.modalCtrl.create('ModalPerfilPacientePage',{paciente:paciente});
+    let profileModal = this.modalCtrl.create('ModalPerfilPage',{objectToUpdate:paciente,typeObjectToUpdate:'paciente'});
    profileModal.onDidDismiss(data => {
-     
+     this.findPacientes()
    });
    profileModal.present();
  } 

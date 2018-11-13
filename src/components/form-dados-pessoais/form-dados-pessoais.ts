@@ -13,7 +13,7 @@ import { NotificacoesService } from '../../services/domain/notificacoes.service'
 export class FormDadosPessoaisComponent {
   
 
-  @Input('paciente')paciente
+  @Input('objectToUpdate')objectToUpdate
   naturalidades = [];
   formGroup : FormGroup;
   
@@ -29,21 +29,21 @@ export class FormDadosPessoaisComponent {
       setTimeout(() => {
         this.formGroup = this.formBuilder.group({
           nome: [
-            this.paciente.pessoa.nome,
+            this.objectToUpdate.pessoa.nome,
              Validators.compose([Validators.required, Validators.minLength(3),
               Validators.maxLength(50)])],                                            
           dataNascimento: [
-            this.convertTimeStampToDate(this.paciente.pessoa.dataNascimento),
+            this.convertTimeStampToDate(this.objectToUpdate.pessoa.dataNascimento),
             Validators.required,],                                            
-          cpf: [this.paciente.pessoa.cpf,
+          cpf: [this.objectToUpdate.pessoa.cpf,
             Validators.compose([Validators.required,
             Validators.minLength(11),
             Validators.maxLength(11)])],  
             naturalidade:[
-              this.paciente.pessoa.naturalidade.id,
+              this.objectToUpdate.pessoa.naturalidade.id,
               Validators.required,],                                          
               sexo:[
-                this.paciente.pessoa.sexo,
+                this.objectToUpdate.pessoa.sexo,
                 Validators.required,],  
         });        
       }, 1);
@@ -51,12 +51,12 @@ export class FormDadosPessoaisComponent {
   
   onChange(field,value){
     if(field === 'dataNascimento'){           
-    this.paciente['pessoa']['dataNascimento'] = this.returnDataValida(value)
+    this.objectToUpdate['pessoa']['dataNascimento'] = this.returnDataValida(value)
           
     }else if(field === 'naturalidade'){
-      this.paciente['pessoa']['naturalidade']['id'] = value
+      this.objectToUpdate['pessoa']['naturalidade']['id'] = value
     }else{
-      this.paciente['pessoa'][field] = value
+      this.objectToUpdate['pessoa'][field] = value
 
     }    
   }
@@ -83,12 +83,12 @@ export class FormDadosPessoaisComponent {
     })
     
   }
-  atualizarPaciente(){       
+  atualizar(){       
     if(this.verificaErrosForm()){
       return
     }
     
-    this.events.publish('atualizar:paciente',this.paciente)
+    this.events.publish('atualizar',this.objectToUpdate)
   }
   verificaErrosForm():any{
     let hasErrors = false;

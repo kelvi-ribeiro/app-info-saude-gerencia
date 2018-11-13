@@ -14,7 +14,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class FormDadosMedicosComponent {
 
-  @Input() paciente;
+  @Input() objectToUpdate;
   tiposSanguineo: any;
   pacienteLinhasCuidado: any;
   linhasCuidado: any;
@@ -40,12 +40,12 @@ export class FormDadosMedicosComponent {
     iniciarFormGroup(): any {      
         this.formGroup = this.formBuilder.group({
           tipoSanguineo: [
-            this.paciente.tipoSanguineo.id, Validators.required],                                                      
+            this.objectToUpdate.tipoSanguineo.id, Validators.required],                                                      
         });              
   }
     
     findAllPacienteLinhaCuidado(){      
-      this.pacienteLinhaCuidadoService.findAllByPacienteId(this.paciente.id)
+      this.pacienteLinhaCuidadoService.findAllByPacienteId(this.objectToUpdate.id)
       .then(res=>{
         this.pacienteLinhasCuidado = res;
       }) 
@@ -76,14 +76,14 @@ export class FormDadosMedicosComponent {
     }
     onChange(field,value){              
       if(field === 'tipoSanguineo'){        
-        this.paciente['tipoSanguineo']['id'] = value        
+        this.objectToUpdate['tipoSanguineo']['id'] = value        
       }        
     }
-    atualizarPaciente(){        
-      this.events.publish('atualizar:paciente')
+    atualizar(){        
+      this.events.publish('atualizar')
       if(this.editouLinhaCuidado){
         this.pacienteLinhasCuidado.forEach(element => {
-          this.pacienteLinhaCuidadoService.update(element,this.paciente.id)
+          this.pacienteLinhaCuidadoService.update(element,this.objectToUpdate.id)
         });
       }
     }
@@ -135,7 +135,7 @@ export class FormDadosMedicosComponent {
             text: 'Sim',            
             handler: () => {
               const pacienteLinhaCuidado = {
-                pacienteId:this.paciente.id,
+                pacienteId:this.objectToUpdate.id,
                 linhaCuidadoId:linhaCuidadoId                
               }
               

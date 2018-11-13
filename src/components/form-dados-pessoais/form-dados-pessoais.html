@@ -1,8 +1,8 @@
-<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="atualizarPaciente()">
+<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="atualizar()">
     <ion-grid>
       <ion-row>       
         <ion-col  offset-4 col-6>
-            <button   ion-button color="secondary">Atualizar Paciente</button>
+            <button   ion-button color="secondary">Atualizar</button>
           </ion-col>                
       </ion-row>
     </ion-grid>
@@ -49,9 +49,9 @@
         <ion-label>Selecione um Gênero</ion-label>
         <ion-select formControlName="sexo"  (ionChange)="onChange('sexo',$event)" >
             <ion-option 
-            [selected]="paciente.pessoa.sexo === 'Masculino'" >Masculino</ion-option>
+            [selected]="objectToUpdate.pessoa.sexo === 'Masculino'" >Masculino</ion-option>
             <ion-option value="Feminino" 
-            [selected]="paciente.pessoa.sexo === 'Feminino'" >Feminino</ion-option>
+            [selected]="objectToUpdate.pessoa.sexo === 'Feminino'" >Feminino</ion-option>
           </ion-select>
       </ion-item>
     </ion-col>
@@ -87,7 +87,7 @@
         <ion-select formControlName="naturalidade" 
         (ionChange)="onChange('naturalidade',$event)" >
           <ion-option 
-           [selected]="paciente.pessoa.naturalidade.id === naturalidade.id" 
+           [selected]="objectToUpdate.pessoa.naturalidade.id === naturalidade.id" 
            [value]="naturalidade.id"
            *ngFor="let naturalidade of naturalidades;">{{naturalidade.naturalidade}}</ion-option>
         </ion-select>

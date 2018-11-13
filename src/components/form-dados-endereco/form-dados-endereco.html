@@ -1,8 +1,8 @@
-<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="atualizarPaciente()">
+<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="atualizar()">
     <ion-grid>
       <ion-row>       
         <ion-col  offset-4 col-6>
-            <button  ion-button color="secondary">Atualizar Paciente</button>
+            <button  ion-button color="secondary">Atualizar</button>
           </ion-col>                
       </ion-row>
     </ion-grid>
@@ -22,7 +22,7 @@
         formControlName="cidade" >
           <ion-option 
           [value]="cidade.id"
-          [selected]="paciente.pessoa.endereco.cidade.id  === cidade.id" 
+          [selected]="objectToUpdate.pessoa.endereco.cidade.id  === cidade.id" 
           *ngFor="let cidade of cidades;">{{cidade.nome}}</ion-option>
         </ion-select>
       </ion-item>

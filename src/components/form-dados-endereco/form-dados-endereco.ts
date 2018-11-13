@@ -12,7 +12,7 @@ import { NotificacoesService } from '../../services/domain/notificacoes.service'
 })
 export class FormDadosEnderecoComponent {
   cidades: any;
-  @Input()paciente
+  @Input()objectToUpdate
   formGroup : FormGroup;
 
   constructor(
@@ -33,21 +33,21 @@ export class FormDadosEnderecoComponent {
     setTimeout(() => {
       this.formGroup = this.formBuilder.group({
         cidade: [
-          this.paciente.pessoa.endereco.cidade.id,Validators.required],                                                    
+          this.objectToUpdate.pessoa.endereco.cidade.id,Validators.required],                                                    
             bairro: [
-              this.paciente.pessoa.endereco.bairro,
+              this.objectToUpdate.pessoa.endereco.bairro,
                Validators.compose([Validators.required, Validators.minLength(3),
                 Validators.maxLength(50)])],
             rua: [
-              this.paciente.pessoa.endereco.rua,
+              this.objectToUpdate.pessoa.endereco.rua,
                 Validators.compose([Validators.required, Validators.minLength(3),
                 Validators.maxLength(50)])],                                                         
             numero: [
-              this.paciente.pessoa.endereco.numero,
+              this.objectToUpdate.pessoa.endereco.numero,
                 Validators.compose([Validators.required, Validators.minLength(1),
                 Validators.maxLength(5)])],       
             cep: [
-              this.paciente.pessoa.endereco.cep,
+              this.objectToUpdate.pessoa.endereco.cep,
                 Validators.compose([Validators.required, Validators.minLength(8),
                 Validators.maxLength(8)])],       
       });        
@@ -56,11 +56,11 @@ export class FormDadosEnderecoComponent {
 
   onChange(field,value){        
     if(field === 'cidade'){
-      this.paciente.pessoa.endereco['cidade']['id'] = value  
+      this.objectToUpdate.pessoa.endereco['cidade']['id'] = value  
     }else{
-      this.paciente.pessoa.endereco[field] = value
+      this.objectToUpdate.pessoa.endereco[field] = value
     }    
-    this.events.publish('editar-dados-endereco:paciente',field,value)       
+    this.events.publish('editar-dados-endereco',field,value)       
   }
 
   findAllCidades(){
@@ -70,11 +70,11 @@ export class FormDadosEnderecoComponent {
     })
   }
 
-  atualizarPaciente(){        
+  atualizar(){        
     if(this.verificaErrosForm()){
       return
     }        
-    this.events.publish('atualizar:endereco',this.paciente)
+    this.events.publish('atualizar:endereco',this.objectToUpdate)
   }
   verificaErrosForm():any{
     let hasErrors = false;

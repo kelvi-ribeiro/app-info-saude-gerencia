@@ -14,7 +14,7 @@ import { Component, Input } from '@angular/core';
 })
 export class DadosPessoaisComponent {
 
-  @Input() paciente;
+  @Input() objectToUpdate;
   @Input()editMode = false;
   pathImages = 'assets/imgs/'
 }

@@ -7,7 +7,7 @@
         <ion-icon name="person"></ion-icon>
       </ion-segment-button>
   
-      <ion-segment-button [disabled]="editMode" value="medicos">
+      <ion-segment-button *ngIf="typeObjectToUpdate === 'paciente'" [disabled]="editMode" value="medicos">
         <span>
           Dados Médicos
         </span>
@@ -42,7 +42,7 @@
       <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">      
     </ion-col>
   </ion-grid>
-  <div  *ngIf="paciente.pessoa.perfis && !paciente.pessoa.perfis[0];else ativo">
+  <div  *ngIf="objectToUpdate.pessoa.perfis && !objectToUpdate.pessoa.perfis[0];else ativo">
     <ion-grid>
       <ion-row>
         <ion-col offset-5 col-8>
@@ -60,20 +60,20 @@
         <ion-row>  
           <ion-col offset-5 col-8>
               <h1 class="title-status text-white">
-                {{usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'Online':'Offline'}}
+                {{usuarioService.checkUserIsOnline(objectToUpdate.pessoa.ultimoAcesso) ? 'Online':'Offline'}}
               </h1>
               <ion-icon class="icon-status-user"
-            [color]="usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso) ? 'secondary':'primary'" name="radio-button-on"></ion-icon>
+            [color]="usuarioService.checkUserIsOnline(objectToUpdate.pessoa.ultimoAcesso) ? 'secondary':'primary'" name="radio-button-on"></ion-icon>
           </ion-col>
             <ion-grid class="grid-status-user">
-              <ion-col *ngIf="!usuarioService.checkUserIsOnline(paciente.pessoa.ultimoAcesso)" 
+              <ion-col *ngIf="!usuarioService.checkUserIsOnline(objectToUpdate.pessoa.ultimoAcesso)" 
               offset-3 col-8>          
-                  <p *ngIf="paciente.pessoa.ultimoAcesso"  
+                  <p *ngIf="objectToUpdate.pessoa.ultimoAcesso"  
                   style="color: white;">
                       Último acesso em 
-                      {{paciente.pessoa.ultimoAcesso | date:'dd/MM/yyyy hh:mm:ss a' }}
+                      {{objectToUpdate.pessoa.ultimoAcesso | date:'dd/MM/yyyy hh:mm:ss a' }}
                   </p>
-                  <p *ngIf="!paciente.pessoa.ultimoAcesso" style="color: white;">
+                  <p *ngIf="!objectToUpdate.pessoa.ultimoAcesso" style="color: white;">
                     Usuário ainda não entrou no aplicativo
                   </p>
                 
@@ -97,22 +97,22 @@
 
               <div *ngIf="!editMode">
                 <dados-pessoais *ngIf="activeSegment === 'pessoais'"
-                [paciente]="paciente" [editMode]="editMode" ></dados-pessoais>
-                <dados-medicos *ngIf="activeSegment === 'medicos'" [paciente]="paciente" ></dados-medicos>
-                <dados-endereco *ngIf="activeSegment === 'endereco'" [paciente]="paciente" ></dados-endereco>
-                <dados-contato *ngIf="activeSegment === 'contato'" [paciente]="paciente" ></dados-contato>
+                [objectToUpdate]="objectToUpdate" [editMode]="editMode" ></dados-pessoais>
+                <dados-medicos *ngIf="activeSegment === 'medicos' && typeObjectToUpdate === 'paciente'" [objectToUpdate]="objectToUpdate" ></dados-medicos>
+                <dados-endereco *ngIf="activeSegment === 'endereco'" [objectToUpdate]="objectToUpdate" ></dados-endereco>
+                <dados-contato *ngIf="activeSegment === 'contato'" [objectToUpdate]="objectToUpdate" ></dados-contato>
               </div>
               <div *ngIf="editMode">
                 <form-dados-pessoais *ngIf="activeSegment === 'pessoais'"
-                 [paciente]="paciente"></form-dados-pessoais>
+                 [objectToUpdate]="objectToUpdate"></form-dados-pessoais>
                  <form-dados-medicos *ngIf="activeSegment === 'medicos'"
-                    [paciente]="paciente"></form-dados-medicos>
+                    [objectToUpdate]="objectToUpdate"></form-dados-medicos>
 
                     <form-dados-endereco *ngIf="activeSegment === 'endereco'"
-                    [paciente]="paciente"></form-dados-endereco>   
+                    [objectToUpdate]="objectToUpdate"></form-dados-endereco>   
                     
                     <form-dados-contato *ngIf="activeSegment === 'contato'"
-                    [paciente]="paciente"></form-dados-contato>   
+                    [objectToUpdate]="objectToUpdate"></form-dados-contato>   
               </div>
             </div>
 </ion-content>

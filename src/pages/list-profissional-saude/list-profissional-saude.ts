@@ -80,7 +80,14 @@ export class ListProfissionalSaudePage {
      this.findAllProfissionaisSaude()
    });
    profileModal.present();
-  } 
+  }
+  openModalUpdate(profissionalSaude){    
+    let profileModal = this.modalCtrl.create('ModalPerfilPage',{objectToUpdate:profissionalSaude,typeObjectToUpdate:'profissionalSaude'});
+   profileModal.onDidDismiss(() => {
+     this.findAllProfissionaisSaude()
+   });
+   profileModal.present();
+ }  
   presentActionSheet() {
     const actionSheet = this.actionSheetCtrl.create({          
       buttons: [

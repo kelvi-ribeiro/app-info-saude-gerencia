@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ModalPerfilPacientePage } from './modal-perfil-paciente';
 import { PipeModule } from '../../pipes/pipe.module';
 import { ComponentsModule } from '../../components/components.module';
 import { EnderecoService } from '../../services/domain/endereco.service';
+import { ModalPerfilPage } from './modal-perfil';
+import { ProfissionalSaudeService } from '../../services/domain/profissional.saude.service';
+
 
 
 @NgModule({
   declarations: [
-    ModalPerfilPacientePage,
+    ModalPerfilPage,
   ],
   imports: [
-    IonicPageModule.forChild(ModalPerfilPacientePage),
+    IonicPageModule.forChild(ModalPerfilPage),
     PipeModule,  
     ComponentsModule  
   ],
   providers:[
-    EnderecoService
+    EnderecoService,
+    ProfissionalSaudeService
   ]
 })
-export class ModalPerfilPacientePageModule {}
+export class ModalPerfilPageModule {}

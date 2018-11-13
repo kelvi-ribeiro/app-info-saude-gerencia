@@ -7,7 +7,7 @@
     </ion-col>
     <ion-col col-6>
       <p class="content-informations">
-        {{paciente.pessoa.nome}}
+        {{objectToUpdate.pessoa.nome}}
       </p>
     </ion-col>
   </ion-row>
@@ -22,7 +22,7 @@
     </ion-col>
     <ion-col col-6>
       <p class="content-informations">
-        {{paciente?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
+        {{objectToUpdate?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
       </p>
     </ion-col>
   </ion-row>
@@ -37,11 +37,11 @@
     </ion-col>
     <ion-col offset-1 col-6>
       <p class="content-informations">
-        {{paciente.pessoa.sexo}}
+        {{objectToUpdate.pessoa.sexo}}
       </p>
       <img       
       class="llustration-img"
-       [src]="paciente.pessoa.sexo === 'Masculino' ? pathImages +  'man.png': pathImages +  'girl.png'">      
+       [src]="objectToUpdate.pessoa.sexo === 'Masculino' ? pathImages +  'man.png': pathImages +  'girl.png'">      
     </ion-col>
   </ion-row>
 </ion-grid>
@@ -55,7 +55,7 @@
     </ion-col>
     <ion-col offset-1 col-6>
       <p class="content-informations">
-        {{paciente.pessoa.cpf | formatCpf}}
+        {{objectToUpdate.pessoa.cpf | formatCpf}}
       </p>
     </ion-col>
   </ion-row>
@@ -70,11 +70,11 @@
     </ion-col>
     <ion-col offset-1 col-5>
       <p class="content-informations">
-        {{paciente.pessoa.naturalidade.naturalidade}}
+        {{objectToUpdate.pessoa.naturalidade.naturalidade}}
       </p>
       <img       
        class="llustration-img"
-        [src]="paciente.pessoa.naturalidade.naturalidade === 'Brasileira' ? pathImages + 'brazilian.png': pathImages + 'universal-nationality.png'">      
+        [src]="objectToUpdate.pessoa.naturalidade.naturalidade === 'Brasileira' ? pathImages + 'brazilian.png': pathImages + 'universal-nationality.png'">      
     </ion-col>
   </ion-row>
 </ion-grid>

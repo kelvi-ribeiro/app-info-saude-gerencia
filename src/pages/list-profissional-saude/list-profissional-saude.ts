@@ -43,6 +43,9 @@ export class ListProfissionalSaudePage {
     this.pageAtual = clickedPage
     this.findAllProfissionaisSaude()
     }
+    openActions(profissionalSaude){
+      profissionalSaude.actionOpened =  profissionalSaude.actionOpened ? false : true
+    }  
  
     nextPage(){
       if(this.pageAtual === this.totalPages || this.totalPages === 1) return

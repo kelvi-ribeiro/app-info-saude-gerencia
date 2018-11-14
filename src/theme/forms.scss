@@ -24,3 +24,22 @@ ion-textarea{
 .item-md{
     background-color: #fbff00;
 }
+
+.camera-button {
+    z-index: 2;
+    position: absolute;
+    left: 25%;
+    bottom: 5%;
+    margin: auto;
+}
+.profile-epic {
+    border:1px solid #000;
+    width: 65%;
+    height: 65%;
+    max-width: 65%;
+    max-width: 65%;
+}      
+.profil-epic-border {
+    position: relative;
+    background: #02243f;
+}    

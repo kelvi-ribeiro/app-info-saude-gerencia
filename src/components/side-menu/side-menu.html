@@ -6,7 +6,7 @@
                 <ion-row>
                     <ion-col col-4>
                         <div   menuClose class="user-avatar">
-                            <img  [src]="this.storageService.getUser().pessoa.urlFoto ? this.storageService.getUser().pessoa.urlFoto:'assets/imgs/avatar-blank.png'">
+                            <img  [src]="this.storageService.getUser().pessoa.urlFoto ? bucketBaseUrl + '/' + this.storageService.getUser().pessoa.urlFoto:'assets/imgs/avatar-blank.png'">
                         </div>
                     </ion-col>
                     <ion-col padding-top col-8>

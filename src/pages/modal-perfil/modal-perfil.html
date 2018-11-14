@@ -39,7 +39,14 @@
 <ion-content>    
   <ion-grid>
     <ion-col style="text-align: center;" offset-3 col-6>
-      <img class="align-horizontal img-paciente" [src]="paciente?.pessoa?.urlFoto ? bucketBaseUrl + '/' + paciente?.pessoa?.urlFoto: 'assets/imgs/avatar-blank.png'">      
+        <div (mouseenter) ="passMouseImage(true)" (mouseleave)="passMouseImage(false)"  class="profilepic-border profile-epic">
+          <button  *ngIf="showCameraIcon" (click)="getGalleryPicture()" icon-only ion-button class="camera-button">
+            <ion-icon name="camera"></ion-icon>
+          </button>
+    
+          <img  class="align-horizontal" 
+          [src]="returnPhoto()">      
+        </div>
     </ion-col>
   </ion-grid>
   <div  *ngIf="objectToUpdate.pessoa.perfis && !objectToUpdate.pessoa.perfis[0];else ativo">

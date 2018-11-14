@@ -5,6 +5,7 @@ import { StorageService } from "../storage.service";
 import { ImageUtilService } from "../image-util.service";
 import { Headers} from '@angular/http';
 import { HttpClient, HttpHeaders } from '../../../node_modules/@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -17,7 +18,8 @@ export class UsuarioService {
     public storage: StorageService,
     public imageUtilService: ImageUtilService,
     public storageService: StorageService,
-    public handlerResponseService:HandlerResponseProvider
+    public handlerResponseService:HandlerResponseProvider,
+    public sanitazer:DomSanitizer,
 
     ) {
   }
@@ -68,7 +70,7 @@ findProfissionalSaudeByPessoaCpf() {
   }
  
 
-  getImageFromBucket(urlFoto = this.storageService.getUser().pessoa.urlFoto ) {
+  getImageFromBucket(urlFoto) {
       let headers = new HttpHeaders();
       headers = headers
       .set("Cache-Control", "no-cache, no-store, must-revalidate")
@@ -78,12 +80,31 @@ findProfissionalSaudeByPessoaCpf() {
       return this.http.get(url, {headers:headers,responseType:'blob'});
   }
 
+  returnUserImage(urlFoto){
+    this.getImageFromBucket(urlFoto)
+    .subscribe(res => {
+      this.blobToDataURL(res).then(dataUrl => {
+        let str: string = dataUrl as string;
+         return this.sanitazer.bypassSecurityTrustUrl(str);
+      });
+    })
+  }
+
+  blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+      let reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = e => fulfill(reader.result);
+      reader.readAsDataURL(blob);
+    });
+  }
+
   getImageFromBucketFromUsers(urlFoto) {
     let url = `${API_CONFIG.bucketBaseUrl}/${urlFoto}`
     return this.http.get(url, { responseType: 'blob' });
   }
 
-  uploadPicture(picture) {
+  uploadPicture(picture,idPessoa) {
     return this.storage.getUserCredentials()
     .then(userCredentials =>{
       if(!userCredentials){
@@ -96,12 +117,13 @@ findProfissionalSaudeByPessoaCpf() {
     formData.set('file', pictureBlob, 'file.png');
     return this.handlerResponseService.handlerResponseFoto(
       "post",
-      `${API_CONFIG.baseUrl}/pessoas/picture`,
+      `${API_CONFIG.baseUrl}/pessoas/picture?idPessoa=${idPessoa}`,
       formData,
       headers
     );
     });
   }
+  
   alterarSenha(objNovaSenha) {
     let headers = new Headers();
     return this.storage.getUserCredentials()
@@ -117,8 +139,6 @@ findProfissionalSaudeByPessoaCpf() {
         headers
       );
     });
-
-
   }
 
   esqueceuSenha(objNovaSenha) {

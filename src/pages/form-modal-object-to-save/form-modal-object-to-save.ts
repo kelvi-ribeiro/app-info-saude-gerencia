@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { PacienteService } from '../../services/domain/paciente.service';
@@ -12,6 +12,7 @@ import { PacienteLinhaCuidadoService } from '../../services/domain/paciente.linh
 import { PessoaService } from '../../services/domain/pessoa.service';
 import { TelefoneService } from '../../services/domain/telefone.service';
 import { ProfissionalSaudeService } from '../../services/domain/profissional.saude.service';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -31,6 +32,11 @@ export class FormModalObjectToSavePage {
   pacienteLinhasCuidado = [];
   cidades: any;
   telefones = []
+  picture: string;
+  @ViewChild('inputcamera') cameraInput: ElementRef;
+
+  @ViewChild('imgresult') imgResult: ElementRef;
+  showCameraIcon: boolean;
   constructor(public viewCtrl: ViewController, 
               public navParams: NavParams,
               public usuarioService:UsuarioService,
@@ -45,7 +51,8 @@ export class FormModalObjectToSavePage {
               private alertCtrl:AlertController,
               private pessoaService:PessoaService,
               private telefoneService:TelefoneService,
-              private profissionalSaudeService:ProfissionalSaudeService
+              private profissionalSaudeService:ProfissionalSaudeService,
+              private camera: Camera,              
 
               )
                {  this.fillObject()
@@ -80,7 +87,7 @@ export class FormModalObjectToSavePage {
     if(this.typeObjectToSave!= 'paciente'){
       delete this.objectToSave.tipoSanguineo;
     }
-  }
+  }  
 
   iniciarFormGroup(): any {
     setTimeout(() => {
@@ -360,6 +367,33 @@ verificaExistePessoaComEmail(){
       
     })
   }
+  getGalleryPicture() {    
+    const options: CameraOptions = {
+      quality: 65,
+      targetWidth: 720,
+      targetHeight: 720,      
+      correctOrientation:true,
+      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }    
+
+    this.camera.getPicture(options).then((imageData) => {
+
+     this.picture = 'data:image/png;base64,' + imageData;
+    }, (err) => {
+    });
+  }
+  sendPicture(idPessoa) {
+    if(this.picture){
+      this.usuarioService.uploadPicture(this.picture,idPessoa)   
+       .catch(()=>{
+        this.notificacoesService
+        .presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error',3000,'middle');     
+       });
+    }
+  }
   createPaciente(){
     this.pacienteService.insert(this.objectToSave)
       .then(paciente =>{      
@@ -367,7 +401,8 @@ verificaExistePessoaComEmail(){
           const pacienteLinhaCuidado = {
             linhaCuidadoId:element.linhaCuidadoId,
             pacienteId:paciente.id
-          }        
+          }
+          this.sendPicture(paciente.pessoa.id)        
           this.pacienteLinhaCuidadoService.insertByPacienteIdAndLinhaCuidadoId(pacienteLinhaCuidado)
           });
           this.telefones.forEach(element => {
@@ -408,5 +443,11 @@ verificaExistePessoaComEmail(){
     }else if(this.typeObjectToSave === 'profissionalSaude'){
       return 'Profissional de saúde'
     }
-  }    
+  }  
+  passMouseImage(show){
+    this.showCameraIcon = show
+ }
+ removePhoto(){
+   this.picture = null;
+  }
 }

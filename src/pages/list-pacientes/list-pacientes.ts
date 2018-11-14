@@ -36,7 +36,7 @@ export class ListPacientesPage {
     private modalCtrl:ModalController,
     private actionSheetCtrl:ActionSheetController,
     private storageService:StorageService,
-    private events:Events
+    private events:Events,
     ) {
   }
 
@@ -220,15 +220,16 @@ export class ListPacientesPage {
   }
   openModalUpdate(paciente){    
     let profileModal = this.modalCtrl.create('ModalPerfilPage',{objectToUpdate:paciente,typeObjectToUpdate:'paciente'});
-   profileModal.onDidDismiss(data => {
+   profileModal.onDidDismiss(() => {
      this.findPacientes()
+     profileModal = null;
    });
    profileModal.present();
  } 
 
  openModalCreate(){    
   let profileModal = this.modalCtrl.create('FormModalObjectToSavePage',{typeObjectToSave:'paciente'});
- profileModal.onDidDismiss(data => {
+ profileModal.onDidDismiss(() => {
    
  });
  profileModal.present();
@@ -236,8 +237,8 @@ export class ListPacientesPage {
 openModalCreateMessage(recipientObject,recipient){    
   let profileModal = this.modalCtrl.create('ModalFormMensagemPage',
   {recipientObject:recipientObject,recipient:recipient});
- profileModal.onDidDismiss(data => {
-   
+ profileModal.onDidDismiss(() => {
+  
  });
  profileModal.present();
 } 

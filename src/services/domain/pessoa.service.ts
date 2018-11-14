@@ -4,6 +4,7 @@ import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
 import { Headers} from '@angular/http';
 import { HttpClient } from '../../../node_modules/@angular/common/http';
+import { ImageUtilService } from '../image-util.service';
 
 
 
@@ -14,7 +15,8 @@ export class PessoaService {
   constructor(
     public http: HttpClient,
     public storage: StorageService,      
-    public handlerResponseService:HandlerResponseProvider
+    public handlerResponseService:HandlerResponseProvider,
+    public imageUtilService: ImageUtilService,
 
     ) {
   }
@@ -33,6 +35,26 @@ export class PessoaService {
         null,
         headers
       );
+    });
+  }
+
+  uploadPicture(picture,idPessoa) {
+    return this.storage.getUserCredentials()
+    .then(userCredentials =>{
+      if(!userCredentials){
+        return;
+      }
+    let headers = new Headers();
+    headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+    let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
+    let formData: FormData = new FormData();
+    formData.set('file', pictureBlob, 'file.png');
+    return this.handlerResponseService.handlerResponseFoto(
+      "post",
+      `${API_CONFIG.baseUrl}/pessoas/picture?idPessoa=${idPessoa}`,
+      formData,
+      headers
+    );
     });
   }
 

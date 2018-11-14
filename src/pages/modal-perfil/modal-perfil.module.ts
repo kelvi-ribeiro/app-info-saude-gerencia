@@ -5,6 +5,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { EnderecoService } from '../../services/domain/endereco.service';
 import { ModalPerfilPage } from './modal-perfil';
 import { ProfissionalSaudeService } from '../../services/domain/profissional.saude.service';
+import { Camera } from '@ionic-native/camera';
 
 
 
@@ -19,7 +20,8 @@ import { ProfissionalSaudeService } from '../../services/domain/profissional.sau
   ],
   providers:[
     EnderecoService,
-    ProfissionalSaudeService
+    ProfissionalSaudeService,
+    Camera
   ]
 })
 export class ModalPerfilPageModule {}

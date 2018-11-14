@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StorageService } from '../../services/storage.service';
 import { LoginPage } from '../../pages/login/login';
+import { API_CONFIG } from '../../config/api.config';
 
 /**
  * Generated class for the SideMenuComponent component.
@@ -15,7 +16,8 @@ import { LoginPage } from '../../pages/login/login';
 export class SideMenuComponent {  
     
   @Input() content
-  @Input() nav  
+  @Input() nav 
+  bucketBaseUrl = API_CONFIG.bucketBaseUrl; 
   constructor(    
     public storageService:StorageService) {
         

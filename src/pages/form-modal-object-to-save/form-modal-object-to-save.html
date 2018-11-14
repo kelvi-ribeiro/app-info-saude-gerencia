@@ -39,7 +39,18 @@
 <ion-content>    
 <ion-grid>
   <ion-col style="text-align: center;" offset-3 col-6>
-    <img class="align-horizontal img-paciente" src="assets/imgs/avatar-blank.png">      
+    <div (mouseenter) ="passMouseImage(true)" (mouseleave)="passMouseImage(false)"  class="profilepic-border profile-epic">
+        <button (click)="removePhoto()" *ngIf="showCameraIcon && picture"  icon-only ion-button class="camera-button">
+            <ion-icon color="danger" name="close"></ion-icon>
+          </button>
+    
+      <button  *ngIf="showCameraIcon && !picture" (click)="getGalleryPicture()" icon-only ion-button class="camera-button">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+
+      <img  class="align-horizontal" 
+      [src]="picture ? picture:'assets/imgs/avatar-blank.png'">      
+    </div>
   </ion-col>
 </ion-grid>
           <div class="content">       

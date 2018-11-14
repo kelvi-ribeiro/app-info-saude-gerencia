@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
 import { ProfissionalSaudeService } from '../../services/domain/profissional.saude.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
+import { API_CONFIG } from '../../config/api.config';
 
 
 @IonicPage()
@@ -16,6 +17,7 @@ export class ListProfissionalSaudePage {
   pageAtual = 0;
   totalPages: any;
   pages: number[];
+  bucketBaseUrl = API_CONFIG.bucketBaseUrl;
 
   constructor(
               public navCtrl: NavController,
@@ -77,14 +79,14 @@ export class ListProfissionalSaudePage {
   openModalCreate(){    
     let profileModal = this.modalCtrl.create('FormModalObjectToSavePage',{typeObjectToSave:'profissionalSaude'});
    profileModal.onDidDismiss(() => {
-     this.findAllProfissionaisSaude()
+     this.findAllProfissionaisSaude()     
    });
    profileModal.present();
   }
   openModalUpdate(profissionalSaude){    
     let profileModal = this.modalCtrl.create('ModalPerfilPage',{objectToUpdate:profissionalSaude,typeObjectToUpdate:'profissionalSaude'});
    profileModal.onDidDismiss(() => {
-     this.findAllProfissionaisSaude()
+    this.findAllProfissionaisSaude()    
    });
    profileModal.present();
  }  
@@ -107,5 +109,4 @@ export class ListProfissionalSaudePage {
     }); 
     actionSheet.present();
   }
-
 }

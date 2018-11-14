@@ -24,7 +24,7 @@ export class ProfissionalSaudeService {
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "get",
-        `${API_CONFIG.baseUrl}/profissionais-saude/page?nome=${nome ? nome: ''}&page=${page ? page : ''}`,
+        `${API_CONFIG.baseUrl}/profissionais-saude/page?nomePessoa=${nome ? nome: ''}&page=${page ? page : ''}`,
         null,
         headers
       );

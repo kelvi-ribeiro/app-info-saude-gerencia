@@ -25,7 +25,9 @@ export class MyApp {
   }
 
   setUserOnline(){
-    this.pessoaService.setUserOnline(this.storageService.getUser().pessoa.id);
+    if(this.storageService.getUser()){
+      this.pessoaService.setUserOnline(this.storageService.getUser().pessoa.id);      
+    }
     setTimeout(() => {
       if(this.storageService.getUser()){
         this.setUserOnline()

@@ -5,7 +5,7 @@
             <ion-grid>
                 <ion-row>
                     <ion-col col-4>
-                        <div   menuClose class="user-avatar">
+                        <div (click)="openModalUpdate()"    menuClose class="user-avatar">
                             <img  [src]="this.storageService.getUser().pessoa.urlFoto ? bucketBaseUrl + '/' + this.storageService.getUser().pessoa.urlFoto:'assets/imgs/avatar-blank.png'">
                         </div>
                     </ion-col>

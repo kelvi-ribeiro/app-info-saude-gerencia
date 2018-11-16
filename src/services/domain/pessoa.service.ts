@@ -38,6 +38,24 @@ export class PessoaService {
     });
   }
 
+  setUserOnline(pessoaId){    
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "put",
+        `${API_CONFIG.baseUrl}/pessoas/setUserOnline?pessoaId=${pessoaId}`,
+        null,
+        headers
+      );
+    })
+  
+  }
+
   uploadPicture(picture,idPessoa) {
     return this.storage.getUserCredentials()
     .then(userCredentials =>{

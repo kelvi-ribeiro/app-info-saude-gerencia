@@ -1,6 +1,6 @@
-<ion-header>  
-  <ion-segment  [(ngModel)]="activeSegment" color="secondary">
-    <ion-segment-button disabled  value="pessoais">
+<ion-header>
+  <ion-segment [(ngModel)]="activeSegment" color="secondary">
+    <ion-segment-button disabled value="pessoais">
       <span>
         Dados Pessoais
       </span>
@@ -29,312 +29,274 @@
     </ion-segment-button>
   </ion-segment>
   <ion-buttons start>
-    <button class="btn-close-mdal"  (click)="closeModal()"  ion-button icon-only>
+    <button class="btn-close-mdal" (click)="closeModal()" ion-button icon-only>
       <ion-icon color="danger" name="close"></ion-icon>
     </button>
-  </ion-buttons >
-  
+  </ion-buttons>
+
 </ion-header>
 
-<ion-content>    
-<ion-grid>
-  <ion-col style="text-align: center;" offset-3 col-6>
-    <div (mouseenter) ="passMouseImage(true)" (mouseleave)="passMouseImage(false)"  class="profilepic-border profile-epic">
-        <button (click)="removePhoto()" *ngIf="showCameraIcon && picture"  icon-only ion-button class="camera-button">
-            <ion-icon color="danger" name="close"></ion-icon>
-          </button>
-    
-      <button  *ngIf="showCameraIcon && !picture" (click)="getGalleryPicture()" icon-only ion-button class="camera-button">
-        <ion-icon name="camera"></ion-icon>
-      </button>
+<ion-content>
 
-      <img  class="align-horizontal" 
-      [src]="picture ? picture:'assets/imgs/avatar-blank.png'">      
-    </div>
-  </ion-col>
-</ion-grid>
-          <div class="content">       
-            
-            <form *ngIf="formGroup && activeSegment=== 'pessoais'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomrDadosPesoais()">
-              <div class="dados-pessoais">
-                <ion-grid>
-                  <ion-row>       
-                    <ion-col  offset-4 col-6>
-                      <button   ion-button color="secondary">Avançar</button>
-                    </ion-col>                
-                  </ion-row>
-                </ion-grid>
-                
-                <ion-grid>
-                  <ion-row>
-                    <ion-col col-5>
-                      <span class="label-informations">
-                        Nome
-                      </span>
-                    </ion-col>
-                    <ion-col col-6>
-                      <ion-input type="text" 
-                      formControlName="nome"  maxLength="50" 
-                      (ionChange)="onChange('nome',$event.value)"></ion-input>      
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-                
-                <ion-grid>
-                  <ion-row>
-              <ion-col col-5>
-                <span class="label-informations">
-                  Data de Nascimento
-                </span>
-              </ion-col>
-              <ion-col col-6>
-                <ion-input type="date"
-                formControlName="dataNascimento"
-                (ionBlur)="onChange('dataNascimento',$event.value)"></ion-input>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          
-          <ion-grid>
-            <ion-row>
-              <ion-col col-4>
-                <span class="label-informations">
-                  Sexo
-                </span>
-              </ion-col>
-              <ion-col offset-1  col-5>
-                <ion-item>
-                  <ion-label>Selecione um Gênero</ion-label>
-                  <ion-select formControlName="sexo"  (ionChange)="onChange('sexo',$event)" >
-                    <ion-option 
-                     >Masculino</ion-option>
-                    <ion-option value="Feminino" 
-                     >Feminino</ion-option>
-                  </ion-select>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-grid> 
-          
-          <ion-grid>
-            <ion-row>
-              <ion-col col-4>
-                <span class="label-informations">
-                  CPF
-                </span>
-              </ion-col>
-              <ion-col offset-1 col-6>
-                <ion-input type="text"
-                maxLength="11"
-                 (ionChange)="onChange('cpf',$event.value)"
-                 formControlName="cpf"></ion-input>
-                </ion-col>
-            </ion-row>
-          </ion-grid>
-          
-          <ion-grid>
-            <ion-row>
-              <ion-col col-4>
-                <span class="label-informations">
-                  Naturalidade
-                </span>
-              </ion-col>
-              <ion-col offset-1 col-5>
-                <ion-item>
-                  <ion-label>Selecione uma naturalidade</ion-label>
-                  <ion-select formControlName="naturalidade" 
-                  (ionChange)="onChange('naturalidade',$event)" >
-                  <ion-option                    
-                  [value]="naturalidade.id"
-                  *ngFor="let naturalidade of naturalidades;">{{naturalidade.naturalidade}}</ion-option>
-                </ion-select>
-              </ion-item>
+  <ion-grid>
+    <ion-col style="text-align: center;" offset-4 col-6>
+      <div (mouseenter)="passMouseImage(true)" (mouseleave)="passMouseImage(false)" class="profilepic-border profile-epic">
+        <button *ngIf="showCameraIcon" (click)="getGalleryPicture()" icon-only ion-button class="camera-button">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+        <img class="align-horizontal" [src]="picture ? picture:'assets/imgs/avatar-blank.png'">
+      </div>
+    </ion-col>
+  </ion-grid>
+  <div class="content">
+
+    <form *ngIf="formGroup && activeSegment=== 'pessoais'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomrDadosPesoais()">
+      <div class="dados-pessoais">
+        <ion-grid>
+          <ion-row>
+            <ion-col offset-4 col-6>
+              <button ion-button color="secondary">Avançar</button>
             </ion-col>
           </ion-row>
-        </ion-grid> 
-      </div>
-      </form>
+        </ion-grid>
 
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <span class="label-informations">
+                Nome
+              </span>
+            </ion-col>
+            <ion-col col-6>
+              <ion-input type="text" formControlName="nome" maxLength="50" (ionChange)="onChange('nome',$event.value)"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <span class="label-informations">
+                Data de Nascimento
+              </span>
+            </ion-col>
+            <ion-col col-6>
+              <ion-input type="date" formControlName="dataNascimento" (ionBlur)="onChange('dataNascimento',$event.value)"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-
-
-
-      <form *ngIf="formGroup && activeSegment=== 'medicos'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomDadosMedicos()">
-          <ion-grid>
-              <ion-row>       
-                <ion-col  offset-4 col-6>
-                    <button  ion-button color="secondary">Avançar</button>
-                  </ion-col>                
-              </ion-row>
-            </ion-grid>
-         
-            <ion-grid *ngFor="let pacienteLinhaCuidado of pacienteLinhasCuidado;let i =  index">
-                <ion-row>
-                  <ion-col col-4>
-                    <span class="label-informations">
-                      Linha de Cuidado {{i + 1}}
-                    </span>
-                  </ion-col>   
-                  <ion-col offset-1  col-4>
-                    <ion-item>                      
-                      <ion-select >
-                        <div *ngFor="let linhaCuidado of linhasCuidado;">
-                          <ion-option  
-                          disabled                           
-                           [value]="linhaCuidado.id" 
-                          [selected]="pacienteLinhaCuidado.linhaCuidadoId === linhaCuidado.id"
-                          >{{linhaCuidado.nome}}</ion-option>
-                        </div>
-                      </ion-select>
-              
-                    </ion-item>
-                  </ion-col>
-                    <ion-col offset-1 col-2>
-                      <button type="button" *ngIf="pacienteLinhasCuidado.length !== 1" (click)="pacienteLinhasCuidado.splice(index,1)"
-                       ion-button icon-only>
-                          <ion-icon  color="danger" ios="ios-remove" md="md-remove"></ion-icon>
-                      </button>
-              
-                    </ion-col>
-                </ion-row>
-              </ion-grid> 
         <ion-grid>
           <ion-row>
             <ion-col col-4>
               <span class="label-informations">
-                Tipo Sanguineo
+                Sexo
               </span>
             </ion-col>
-            <ion-col offset-1 col-4>   
-                <ion-item>
-                    <ion-label>Selecione um tipo sanguineo</ion-label>
-                    <ion-select formControlName="tipoSanguineo" (ionChange)="onChange('tipoSanguineo',$event)">
-                      <ion-option  
-                      *ngFor="let tipoSanguineo of tiposSanguineo;"
-                       [value]="tipoSanguineo.id"                       
-                      >{{tipoSanguineo.tipoSanguineo}}</ion-option>
-                    </ion-select>            
-                  </ion-item>     
+            <ion-col offset-1 col-5>
+              <ion-item>
+                <ion-label>Selecione um Gênero</ion-label>
+                <ion-select formControlName="sexo" (ionChange)="onChange('sexo',$event)">
+                  <ion-option>Masculino</ion-option>
+                  <ion-option value="Feminino">Feminino</ion-option>
+                </ion-select>
+              </ion-item>
             </ion-col>
           </ion-row>
         </ion-grid>
-        
-          <ion-grid>
-            <ion-col offset-3 col-8>
-              <button type="button" (click)="alertEscolhaNovaLinhaCuidado()"ion-button >Adicionar Nova Linha de cuidado</button>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <span class="label-informations">
+                CPF
+              </span>
             </ion-col>
-          </ion-grid>
-        
-  </form>
+            <ion-col offset-1 col-6>
+              <ion-input type="text" maxLength="11" (ionChange)="onChange('cpf',$event.value)" formControlName="cpf"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <span class="label-informations">
+                Naturalidade
+              </span>
+            </ion-col>
+            <ion-col offset-1 col-5>
+              <ion-item>
+                <ion-label>Selecione uma naturalidade</ion-label>
+                <ion-select formControlName="naturalidade" (ionChange)="onChange('naturalidade',$event)">
+                  <ion-option [value]="naturalidade.id" *ngFor="let naturalidade of naturalidades;">{{naturalidade.naturalidade}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </form>
 
 
-  <form *ngIf="formGroup && activeSegment === 'endereco'"
-   [formGroup]="formGroup" (ngSubmit)="verificaErrosFomDadosEndereco()">
+
+
+
+
+    <form *ngIf="formGroup && activeSegment=== 'medicos'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomDadosMedicos()">
       <ion-grid>
-        <ion-row>       
-          <ion-col  offset-4 col-6>
-              <button  ion-button color="secondary">Avançar</button>
-            </ion-col>                
+        <ion-row>
+          <ion-col offset-4 col-6>
+            <button ion-button color="secondary">Avançar</button>
+          </ion-col>
         </ion-row>
       </ion-grid>
-  
-      
-      <ion-grid>
-    <ion-row>
-      <ion-col col-4>
-        <span class="label-informations">
-          Cidade
-        </span>
-      </ion-col>
-      <ion-col offset-1 col-5>
-        <ion-item>
-          <ion-label>Selecione uma cidade</ion-label>
-          <ion-select (ionChange)="onChangeEndereco('cidade',$event)"
-          formControlName="cidade" >
-            <ion-option 
-            [value]="cidade.id"         
-            *ngFor="let cidade of cidades;">{{cidade.nome}}</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  
-  <ion-grid>
-    <ion-row>
-      <ion-col col-4>
-        <span class="label-informations">
-          Bairro
-        </span>
-      </ion-col>
-      <ion-col offset-1 col-6>
-        
-        <ion-input type="text" 
-        maxLength="50"
-        formControlName="bairro"
-        (ionChange)="onChangeEndereco('bairro',$event.value)"></ion-input>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  
-  <ion-grid>
-    <ion-row>
-      <ion-col col-4>
-        <span class="label-informations">
-          Rua
-        </span>
-      </ion-col>
-      <ion-col offset-1 col-6>
-        <ion-input type="text" 
-        formControlName="rua"
-        (ionChange)="onChangeEndereco('rua',$event.value)"></ion-input>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  
-  
-  <ion-grid>
-    <ion-row>
-      <ion-col col-4>
-        <span class="label-informations">
-          Número
-        </span>
-      </ion-col>
-      <ion-col offset-1 col-6>
-        <ion-input type="number"      
-        formControlName="numero"
-        (ionChange)="onChangeEndereco('numero',$event.value)"></ion-input>
-      </ion-col>
-  </ion-row>
-  </ion-grid>
-  <ion-grid>
-      <ion-row>
-      <ion-col col-4>
-        <span class="label-informations">
-          CEP
-        </span>
-      </ion-col>
-      <ion-col offset-1 col-6>
-        <ion-input type="text" 
-        maxLength="8"
-        formControlName="cep"
-         (ionChange)="onChangeEndereco('cep',$event.value)"></ion-input>
-      </ion-col>
-      </ion-row>
-      </ion-grid>
-  </form>
 
-  <form   *ngIf="formGroup && activeSegment === 'contato'" [formGroup]="formGroup" (ngSubmit)="createObjectToSave()">
-      <ion-grid>
-        <ion-row>       
-          <ion-col  offset-4 col-6>
-              <button color="primary"  ion-button color="secondary">Criar {{returnTypeObjectToSave()}}</button>
-            </ion-col>                
+      <ion-grid *ngFor="let pacienteLinhaCuidado of pacienteLinhasCuidado;let i =  index">
+        <ion-row>
+          <ion-col col-4>
+            <span class="label-informations">
+              Linha de Cuidado {{i + 1}}
+            </span>
+          </ion-col>
+          <ion-col offset-1 col-4>
+            <ion-item>
+              <ion-select>
+                <div *ngFor="let linhaCuidado of linhasCuidado;">
+                  <ion-option disabled [value]="linhaCuidado.id" [selected]="pacienteLinhaCuidado.linhaCuidadoId === linhaCuidado.id">{{linhaCuidado.nome}}</ion-option>
+                </div>
+              </ion-select>
+
+            </ion-item>
+          </ion-col>
+          <ion-col offset-1 col-2>
+            <button type="button" *ngIf="pacienteLinhasCuidado.length !== 1" (click)="pacienteLinhasCuidado.splice(index,1)"
+              ion-button icon-only>
+              <ion-icon color="danger" ios="ios-remove" md="md-remove"></ion-icon>
+            </button>
+
+          </ion-col>
         </ion-row>
       </ion-grid>
-    
-    <ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <span class="label-informations">
+              Tipo Sanguineo
+            </span>
+          </ion-col>
+          <ion-col offset-1 col-4>
+            <ion-item>
+              <ion-label>Selecione um tipo sanguineo</ion-label>
+              <ion-select formControlName="tipoSanguineo" (ionChange)="onChange('tipoSanguineo',$event)">
+                <ion-option *ngFor="let tipoSanguineo of tiposSanguineo;" [value]="tipoSanguineo.id">{{tipoSanguineo.tipoSanguineo}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-col offset-3 col-8>
+          <button type="button" (click)="alertEscolhaNovaLinhaCuidado()" ion-button>Adicionar Nova Linha de cuidado</button>
+        </ion-col>
+      </ion-grid>
+
+    </form>
+
+
+    <form *ngIf="formGroup && activeSegment === 'endereco'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomDadosEndereco()">
+      <ion-grid>
+        <ion-row>
+          <ion-col offset-4 col-6>
+            <button ion-button color="secondary">Avançar</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <span class="label-informations">
+              Cidade
+            </span>
+          </ion-col>
+          <ion-col offset-1 col-5>
+            <ion-item>
+              <ion-label>Selecione uma cidade</ion-label>
+              <ion-select (ionChange)="onChangeEndereco('cidade',$event)" formControlName="cidade">
+                <ion-option [value]="cidade.id" *ngFor="let cidade of cidades;">{{cidade.nome}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <span class="label-informations">
+              Bairro
+            </span>
+          </ion-col>
+          <ion-col offset-1 col-6>
+
+            <ion-input type="text" maxLength="50" formControlName="bairro" (ionChange)="onChangeEndereco('bairro',$event.value)"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <span class="label-informations">
+              Rua
+            </span>
+          </ion-col>
+          <ion-col offset-1 col-6>
+            <ion-input type="text" formControlName="rua" (ionChange)="onChangeEndereco('rua',$event.value)"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <span class="label-informations">
+              Número
+            </span>
+          </ion-col>
+          <ion-col offset-1 col-6>
+            <ion-input type="number" formControlName="numero" (ionChange)="onChangeEndereco('numero',$event.value)"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <span class="label-informations">
+              CEP
+            </span>
+          </ion-col>
+          <ion-col offset-1 col-6>
+            <ion-input type="text" maxLength="8" formControlName="cep" (ionChange)="onChangeEndereco('cep',$event.value)"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+
+    <form *ngIf="formGroup && activeSegment === 'contato'" [formGroup]="formGroup" (ngSubmit)="createObjectToSave()">
+      <ion-grid>
+        <ion-row>
+          <ion-col offset-4 col-6>
+            <button color="primary" ion-button color="secondary">Criar {{returnTypeObjectToSave()}}</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid>
         <ion-row>
           <ion-col col-4>
             <span class="label-informations">
@@ -342,41 +304,34 @@
             </span>
           </ion-col>
           <ion-col offset-1 col-6>
-              <ion-input 
-              type="email" 
-              maxLength="50"
-              formControlName="email"
-               (ionChange)="onChange('email',$event.value)"></ion-input>
-            </ion-col>
+            <ion-input type="email" maxLength="50" formControlName="email" (ionChange)="onChange('email',$event.value)"></ion-input>
+          </ion-col>
         </ion-row>
       </ion-grid>
-      
+
       <ion-grid *ngFor="let telefone of telefones;let i = index">
         <ion-row>
-            <ion-col col-4>
-                <span class="label-informations">
-                    Telefone {{i + 1}}                 
-                  </span>             
-            </ion-col>
-            <ion-col offset-1 col-5>         
-                      <ion-input type="text" 
-                      [value]="telefone.numero"
-                      (ionBlur)="onChange('numero',$event.value)"></ion-input>          
-                    </ion-col>            
-                      <ion-col  col-2>
-                        <button type="button"  (click)="telefones.splice(index,1)"
-                        ion-button icon-only>
-                        <ion-icon  color="danger" ios="ios-remove" md="md-remove"></ion-icon>
-                      </button>
-                      </ion-col>        
+          <ion-col col-4>
+            <span class="label-informations">
+              Telefone {{i + 1}}
+            </span>
+          </ion-col>
+          <ion-col offset-1 col-5>
+            <ion-input type="text" [value]="telefone.numero" (ionBlur)="onChange('numero',$event.value)"></ion-input>
+          </ion-col>
+          <ion-col col-2>
+            <button type="button" (click)="telefones.splice(index,1)" ion-button icon-only>
+              <ion-icon color="danger" ios="ios-remove" md="md-remove"></ion-icon>
+            </button>
+          </ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid>
         <ion-col offset-3 col-8>
-          <button type="button" (click)="presentPromptAdicionarTelefone()"ion-button >Adicionar Telefone</button>
+          <button type="button" (click)="presentPromptAdicionarTelefone()" ion-button>Adicionar Telefone</button>
         </ion-col>
       </ion-grid>
-      </form>
+    </form>
 
-    </div>
-  </ion-content>
+  </div>
+</ion-content>

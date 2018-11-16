@@ -6,6 +6,7 @@ import { LocalUser } from "../models/local_user";
 import { StorageService } from "./storage.service";
 import { JwtHelper } from 'angular2-jwt';
 import { CreadenciaisDTO } from "../models/credenciais.dto";
+import { Events } from 'ionic-angular';
 
 @Injectable()
 export class AuthService {
@@ -14,10 +15,14 @@ export class AuthService {
 
     constructor(public http: HttpClient,
                 public storage: StorageService,
-                public usuarioService:UsuarioService                
+                public usuarioService:UsuarioService,
+                public events:Events                
 
                 ) {
-    }
+        this.events.subscribe('refresh:usuario',() => {
+          this.obterDadosPerfil()
+        })
+      }
 
     authenticate(creds : CreadenciaisDTO) {
         return this.http.post(
@@ -53,7 +58,7 @@ export class AuthService {
         this.storage.limparStorage();
 
     }
-    obterDadosPerfil(){
+    obterDadosPerfil(){        
        return this.usuarioService.findProfissionalSaudeByPessoaCpf().then(res=>{        
         this.setUser(res);
       }).catch(()=>{                
@@ -66,6 +71,7 @@ export class AuthService {
       user = {
         id:res['id'],
           pessoa:{
+            id:pessoa.id,
             nome:pessoa.nome,
             cpf:pessoa.cpf,
             dataInclusao:pessoa.dataInclusao,
@@ -74,6 +80,7 @@ export class AuthService {
             rg:pessoa.rg,
             sexo:pessoa.sexo,
             urlFoto:pessoa.urlFoto,
+            dataNascimento:pessoa.dataNascimento,
             endereco:{
               id:pessoa.endereco.id,
               numero:pessoa.endereco.numero,

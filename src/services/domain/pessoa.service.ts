@@ -52,9 +52,45 @@ export class PessoaService {
         null,
         headers
       );
+    })  
+  }
+
+  deletePerfil(pessoaId,idPerfil){    
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "delete",
+        `${API_CONFIG.baseUrl}/pessoas/delete-perfil/${pessoaId}/${idPerfil}`,
+        null,
+        headers
+      );
     })
   
   }
+
+  addPerfil(pessoaId,idPerfil){    
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "post",
+        `${API_CONFIG.baseUrl}/pessoas/add-perfil/${pessoaId}/${idPerfil}`,
+        null,
+        headers
+      );
+    })
+  
+  }
+
 
   uploadPicture(picture,idPessoa) {
     return this.storage.getUserCredentials()

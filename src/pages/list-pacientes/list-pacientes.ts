@@ -1,5 +1,5 @@
 import { Component, ViewChild, HostListener } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, ModalController, ActionSheetController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, ModalController, ActionSheetController, Events, AlertController } from 'ionic-angular';
 import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { LinhaCuidadoService } from '../../services/domain/linha.cuidado.service';
@@ -7,6 +7,7 @@ import { API_CONFIG } from '../../config/api.config';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { StorageService } from '../../services/storage.service';
 import { LoginPage } from '../login/login';
+import { PessoaService } from '../../services/domain/pessoa.service';
 
 
 @IonicPage()
@@ -37,6 +38,8 @@ export class ListPacientesPage {
     private actionSheetCtrl:ActionSheetController,
     private storageService:StorageService,
     private events:Events,
+    private pessoaService:PessoaService,
+    private alertCtrl:AlertController
     ) {
   }
 
@@ -241,6 +244,39 @@ openModalCreateMessage(recipientObject,recipient){
   
  });
  profileModal.present();
-} 
-  
+  }
+  alertControlePerfil(pessoaId,acao){
+  let alert = this.alertCtrl.create({
+    title:'Alerta',
+    message:`Deseja mesmo ${acao} esse paciente ? ${acao === 'inativar' ? 'Esta ação irá impossibilitar o login do paciente no aplicativo':''}`,
+    buttons: [
+      {
+        text: 'Sim',            
+        handler: () => {
+          if(acao === 'ativar'){
+            this.pessoaService.addPerfil(pessoaId,2)
+            .then(() => {                
+             this.findPacientes()                              
+             this.notificacoesService.presentToast('Paciente Inativado' ,null,2000,'top')
+            }).catch(()=>{              
+              this.notificacoesService.presentAlertErro();
+            })  
+          }
+          this.pessoaService.deletePerfil(pessoaId,2)
+          .then(() => {                
+           this.findPacientes()                            
+           this.notificacoesService.presentToast('Paciente Ativado',null,2000,'top')
+          }).catch(()=>{            
+            this.notificacoesService.presentAlertErro();
+          })
+        }
+      },
+      {
+        text: 'Não',             
+      },
+   
+       ]
+  });
+  alert.present()
+}    
 }

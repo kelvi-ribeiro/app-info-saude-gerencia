@@ -117,7 +117,11 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li><a (click)="openModalUpdate(paciente)">Visualizar Paciente / Editar Paciente</a></li>
-                      <li><a (click)="openModalCreateMessage(paciente,'paciente')" >Enviar Mensagem</a></li>                      
+                      <li><a (click)="openModalCreateMessage(paciente,'paciente')" >Enviar Mensagem</a></li>                                            
+                      <li *ngIf="paciente.pessoa.perfis.length > 0; else semPerfil"><a (click)="alertControlePerfil(paciente.pessoa.id,'inativar')" >Inativar Paciente</a></li>                      
+                      <ng-template #semPerfil> 
+                        <li><a (click)="alertControlePerfil(paciente.pessoa.id,'ativar')" >Ativar Paciente</a></li>                     
+                      </ng-template>
                     </ul>
                   </div>
                 </td>

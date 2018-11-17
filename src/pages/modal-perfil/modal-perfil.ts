@@ -15,10 +15,8 @@ import { ProfissionalSaudeService } from '../../services/domain/profissional.sau
 })
 export class ModalPerfilPage {
 
-
-  @ViewChild('fileUpload') fileUpload: ElementRef;
+  @ViewChild('fileUpload') fileUpload: ElementRef; 
   
-
   objectToUpdate = this.navParams.get('objectToUpdate');
   typeObjectToUpdate = this.navParams.get('typeObjectToUpdate'); 
   bucketBaseUrl = API_CONFIG.bucketBaseUrl;

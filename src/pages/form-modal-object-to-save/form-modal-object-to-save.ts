@@ -12,7 +12,7 @@ import { PacienteLinhaCuidadoService } from '../../services/domain/paciente.linh
 import { PessoaService } from '../../services/domain/pessoa.service';
 import { TelefoneService } from '../../services/domain/telefone.service';
 import { ProfissionalSaudeService } from '../../services/domain/profissional.saude.service';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+
 
 @IonicPage()
 @Component({
@@ -33,9 +33,7 @@ export class FormModalObjectToSavePage {
   cidades: any;
   telefones = []
   picture: string;
-  @ViewChild('inputcamera') cameraInput: ElementRef;
-
-  @ViewChild('imgresult') imgResult: ElementRef;
+  @ViewChild('fileUpload') fileUpload: ElementRef;
   showCameraIcon: boolean;
   constructor(public viewCtrl: ViewController, 
               public navParams: NavParams,
@@ -51,8 +49,7 @@ export class FormModalObjectToSavePage {
               private alertCtrl:AlertController,
               private pessoaService:PessoaService,
               private telefoneService:TelefoneService,
-              private profissionalSaudeService:ProfissionalSaudeService,
-              private camera: Camera,              
+              private profissionalSaudeService:ProfissionalSaudeService              
 
               )
                {  this.fillObject()
@@ -61,6 +58,20 @@ export class FormModalObjectToSavePage {
                   this.findAllTipoSanguineo();
                   this.findAllLinhaCuidado();  
                   this.findAllCidades();
+  }
+  ionViewDidLoad(){
+    this.onChangePhoto()
+  }
+
+  onChangePhoto(){
+    const element = this.fileUpload.nativeElement as HTMLInputElement;
+      element.onchange = () => {      
+        const reader = new FileReader();  
+        reader.onload = (r: any) => {
+        this.picture = r.target.result as string;        
+        };  
+        reader.readAsDataURL(element.files[0]);
+      };
   }
 
   fillObject(){
@@ -367,24 +378,7 @@ verificaExistePessoaComEmail(){
       
     })
   }
-  getGalleryPicture() {    
-    const options: CameraOptions = {
-      quality: 65,
-      targetWidth: 720,
-      targetHeight: 720,      
-      correctOrientation:true,
-      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
-      mediaType: this.camera.MediaType.PICTURE
-    }    
-
-    this.camera.getPicture(options).then((imageData) => {
-
-     this.picture = 'data:image/png;base64,' + imageData;
-    }, (err) => {
-    });
-  }
+  
   sendPicture(idPessoa) {
     if(this.picture){
       this.usuarioService.uploadPicture(this.picture,idPessoa)   

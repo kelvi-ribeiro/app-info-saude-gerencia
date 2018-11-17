@@ -48,9 +48,9 @@
           [src]="returnPhoto()">      
         </div>
     </ion-col>
+    <input #fileUpload type="file" style="display:none"
+  accept="image/*">
   </ion-grid>
-  <input #fileUpload type="file" style="display:none"
-accept="image/*">
 
   <div  *ngIf="objectToUpdate.pessoa.perfis && !objectToUpdate.pessoa.perfis[0];else ativo">
     <ion-grid>

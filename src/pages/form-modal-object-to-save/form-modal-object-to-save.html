@@ -38,16 +38,25 @@
 
 <ion-content>
 
-  <ion-grid>
-    <ion-col style="text-align: center;" offset-4 col-6>
-      <div (mouseenter)="passMouseImage(true)" (mouseleave)="passMouseImage(false)" class="profilepic-border profile-epic">
-        <button *ngIf="showCameraIcon" (click)="getGalleryPicture()" icon-only ion-button class="camera-button">
-          <ion-icon name="camera"></ion-icon>
-        </button>
-        <img class="align-horizontal" [src]="picture ? picture:'assets/imgs/avatar-blank.png'">
-      </div>
-    </ion-col>
-  </ion-grid>
+    <ion-grid>
+        <ion-col style="text-align: center;" offset-4 col-6>
+            <div (mouseenter) ="passMouseImage(true)" (mouseleave)="passMouseImage(false)"  class="profilepic-border profile-epic">
+              <button  *ngIf="showCameraIcon" (click)="fileUpload.click()" icon-only ion-button class="camera-button">
+                <ion-icon name="camera"></ion-icon>
+              </button>        
+              <img 
+              class="align-horizontal" 
+              [src]="picture ? picture:'assets/imgs/avatar-blank.png'">
+              </div>
+        </ion-col>
+        <input #fileUpload type="file" style="display:none"
+      accept="image/*">
+      </ion-grid>
+    
+        
+      
+
+
   <div class="content">
 
     <form *ngIf="formGroup && activeSegment=== 'pessoais'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomrDadosPesoais()">
@@ -137,11 +146,6 @@
         </ion-grid>
       </div>
     </form>
-
-
-
-
-
 
     <form *ngIf="formGroup && activeSegment=== 'medicos'" [formGroup]="formGroup" (ngSubmit)="verificaErrosFomDadosMedicos()">
       <ion-grid>

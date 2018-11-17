@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavParams, ViewController, Events } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
 import { UsuarioService } from '../../services/domain/usuario.service';
@@ -6,7 +6,7 @@ import { PacienteService } from '../../services/domain/paciente.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { EnderecoService } from '../../services/domain/endereco.service';
 import { ProfissionalSaudeService } from '../../services/domain/profissional.saude.service';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+
 
 @IonicPage()
 @Component({
@@ -15,6 +15,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class ModalPerfilPage {
 
+
+  @ViewChild('fileUpload') fileUpload: ElementRef;
+  
+
   objectToUpdate = this.navParams.get('objectToUpdate');
   typeObjectToUpdate = this.navParams.get('typeObjectToUpdate'); 
   bucketBaseUrl = API_CONFIG.bucketBaseUrl;
@@ -22,6 +26,7 @@ export class ModalPerfilPage {
   editMode: boolean;    
   picture: any;
   showCameraIcon: any;
+  img: string;
   constructor(public viewCtrl: ViewController, 
               public navParams: NavParams,
               public usuarioService:UsuarioService,
@@ -29,14 +34,15 @@ export class ModalPerfilPage {
               private profissionalSaude:ProfissionalSaudeService,
               private events:Events,
               private notificacoesService:NotificacoesService,
-              private enderecoService:EnderecoService,
-              private camera: Camera,
+              private enderecoService:EnderecoService
+      
 
               )
                {
   }
 
-  ionViewDidLoad() {  
+  ionViewDidLoad() {
+    this.onChangePhoto()  
     this.events.subscribe('atualizar',()=>{      
      if(this.typeObjectToUpdate === 'paciente'){
       this.atualizarPaciente()
@@ -47,6 +53,17 @@ export class ModalPerfilPage {
     this.events.subscribe('atualizar:endereco',()=>{
       this.atualizarEnderecoPessoa()
      })    
+  }
+  onChangePhoto(){
+    const element = this.fileUpload.nativeElement as HTMLInputElement;
+      element.onchange = () => {      
+        const reader = new FileReader();  
+        reader.onload = (r: any) => {
+        this.picture = r.target.result as string;
+        this.sendPicture()           
+        };  
+        reader.readAsDataURL(element.files[0]);
+      };
   }
   closeModal(){
     this.viewCtrl.dismiss()
@@ -95,25 +112,8 @@ export class ModalPerfilPage {
     }else if(this.typeObjectToUpdate === 'profissionalSaude'){
       return 'Profissional de saúde'
     }
-  }     
-
-  getGalleryPicture() {    
-    const options: CameraOptions = {
-      quality: 100,      
-      correctOrientation:true,
-      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
-      mediaType: this.camera.MediaType.PICTURE
-    }    
-
-    this.camera.getPicture(options).then((imageData) => {
-     this.picture = 'data:image/png;base64,' + imageData;
-     this.sendPicture()
-    }, (err) => {
-    });
-  }
-
+  }  
+  
   sendPicture() {
     if(this.picture){
       this.usuarioService.uploadPicture(this.picture,this.objectToUpdate.pessoa.id)   

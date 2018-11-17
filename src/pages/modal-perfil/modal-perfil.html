@@ -40,7 +40,7 @@
   <ion-grid>
     <ion-col style="text-align: center;" offset-4 col-6>
         <div (mouseenter) ="passMouseImage(true)" (mouseleave)="passMouseImage(false)"  class="profilepic-border profile-epic">
-          <button  *ngIf="showCameraIcon" (click)="getGalleryPicture()" icon-only ion-button class="camera-button">
+          <button  *ngIf="showCameraIcon" (click)="fileUpload.click()" icon-only ion-button class="camera-button">
             <ion-icon name="camera"></ion-icon>
           </button>
     
@@ -49,6 +49,9 @@
         </div>
     </ion-col>
   </ion-grid>
+  <input #fileUpload type="file" style="display:none"
+accept="image/*">
+
   <div  *ngIf="objectToUpdate.pessoa.perfis && !objectToUpdate.pessoa.perfis[0];else ativo">
     <ion-grid>
       <ion-row>
@@ -62,6 +65,7 @@
       </ion-row>
     </ion-grid>
   </div>    
+  
   <ng-template #ativo>
     <ion-grid class="grid-header">
         <ion-row>  

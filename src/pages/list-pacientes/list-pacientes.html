@@ -8,7 +8,10 @@
     <ion-buttons end>
         <button (click)="showToastExplanation()" ion-button icon-only>
           <ion-icon  color="secondary" name="radio-button-on"></ion-icon>
-          <p  class="text-white count-users" >{{pacientesOnline}} Pacientes Online</p>
+          <p *ngIf="pacientesOnline > 0;else nenhumPacienteOnline" class="text-white count-users" >{{pacientesOnline}} Paciente(s) Online</p>
+          <ng-template #nenhumPacienteOnline>
+            <p  class="text-white count-users" >Nenhum paciente online</p>
+          </ng-template>
         </button>
         
       </ion-buttons >

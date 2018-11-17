@@ -257,18 +257,20 @@ openModalCreateMessage(recipientObject,recipient){
             this.pessoaService.addPerfil(pessoaId,2)
             .then(() => {                
              this.findPacientes()                              
-             this.notificacoesService.presentToast('Paciente Inativado' ,null,2000,'top')
+             this.notificacoesService.presentToast('Paciente Ativado' ,null,2000,'top')
             }).catch(()=>{              
               this.notificacoesService.presentAlertErro();
             })  
+          }else{
+
+            this.pessoaService.deletePerfil(pessoaId,2)
+            .then(() => {                
+             this.findPacientes()                            
+             this.notificacoesService.presentToast('Paciente Inativado',null,2000,'top')
+            }).catch(()=>{            
+              this.notificacoesService.presentAlertErro();
+            })
           }
-          this.pessoaService.deletePerfil(pessoaId,2)
-          .then(() => {                
-           this.findPacientes()                            
-           this.notificacoesService.presentToast('Paciente Ativado',null,2000,'top')
-          }).catch(()=>{            
-            this.notificacoesService.presentAlertErro();
-          })
         }
       },
       {

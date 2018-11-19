@@ -48,13 +48,15 @@
           <button ion-item menuClose class="text-1x"  (click)="openPage('ListMensagensPage')">
                 <ion-icon item-left name="mail" color="light"></ion-icon>
                 <span ion-text color="light">Mensagens Enviadas</span>
-            </button>            
+            </button>   
             <hr>
-            <button ion-item menuClose class="text-1x"  (click)="openPage('ListProfissionalSaudePage')">
-                    <ion-icon item-left name="people" color="light"></ion-icon>
-                    <span ion-text color="light">Profissionais de Saúde</span>
-                </button>            
-                <hr>
+            <div *ngIf="usuarioService.verificaTemPermissaoAdmin()" >               
+                <button ion-item menuClose class="text-1x"  (click)="openPage('ListProfissionalSaudePage')">
+                        <ion-icon item-left name="people" color="light"></ion-icon>
+                        <span ion-text color="light">Profissionais de Saúde</span>
+                    </button>        
+                    <hr>
+            </div>         
         </ion-list>
     </ion-content>
   

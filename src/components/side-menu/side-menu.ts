@@ -3,6 +3,7 @@ import { StorageService } from '../../services/storage.service';
 import { LoginPage } from '../../pages/login/login';
 import { API_CONFIG } from '../../config/api.config';
 import { ModalController, Events } from 'ionic-angular';
+import { UsuarioService } from '../../services/domain/usuario.service';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class SideMenuComponent {
   constructor(    
     public storageService:StorageService,
     private modalCtrl:ModalController,
+    public usuarioService:UsuarioService,
     private events:Events) {
         
   }

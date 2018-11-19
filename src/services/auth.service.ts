@@ -81,6 +81,7 @@ export class AuthService {
             sexo:pessoa.sexo,
             urlFoto:pessoa.urlFoto,
             dataNascimento:pessoa.dataNascimento,
+            perfis:pessoa.perfis,
             endereco:{
               id:pessoa.endereco.id,
               numero:pessoa.endereco.numero,

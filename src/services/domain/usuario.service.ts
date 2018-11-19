@@ -158,6 +158,13 @@ findProfissionalSaudeByPessoaCpf() {
     return dataUltimoAcesso.getTime() > currentTime.getTime() ? true : false
   }
 
+  verificaTemPermissaoAdmin(){
+    if(this.storage.getUser().pessoa.perfis.find(el => el==='ADMIN')){
+      return true
+    }
+    return false
+  }
+
 
   // getImageFromBucket(): Observable<any> {
   //   let url = `${API_CONFIG.bucketBaseUrl}/${this.storageService.getUserUrlFoto()}`

@@ -50,10 +50,10 @@
                 <td (click)="openModalUpdate(profissionalSaude)">
                   {{profissionalSaude?.pessoa?.dataNascimento | date:'dd/MM/yyyy'}}
                 </td>             
-                <td *ngIf="usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis);">
+                <td (click)="openModalUpdate(profissionalSaude)" *ngIf="usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis);">
                     Gerente Administrador                  
                   </td>                            
-                    <td *ngIf="!usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis);">
+                    <td (click)="openModalUpdate(profissionalSaude)" *ngIf="!usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis);">
                       Gerente
                     </td>                  
                 <td>

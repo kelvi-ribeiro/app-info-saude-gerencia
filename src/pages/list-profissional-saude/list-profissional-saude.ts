@@ -121,7 +121,7 @@ export class ListProfissionalSaudePage {
     })
   }
   deletarPerfilAdmin(pessoaId){
-    this.pessoaService.addPerfil(pessoaId,1)
+    this.pessoaService.deletePerfil(pessoaId,1)
     .then(()=>{
       this.findAllProfissionaisSaude()
     })

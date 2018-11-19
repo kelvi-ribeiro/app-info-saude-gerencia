@@ -2,8 +2,9 @@ import { Component, Input } from '@angular/core';
 import { StorageService } from '../../services/storage.service';
 import { LoginPage } from '../../pages/login/login';
 import { API_CONFIG } from '../../config/api.config';
-import { ModalController, Events } from 'ionic-angular';
+import { ModalController, Events, AlertController } from 'ionic-angular';
 import { UsuarioService } from '../../services/domain/usuario.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class SideMenuComponent {
   constructor(    
     public storageService:StorageService,
     private modalCtrl:ModalController,
-    public usuarioService:UsuarioService,    
+    public usuarioService:UsuarioService,   
+    public alertCtrl:AlertController, 
+    public authService:AuthService,
     private events:Events) {
         
   }
@@ -27,10 +30,7 @@ export class SideMenuComponent {
       return
     }    
   }
-  sair(){
-    this.storageService.limparStorage()
-    this.nav.setRoot(LoginPage)
-  } 
+  
   openPage(page){
     this.nav.setRoot(page)
   }
@@ -42,5 +42,29 @@ export class SideMenuComponent {
    });
    profileModal.present();
  }   
+
+ alertCertezaSair() {
+  let alert = this.alertCtrl.create({
+    title: "Logout!",
+    message: "Você deseja se desconectar ?",
+    enableBackdropDismiss: false,
+    buttons: [
+      {
+        text: "Sim",
+        handler: () => {
+          this.authService.logout();
+          this.nav.setRoot(LoginPage)
+        }
+      },
+      {
+        text: "Não",
+        handler: () => {
+          this.storageService.setEmail(null);
+        }
+      }
+    ]
+  });
+  alert.present();
+}
 
 }

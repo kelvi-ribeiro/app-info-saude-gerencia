@@ -60,6 +60,10 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li><a (click)="openModalUpdate(profissionalSaude)">Visualizar Profissional de Saúde / Editar Profissional de Saúde</a></li>                      
+                      <li *ngIf="!usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis) else semPerfilAdmin"><a (click)="adicionarPerfilAdmin(profissionalSaude.pessoa.id)">Adicionar Perfil de Administrador</a></li>                      
+                      <ng-template #semPerfilAdmin>
+                        <li><a (click)="deletarPerfilAdmin(profissionalSaude.pessoa.id)">Delete Perfil de Administrador</a></li>                      
+                      </ng-template>
                     </ul>
                   </div>
                 </td>

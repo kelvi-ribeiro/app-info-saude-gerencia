@@ -18,7 +18,7 @@ export class SideMenuComponent {
   constructor(    
     public storageService:StorageService,
     private modalCtrl:ModalController,
-    public usuarioService:UsuarioService,
+    public usuarioService:UsuarioService,    
     private events:Events) {
         
   }

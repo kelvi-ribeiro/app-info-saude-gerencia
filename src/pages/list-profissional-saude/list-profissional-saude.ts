@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ActionSheetController, ModalContro
 import { ProfissionalSaudeService } from '../../services/domain/profissional.saude.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { API_CONFIG } from '../../config/api.config';
+import { PessoaService } from '../../services/domain/pessoa.service';
+import { UsuarioService } from '../../services/domain/usuario.service';
 
 
 @IonicPage()
@@ -25,6 +27,8 @@ export class ListProfissionalSaudePage {
               public profissionalSaudeService:ProfissionalSaudeService,
               public notificacoesService:NotificacoesService,
               private actionSheetCtrl:ActionSheetController,
+              private pessoaService:PessoaService,
+              public usuarioService:UsuarioService,
               private modalCtrl:ModalController) {
   }
 
@@ -108,5 +112,18 @@ export class ListProfissionalSaudePage {
     ]
     }); 
     actionSheet.present();
+  }
+
+  adicionarPerfilAdmin(pessoaId){
+    this.pessoaService.addPerfil(pessoaId,1)
+    .then(()=>{
+      this.findAllProfissionaisSaude()
+    })
+  }
+  deletarPerfilAdmin(pessoaId){
+    this.pessoaService.addPerfil(pessoaId,1)
+    .then(()=>{
+      this.findAllProfissionaisSaude()
+    })
   }
 }

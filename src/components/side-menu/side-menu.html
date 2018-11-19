@@ -50,7 +50,7 @@
                 <span ion-text color="light">Mensagens Enviadas</span>
             </button>   
             <hr>
-            <div *ngIf="usuarioService.verificaTemPermissaoAdmin()" >               
+            <div *ngIf="usuarioService.verificaTemPermissaoAdmin(storageService.getUser().pessoa.perfis)" >               
                 <button ion-item menuClose class="text-1x"  (click)="openPage('ListProfissionalSaudePage')">
                         <ion-icon item-left name="people" color="light"></ion-icon>
                         <span ion-text color="light">Profissionais de Saúde</span>

@@ -263,7 +263,7 @@ openModalCreateMessage(recipientObject,recipient){
             })  
           }else{
 
-            this.pessoaService.deletePerfil(pessoaId,2)
+            this.pessoaService.deletePerfil(pessoaId,3)
             .then(() => {                
              this.findPacientes()                            
              this.notificacoesService.presentToast('Paciente Inativado',null,2000,'top')

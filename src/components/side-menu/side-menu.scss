@@ -5,8 +5,10 @@ side-menu {
 
 .user-profile {
     .user-avatar {
-      width: 80px;
-      height: 70px;
+      width: 63px;
+      height: 63px;
+      max-width: 63px;
+      max-height: 63px;
       display: inline-block;
       border-radius: 50%;
       box-shadow: inset 0 0 10rem rgba(0, 0, 0, 0.25), 0 0 4rem rgba(255,255,255,.45);

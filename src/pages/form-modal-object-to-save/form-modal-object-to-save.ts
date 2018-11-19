@@ -425,6 +425,7 @@ verificaExistePessoaComEmail(){
         this.telefoneService.insert(telefoneDto)
         
         });
+        this.sendPicture(profissionalSaude.pessoa.id)        
         this.notificacoesService.presentToast('Profissional de saúde Criado',null,2500,'top')
         this.closeModal()
     }).catch(() =>{

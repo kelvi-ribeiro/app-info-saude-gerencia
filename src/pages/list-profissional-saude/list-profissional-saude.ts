@@ -65,10 +65,11 @@ export class ListProfissionalSaudePage {
       this.findAllProfissionaisSaude()
     }
   findAllProfissionaisSaude(){
+    const loading = this.notificacoesService.presentLoadingDefault('Carregando...')
     this.profissionalSaudeService.findByName(this.nomePessoa,this.page)
     .then(res =>{
-      this.profissionaisSaude = res.content      
-    
+      loading.dismiss()
+      this.profissionaisSaude = res.content          
       this.totalPages = res.totalPages   
       if(res.content.length === 0){
         this.notificacoesService.presentToast('Nenhum profissional de saúde encontrado','toast-attention',2000,'top')
@@ -77,6 +78,7 @@ export class ListProfissionalSaudePage {
       this.pages =  Array(res.totalPages).fill(res.totalPages).map((x,i)=>  i) /* Array(res.totalPages).fill(res.totalPages).map((x,i)=>i); // [0,1,2,3,4] */
       this.pages = this.pages.filter(res => res<=this.pageAtual+5 && res>=this.pageAtual-5)
     }).catch(()=>{
+      loading.dismiss()
       this.notificacoesService.presentAlertErro();
     })
   }

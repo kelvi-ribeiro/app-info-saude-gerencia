@@ -35,10 +35,11 @@ export class ListMensagensPage {
   }
 
   findAllMensagens(){
+    const loading = this.notificacoesService.presentLoadingDefault('Carregando...')
     this.mensagemService.findMensagemByAnyField(this.linhaCuidadoId,this.campoPesquisa,this.pageAtual)
     .then(res=>{            
+      loading.dismiss()
       this.mensagens= res.content      
-      
       this.totalPages = res.totalPages   
       if(res.content.length === 0){
         this.notificacoesService.presentToast('Nenhum paciente encontrado','toast-attention',2000,'top')
@@ -46,7 +47,8 @@ export class ListMensagensPage {
       }
       this.pages =  Array(res.totalPages).fill(res.totalPages).map((x,i)=>  i) /* Array(res.totalPages).fill(res.totalPages).map((x,i)=>i); // [0,1,2,3,4] */
       this.pages = this.pages.filter(res => res<=this.pageAtual+5 && res>=this.pageAtual-5)
-    }).catch(()=>{      
+    }).catch(()=>{    
+      loading.dismiss()  
       this.notificacoesService.presentAlertErro();
     })
   }

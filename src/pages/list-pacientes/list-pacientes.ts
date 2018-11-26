@@ -51,9 +51,9 @@ export class ListPacientesPage {
     this.events.subscribe('listar:pacientes',() => {
       this.findPacientes()
     })
-    this.slidesLinhasCuidado.lockSwipes(true)
-    this.findPacientes()  
-    this.findLinhasCuidado()     
+    this.slidesLinhasCuidado.lockSwipes(true)    
+    this.findLinhasCuidado()   
+    this.findPacientes()    
     this.showOnlinePacientes()
   } 
   
@@ -114,8 +114,11 @@ export class ListPacientesPage {
   findLinhasCuidado(){
     this.linhaCuidadoService.findAll()
     .then(res=>{
-      this.linhasCuidado = res
+      this.linhasCuidado = res      
       this.linhasCuidado.unshift({id:0,nome:'Todas',caminhoImagem:'assets/imgs/todas.png'});
+    })
+    .catch(() =>{
+      this.notificacoesService.presentAlertErro();
     })
   }
   presentActionSheet() {
@@ -175,9 +178,12 @@ export class ListPacientesPage {
   }
 
   findPacientes(){
+    const loading = this.notificacoesService.presentLoadingDefault('Carregando...')
     this.pacienteService.findPessoaByAnyField(this.linhaCuidadoId,this.campoPesquisa,this.pageAtual)
     .then(res=>{            
-      this.pacientes = res.content      
+      this.pacientes = res.content  
+      loading.dismiss()
+          
       //this.removerPacienteDuplicado();
       
       /* this.pacientes = this.pacientes.sort(function (a, b) {
@@ -195,6 +201,7 @@ export class ListPacientesPage {
       this.pages = this.pages.filter(res => res<=this.pageAtual+5 && res>=this.pageAtual-5)
     }).catch(()=>{
       this.notificacoesService.presentAlertErro();
+      loading.dismiss()
     })
   }  
   removerPacienteDuplicado(){

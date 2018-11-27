@@ -17,21 +17,20 @@
               <ion-slide swipeBackEnabled="false"  *ngFor="let linhaCuidado of linhasCuidado" >
                 <ion-grid>
                   <ion-row>
-                    <ion-col offset-4 col-1>
+                    <ion-col push-1 col-4>
                       <img style="-moz-transform: scaleX(-1);
                       -o-transform: scaleX(-1);
                       -webkit-transform: scaleX(-1);
                       transform: scaleX(-1);
-                      filter: FlipH;"
-                      
+                      filter: FlipH;"                    
                        class="cursor-pointer" (click)="prevSlide()"
                        [hidden]="slidesLinhasCuidado.isBeginning()"
                         src="/assets/imgs/arrow-slide.png" >
                     </ion-col>
-                    <ion-col  col-2>
+                    <ion-col  col-4>
                       <img [src]="linhaCuidado.caminhoImagem">
                     </ion-col>
-                    <ion-col  col-1>
+                    <ion-col pull-1  col-4>
                         <img 
                         class="cursor-pointer"
                         (click)="nextSlide()"

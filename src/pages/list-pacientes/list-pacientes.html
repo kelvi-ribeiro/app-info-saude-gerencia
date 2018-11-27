@@ -5,15 +5,14 @@
           <ion-icon name="menu"></ion-icon>
         </button>
     <ion-title>Lista de Pacientes</ion-title>   
-    <ion-buttons end>
-        <button (click)="showToastExplanation()" ion-button icon-only>
+    <ion-buttons showWhen="landscape" end>
+        <button class="no-cursor-pointer" ion-button icon-only>
           <ion-icon  color="secondary" name="radio-button-on"></ion-icon>
           <p *ngIf="pacientesOnline > 0;else nenhumPacienteOnline" class="text-white count-users" >{{pacientesOnline}} Paciente(s) Online</p>
           <ng-template #nenhumPacienteOnline>
             <p  class="text-white count-users" >Nenhum paciente online</p>
           </ng-template>
-        </button>
-        
+        </button>        
       </ion-buttons >
   </ion-navbar>
 </ion-header>

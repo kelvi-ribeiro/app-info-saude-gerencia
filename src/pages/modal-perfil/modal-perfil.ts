@@ -23,9 +23,10 @@ export class ModalPerfilPage {
   bucketBaseUrl = API_CONFIG.bucketBaseUrl;
   activeSegment = 'pessoais'
   editMode: boolean;    
-  picture: any;
+  picture; 
   showCameraIcon: any;
   img: string;
+  carregando = false
   constructor(public viewCtrl: ViewController, 
               public navParams: NavParams,
               public usuarioService:UsuarioService,
@@ -40,9 +41,9 @@ export class ModalPerfilPage {
                {
   }
 
-  ionViewDidLoad() {    
-    console.log('objectToUpdate.pessoa.perfis.length',this.objectToUpdate.pessoa.perfis.length)
+  ionViewDidLoad() {        
     this.onChangePhoto()  
+    this.findPhoto()
     this.events.subscribe('atualizar',()=>{      
      if(this.typeObjectToUpdate === 'paciente'){
       this.atualizarPaciente()
@@ -54,6 +55,20 @@ export class ModalPerfilPage {
       this.atualizarEnderecoPessoa()
      })    
   }
+
+  findPhoto(){
+    this.picture =  'assets/imgs/avatar-blank.png';
+     if(this.objectToUpdate.pessoa.urlFoto){      
+       this.usuarioService.getImageFromBucket(this.objectToUpdate.pessoa.urlFoto)
+       .subscribe(res =>{
+        this.carregando = true
+        this.usuarioService.blobToDataURL(res).then(dataUrl => {
+        let str: string = dataUrl as string;
+        this.picture = this.usuarioService.sanitazer.bypassSecurityTrustUrl(str);
+        });
+      })       
+    }
+  } 
   onChangePhoto(){
     const element = this.fileUpload.nativeElement as HTMLInputElement;
       element.onchange = () => {      
@@ -126,22 +141,7 @@ export class ModalPerfilPage {
        });
     }
   }
-  returnPhoto(){
-    if(this.picture){
-      return this.picture
-    }else if(this.objectToUpdate.pessoa.urlFoto){      
-       this.usuarioService.getImageFromBucket(this.objectToUpdate.pessoa.urlFoto)
-       .subscribe(res =>{
-        this.usuarioService.blobToDataURL(res).then(dataUrl => {
-          let str: string = dataUrl as string;
-           this.picture = this.usuarioService.sanitazer.bypassSecurityTrustUrl(str);
-        });
-       })
-       
-    }else{
-      return 'assets/imgs/avatar-blank.png'
-    }     
-  }
+
   passMouseImage(show){
     this.showCameraIcon = show
  }

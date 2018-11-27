@@ -13,10 +13,9 @@
                         <h2 ion-text class="no-margin bold text-white">
                           {{this.storageService.getUser().pessoa.nome | extractWords:2 }}
                         </h2>
-                        <span ion-text color="light">{{this.storageService.getUser().pessoa.email}}</span>
+                        <span ion-text color="light">{{usuarioService.verificaTemPermissaoAdmin(this.storageService.getUser().pessoa.perfis) ? 'Gestor' : 'Profissional de Saúde'}}</span>
                     </ion-col>
                 </ion-row>
-  
                 <ion-row no-padding class="other-data">
                     <ion-col no-padding class="column">
                         <button color="light" (click)="openModalUpdate()" 

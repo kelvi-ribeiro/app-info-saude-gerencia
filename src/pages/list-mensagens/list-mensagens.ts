@@ -42,7 +42,7 @@ export class ListMensagensPage {
       this.mensagens= res.content      
       this.totalPages = res.totalPages   
       if(res.content.length === 0){
-        this.notificacoesService.presentToast('Nenhum paciente encontrado','toast-attention',2000,'top')
+        this.notificacoesService.presentToast('nenhuma mensagem encontrada','toast-attention',2000,'top')
         return        
       }
       this.pages =  Array(res.totalPages).fill(res.totalPages).map((x,i)=>  i) /* Array(res.totalPages).fill(res.totalPages).map((x,i)=>i); // [0,1,2,3,4] */

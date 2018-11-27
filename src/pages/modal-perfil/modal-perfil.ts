@@ -18,6 +18,7 @@ export class ModalPerfilPage {
   @ViewChild('fileUpload') fileUpload: ElementRef; 
   
   objectToUpdate = this.navParams.get('objectToUpdate');
+  
   typeObjectToUpdate = this.navParams.get('typeObjectToUpdate'); 
   bucketBaseUrl = API_CONFIG.bucketBaseUrl;
   activeSegment = 'pessoais'
@@ -39,7 +40,8 @@ export class ModalPerfilPage {
                {
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad() {    
+    console.log('objectToUpdate.pessoa.perfis.length',this.objectToUpdate.pessoa.perfis.length)
     this.onChangePhoto()  
     this.events.subscribe('atualizar',()=>{      
      if(this.typeObjectToUpdate === 'paciente'){

@@ -52,7 +52,7 @@
   accept="image/*">
   </ion-grid>
 
-  <div  *ngIf="objectToUpdate.pessoa.perfis && !objectToUpdate.pessoa.perfis[0];else ativo">
+  <div  *ngIf="objectToUpdate.pessoa.perfis.length === 0;else ativo">
     <ion-grid>
       <ion-row>
         <ion-col offset-5 col-8>

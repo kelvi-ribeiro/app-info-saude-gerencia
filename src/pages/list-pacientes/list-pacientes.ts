@@ -261,7 +261,7 @@ openModalCreateMessage(recipientObject,recipient){
         text: 'Sim',            
         handler: () => {
           if(acao === 'ativar'){
-            this.pessoaService.addPerfil(pessoaId,2)
+            this.pessoaService.addPerfil(pessoaId,3)
             .then(() => {                
              this.findPacientes()                              
              this.notificacoesService.presentToast('Paciente Ativado' ,null,2000,'top')

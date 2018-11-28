@@ -78,10 +78,10 @@ export class FormDadosEnderecoComponent {
   }
   verificaErrosForm():any{
     let hasErrors = false;
-    Object.keys(this.formGroup.controls).forEach(element => {
+    Object.keys(this.formGroup.controls).find(element => {
       if(this.formGroup['controls'][element]['errors']){        
         this.notificacoesService.presentErrorValidationToast(element);        
-        hasErrors = true
+        return hasErrors = true
       }
     });
     return hasErrors;

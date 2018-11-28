@@ -306,10 +306,10 @@ verificaExistePessoaComEmail(){
     }      
    
 
-      Object.keys(inputs).forEach(element =>{
+      Object.keys(inputs).find(element =>{
         if(this.formGroup['controls'][element]['errors']){
-          this.notificacoesService.presentErrorValidationToast(element);        
-          hasErrors = true
+          this.notificacoesService.presentErrorValidationToast(element);                  
+          return hasErrors = true
         }
       })
       this.verificaExistePessoaComCpf().then(res=>{

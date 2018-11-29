@@ -208,8 +208,8 @@ html {
     -ms-user-select: none;
     user-select: none;
   }
-  .btn:hover, .btn:focus {
-    color: #333;
+  .btn:hover, .btn:focus {  
+    background: rgb(63, 70, 146);
     text-decoration: none;
   }
   .btn:active {
@@ -494,7 +494,7 @@ html {
     box-shadow: none;
     position: relative;
     -webkit-transition: 0.3s;
-    transition: 0.3s;
+    transition: .5s ease-in all;
   }
   .btn:hover, .btn:focus {
     box-shadow: none;

@@ -21,7 +21,7 @@
               <tr>
                 <th style="width: 32px"></th>                
                 <th>Nome</th>
-                <th>Email</th>
+                <th>E-mail</th>
                 <th>CPF</th>
                 <th>Cidade</th>
                 <th style="width: 15%">Data de Nascimento</th>              
@@ -66,10 +66,10 @@
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                      <li><a (click)="openModalUpdate(profissionalSaude)">Visualizar Profissional de Saúde / Editar Profissional de Saúde</a></li>                                            
-                      <li *ngIf="!usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis) else semPerfilAdmin"><a (click)="adicionarPerfilAdmin(profissionalSaude.pessoa.id)">Adicionar Perfil de Administrador</a></li>                      
+                      <li><a (click)="openModalUpdate(profissionalSaude)">Visualizar / Editar Profissional de Saúde</a></li>                                            
+                      <li *ngIf="!usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis) else semPerfilAdmin"><a (click)="adicionarPerfilAdmin(profissionalSaude.pessoa.id)">Mudar para perfil de Gerente</a></li>                      
                       <ng-template #semPerfilAdmin>
-                        <li><a (click)="deletarPerfilAdmin(profissionalSaude.pessoa.id)">Deletar Perfil de Administrador</a></li>                      
+                        <li><a (click)="deletarPerfilAdmin(profissionalSaude.pessoa.id)">Mudar para perfil de Gerente</a></li>                      
                       </ng-template>
                     </ul>
                   </div>

@@ -173,8 +173,59 @@ export class ListPacientesPage {
     
     this.findPacientes()
   }
-  openActions(paciente){
-    paciente.actionOpened =  paciente.actionOpened ? false : true
+  openActions(paciente) {
+    let alert = this.alertCtrl.create({
+      title: 'Ações',      
+      buttons: [
+        {
+          text: 'Visualizar / Editar Paciente',          
+          handler: () => {
+            this.openModalUpdate(paciente)
+          }
+        },
+        {
+          text: 'Enviar Mensagem',
+          handler: () => {
+            this.openModalCreateMessage(paciente,'paciente')
+          }
+        },
+        {
+          text: 'Inativar Paciente',
+          handler: () => {            
+            this.alertControlePerfil(paciente.pessoa.id,'inativar')
+          }
+        },
+        {
+          text: 'Ativar Paciente',
+          handler: () => {            
+            this.alertControlePerfil(paciente.pessoa.id,'ativar')
+          }
+        },
+        {
+          text: 'Fechar',
+          handler: () => {
+            
+          }
+        }
+      ]
+    });
+    
+    if(paciente.pessoa.perfis && paciente.pessoa.perfis.length > 0){
+      alert.data.buttons = alert.data.buttons.filter((el,index) =>{
+        if(index != 3){
+          return el
+        }    
+      })
+    }else{
+      alert.data.buttons = alert.data.buttons.filter((el,index) =>{
+        if(index != 2){
+          return el
+        }    
+      })
+    }
+      
+    
+    alert.present();
   }
 
   findPacientes(){

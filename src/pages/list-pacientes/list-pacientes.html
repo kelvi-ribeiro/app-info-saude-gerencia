@@ -66,7 +66,7 @@
               <tr>
                 <th style="width: 32px"></th>                
                 <th>Nome</th>
-                <th>Email</th>
+                <th>E-mail</th>
                 <th>CPF</th>
                 <th>Cidade</th>
                 <th style="width: 15%">Data de Nascimento</th>
@@ -108,13 +108,12 @@
                   </ng-template>
                 </td>
                 <td>
-                  <div  [class]="paciente.actionOpened ? 'btn-group open': 'btn-group'">
+                  <div  [class]="btn-group">
                     <button (click)="openActions(paciente)" type="button" class="btn btn-default btn-sm dropdown-toggle"
                      data-toggle="dropdown" 
                      aria-haspopup="true" 
                      aria-expanded="false">
-                      Ações
-                      <span class="caret"></span>
+                      Ações                      
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li><a (click)="openModalUpdate(paciente)">Visualizar Paciente / Editar Paciente</a></li>

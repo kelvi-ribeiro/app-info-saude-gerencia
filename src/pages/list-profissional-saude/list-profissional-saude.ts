@@ -5,6 +5,7 @@ import { NotificacoesService } from '../../services/domain/notificacoes.service'
 import { API_CONFIG } from '../../config/api.config';
 import { PessoaService } from '../../services/domain/pessoa.service';
 import { UsuarioService } from '../../services/domain/usuario.service';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 
 @IonicPage()
@@ -29,7 +30,8 @@ export class ListProfissionalSaudePage {
               private actionSheetCtrl:ActionSheetController,
               private pessoaService:PessoaService,
               public usuarioService:UsuarioService,
-              private modalCtrl:ModalController) {
+              private modalCtrl:ModalController,
+              private alertCtrl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -48,10 +50,7 @@ export class ListProfissionalSaudePage {
     if(this.pageAtual === clickedPage) return 
     this.pageAtual = clickedPage
     this.findAllProfissionaisSaude()
-    }
-    openActions(profissionalSaude){
-      profissionalSaude.actionOpened =  profissionalSaude.actionOpened ? false : true
-    }  
+    } 
  
     nextPage(){
       if(this.pageAtual === this.totalPages || this.totalPages === 1) return
@@ -127,5 +126,53 @@ export class ListProfissionalSaudePage {
     .then(()=>{
       this.findAllProfissionaisSaude()
     })
+  }
+  openActions(profissionalSaude) {
+    let alert = this.alertCtrl.create({
+      title: 'Ações',      
+      buttons: [
+        {
+          text: 'Visualizar / Editar Profissional de Saúde',          
+          handler: () => {
+            this.openModalUpdate(profissionalSaude)
+          }
+        },       
+        {
+          text: 'Mudar perfil para Gerente',
+          handler: () => {            
+            this.adicionarPerfilAdmin(profissionalSaude.pessoa.id)
+          }
+        },
+        {
+          text: 'Mudar perfil para Profissional de Saúde',
+          handler: () => {            
+            this.deletarPerfilAdmin(profissionalSaude.pessoa.id)
+          }
+        },
+        {
+          text: 'Fechar',
+          handler: () => {
+            
+          }
+        }
+      ]
+    });
+    
+    if(this.usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis)){
+      alert.data.buttons = alert.data.buttons.filter((el,index) =>{
+        if(index != 1){
+          return el
+        }    
+      })
+    }else{
+      alert.data.buttons = alert.data.buttons.filter((el,index) =>{
+        if(index != 2){
+          return el
+        }    
+      })
+    }
+      
+    
+    alert.present();
   }
 }

@@ -57,22 +57,13 @@
                       Profissional de Saúde
                     </td>                  
                 <td>
-                  <div  [class]="profissionalSaude.actionOpened ? 'btn-group open': 'btn-group'">
-                    <button (click)="openActions(profissionalSaude)" type="button" class="btn btn-default btn-sm dropdown-toggle"
+                  <div class="btn-group">
+                    <button (click)="openActions(profissionalSaude)" type="button" class="btn btn-primary btn-sm dropdown-toggle"
                      data-toggle="dropdown" 
                      aria-haspopup="true" 
                      aria-expanded="false">
-                      Ações
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                      <li><a (click)="openModalUpdate(profissionalSaude)">Visualizar / Editar Profissional de Saúde</a></li>                                            
-                      <li *ngIf="!usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis) else semPerfilAdmin"><a (click)="adicionarPerfilAdmin(profissionalSaude.pessoa.id)">Mudar para perfil de Gerente</a></li>                      
-                      <ng-template #semPerfilAdmin>
-                        <li><a (click)="deletarPerfilAdmin(profissionalSaude.pessoa.id)">Mudar para perfil de Gerente</a></li>                      
-                      </ng-template>
-                    </ul>
-                  </div>
+                      Ações                      
+                    </button>                                                                                                                                                                                  </div>
                 </td>
               </tr>
             </tbody>
@@ -102,9 +93,9 @@
     </div>
 
     <ion-fab class="ion-fab-position-fixed" bottom  right >
-      <button (click)="presentActionSheet()" ion-fab >
-        <ion-icon color="light" name="add"></ion-icon>
-      </button>
-    </ion-fab>
+        <button (click)="presentActionSheet()" ion-fab >
+          <ion-icon color="light" name="add"></ion-icon>
+        </button>
+      </ion-fab>
 
 </ion-content>

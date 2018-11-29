@@ -568,3 +568,8 @@ html {
 .open > .dropdown-menu {
 display: block; 
 }      
+
+.btn-primary{
+  background:color($colors, primary);
+  color:white;
+}

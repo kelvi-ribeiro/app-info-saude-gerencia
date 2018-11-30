@@ -41,11 +41,11 @@ export class ModalFormMensagemPage {
       assunto: [
         '',
          Validators.compose([Validators.required, Validators.minLength(3),
-          Validators.maxLength(30)])],                                                     
+          Validators.maxLength(130)])],                                                     
       mensagem: [
         '',
           Validators.compose([Validators.required, Validators.minLength(3),
-          Validators.maxLength(100)])],      
+          Validators.maxLength(500)])],      
           profissionalSaudeId: [
               this.storageService.getUser().id],      
           pacienteId: [

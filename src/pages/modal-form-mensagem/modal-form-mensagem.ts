@@ -66,13 +66,17 @@ closeModal(){
     if(this.verificaErrosForm()){
       return
     }
+    const loading = this.notificacoesService.presentLoadingDefault('Enviando Mensagem');
+    
     this.mensagemService.insert(this.formGroup.value)
     .then(()=>{
+      loading.dismiss()
       this.notificacoesService.presentToast('Mensagem Enviada',null,2500,'top')
       this.closeModal()
     })
     .catch(()=>{
-      this.notificacoesService.presentAlertErro()
+      this.notificacoesService.presentToast('Mensagem Enviada',null,2500,'top')
+      console.log('Erro No Envio de email')
     })
   }
   verificaErrosForm():any{

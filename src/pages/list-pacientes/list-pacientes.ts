@@ -60,13 +60,15 @@ export class ListPacientesPage {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-      if (event.key === 'ArrowLeft') {
+      if (event.ctrlKey && event.key === 'ArrowLeft') {
          this.prevSlide()
       }
-      else if (event.key === 'ArrowRight') {
+      else if (event.ctrlKey && event.key === 'ArrowRight') {
         this.nextSlide()
       }
   }
+
+  
 
   showToastExplanation(){
     this.notificacoesService.presentToast('Quantidade de pacientes online','toast-attention',2000,'top')
@@ -93,7 +95,7 @@ export class ListPacientesPage {
       this.pacientesOnline = pacientesOnline;
       setTimeout(() => {
         this.showOnlinePacientes()
-      }, 15000);
+      }, 500);
     })
     .catch(() => {
       this.notificacoesService.presentAlertErro()

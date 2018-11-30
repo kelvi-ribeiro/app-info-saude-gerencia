@@ -34,6 +34,17 @@ export class ListMensagensPage {
     this.findLinhasCuidado()
   }
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+      if (event.ctrlKey && event.key === 'ArrowLeft') {
+         this.prevSlide()
+      }
+      else if (event.ctrlKey && event.key === 'ArrowRight') {
+        this.nextSlide()
+      }
+  }
+
+
   findAllMensagens(){
     const loading = this.notificacoesService.presentLoadingDefault('Carregando...')
     this.mensagemService.findMensagemByAnyField(this.linhaCuidadoId,this.campoPesquisa,this.pageAtual)
@@ -51,17 +62,7 @@ export class ListMensagensPage {
       loading.dismiss()  
       this.notificacoesService.presentAlertErro();
     })
-  }
-
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-      if (event.key === 'ArrowLeft') {
-         this.prevSlide()
-      }
-      else if (event.key === 'ArrowRight') {
-        this.nextSlide()
-      }
-  }
+  } 
 
   findLinhasCuidado(){
     this.linhaCuidadoService.findAll()

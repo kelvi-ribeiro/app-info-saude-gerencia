@@ -6,6 +6,7 @@ import { API_CONFIG } from '../../config/api.config';
 import { PessoaService } from '../../services/domain/pessoa.service';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { StorageService } from '../../services/storage.service';
 
 
 @IonicPage()
@@ -31,7 +32,8 @@ export class ListProfissionalSaudePage {
               private pessoaService:PessoaService,
               public usuarioService:UsuarioService,
               private modalCtrl:ModalController,
-              private alertCtrl:AlertController) {
+              private alertCtrl:AlertController,
+              private storageService:StorageService) {
   }
 
   ionViewDidLoad() {
@@ -157,6 +159,16 @@ export class ListProfissionalSaudePage {
         }
       ]
     });
+    if(profissionalSaude.id === this.storageService.getUser().id){
+      alert.present()
+      alert.data.buttons = alert.data.buttons.filter((el,index) =>{
+        if(index != 1 && index != 2){
+          return el
+        }    
+      }) 
+      alert.data.buttons = alert.data.buttons.reverse()   
+      return
+    }
     
     if(this.usuarioService.verificaTemPermissaoAdmin(profissionalSaude.pessoa.perfis)){
       alert.data.buttons = alert.data.buttons.filter((el,index) =>{
